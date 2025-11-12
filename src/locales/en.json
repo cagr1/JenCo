@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "gallery": "Gallery",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "hero": {
+    "tagline": "Beauty & Wellness Experience",
+    "cta": "Book Appointment"
+  },
+  "about": {
+    "title": "About Jennifer",
+    "bio": "With over 10 years of experience in the beauty industry, Jennifer Gallardo is dedicated to helping you feel confident and beautiful. From bridal makeup to relaxing treatments, every service is tailored to bring out your natural radiance.",
+    "philosophy": "Your beauty, your way"
+  },
+  "services": {
+    "title": "Our Services",
+    "makeup_bride": "Bridal Makeup",
+    "makeup_bride_desc": "Timeless and elegant makeup for your special day",
+    "makeup_quince": "Quinceañera Makeup",
+    "makeup_quince_desc": "Glamorous makeup for your milestone celebration",
+    "makeup_photo": "Photoshoot Makeup",
+    "makeup_photo_desc": "Camera-ready makeup that captures your best angle",
+    "waxing": "Waxing",
+    "waxing_desc": "Smooth, flawless skin with precision waxing",
+    "lash": "Lash Services",
+    "lash_desc": "Curling and tinting for stunning, defined lashes",
+    "massage": "Relaxing Massage",
+    "massage_desc": "Therapeutic massage to relieve stress and tension"
+  },
+  "testimonials": {
+    "title": "Client Testimonials",
+    "review1": "Jennifer made me feel so beautiful on my wedding day. Her makeup was perfect!",
+    "author1": "Maria García",
+    "review2": "The best beauty experience ever. Jennifer is a true professional.",
+    "author2": "Sofia Rodriguez",
+    "review3": "I always come back. She knows exactly what works for me.",
+    "author3": "Isabella López"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "form_name": "Full Name",
+    "form_email": "Email",
+    "form_service": "Select Service",
+    "form_message": "Message",
+    "form_submit": "Book Now",
+    "location": "Location",
+    "followUs": "Follow Us",
+    "phone": "Phone"
+  }
+}

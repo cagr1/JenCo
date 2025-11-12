@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre Mí",
+    "services": "Servicios",
+    "gallery": "Galería",
+    "testimonials": "Testimonios",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "tagline": "Experiencia de Belleza y Bienestar",
+    "cta": "Reservar Cita"
+  },
+  "about": {
+    "title": "Sobre Jennifer",
+    "bio": "Con más de 10 años de experiencia en la industria de la belleza, Jennifer Gallardo se dedica a ayudarte a sentirte segura y hermosa. Desde maquillaje nupcial hasta tratamientos relajantes, cada servicio está personalizado para resaltar tu resplandor natural.",
+    "philosophy": "Tu belleza, tu forma"
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "makeup_bride": "Maquillaje Nupcial",
+    "makeup_bride_desc": "Maquillaje atemporal y elegante para tu día especial",
+    "makeup_quince": "Maquillaje Quinceañera",
+    "makeup_quince_desc": "Maquillaje glamoroso para tu celebración de hito",
+    "makeup_photo": "Maquillaje para Sesión Fotográfica",
+    "makeup_photo_desc": "Maquillaje listo para cámara que captura tu mejor ángulo",
+    "waxing": "Depilación",
+    "waxing_desc": "Piel suave y impecable con depilación de precisión",
+    "lash": "Servicios de Pestañas",
+    "lash_desc": "Rizador y tinte para pestañas deslumbrantes y definidas",
+    "massage": "Masaje Relajante",
+    "massage_desc": "Masaje terapéutico para aliviar el estrés y la tensión"
+  },
+  "testimonials": {
+    "title": "Testimonios de Clientes",
+    "review1": "Jennifer me hizo sentir tan hermosa en mi día de bodas. ¡Su maquillaje fue perfecto!",
+    "author1": "María García",
+    "review2": "La mejor experiencia de belleza jamás. Jennifer es una verdadera profesional.",
+    "author2": "Sofía Rodríguez",
+    "review3": "Siempre regreso. Ella sabe exactamente qué me funciona.",
+    "author3": "Isabella López"
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "form_name": "Nombre Completo",
+    "form_email": "Correo Electrónico",
+    "form_service": "Selecciona Servicio",
+    "form_message": "Mensaje",
+    "form_submit": "Reservar",
+    "location": "Ubicación",
+    "followUs": "Sígueme",
+    "phone": "Teléfono"
+  }
+}
