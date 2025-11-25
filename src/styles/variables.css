@@ -1,0 +1,53 @@
+/**
+ * CSS Variables
+ * Color system and design tokens
+ */
+
+:root {
+  /* Coolors Palette: https://coolors.co/palette/463f3a-8a817c-bcb8b1-f4f3ee-e0afa0 */
+  --color-cocoa: #463f3a;      /* Dark brown-gray */
+  --color-graphite: #8a817c;   /* Medium gray-brown */
+  --color-champagne: #bcb8b1;  /* Light neutral gray */
+  --color-linen: #f4f3ee;      /* Lightest cream/beige */
+  --color-rose: #e0afa0;       /* Peachy pink accent */
+
+  /* Color Aliases for Compatibility */
+  --color-gold: var(--color-rose);
+  --color-blush: var(--color-rose);
+  --color-nude: var(--color-champagne);
+  --color-cream: var(--color-linen);
+
+  /* Spacing System */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-2xl: 8rem;
+  --space-3xl: 12rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Z-Index Scale */
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+

@@ -10,20 +10,39 @@
         <button @click="toggleMenu" class="md:hidden text-2xl">☰</button>
 
         <div :class="['hidden md:flex gap-8']">
-          <a v-for="item in navItems" :key="item.key"
-             :href="item.href"
-             class="text-sm font-inter hover:text-gold transition">
-             {{ $t(item.key) }}
+          <a 
+            v-for="item in navItems" 
+            :key="item.key"
+            :href="item.href"
+            @click="handleNavClick($event, item.href)"
+            class="text-sm font-inter hover:text-rose transition-colors duration-300 relative group"
+          >
+            {{ $t(item.key) }}
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-rose transition-all duration-300 group-hover:w-full"></span>
           </a>
         </div>
 
-        <div class="flex gap-3">
-          <button @click="$i18n.locale = 'en'"
-                  :class="['px-3 py-1 text-sm transition', $i18n.locale === 'en' ? 'text-gold font-bold' : 'text-gray-500']">
+        <div class="flex gap-2">
+          <button 
+            @click="$i18n.locale = 'en'"
+            :class="[
+              'px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-300',
+              $i18n.locale === 'en' 
+                ? 'text-rose bg-rose/10 font-bold' 
+                : 'text-white hover:text-rose hover:bg-rose/5'
+            ]"
+          >
             EN
           </button>
-          <button @click="$i18n.locale = 'es'"
-                  :class="['px-3 py-1 text-sm transition', $i18n.locale === 'es' ? 'text-gold font-bold' : 'text-gray-500']">
+          <button 
+            @click="$i18n.locale = 'es'"
+            :class="[
+              'px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-300',
+              $i18n.locale === 'es' 
+                ? 'text-rose bg-rose/10 font-bold' 
+                : 'text-graphite hover:text-rose hover:bg-rose/5'
+            ]"
+          >
             ES
           </button>
         </div>
@@ -37,7 +56,7 @@
     <TestimonialsSection />
     <ContactSection />
 
-    <footer class="bg-gray-900 text-white text-center py-8">
+    <footer class="bg-cocoa text-linen text-center py-12">
       <div class="relative overflow-hidden h-24 mb-6">
   <span
     v-for="n in 15"
@@ -52,22 +71,26 @@
     Jen&nbsp;&amp;&nbsp;Co
   </span>
 </div>
-      <p class="text-sm">&copy; {{ new Date().getFullYear() }}   Made with ❤️ by CG. All rights reserved.</p>
+      <p class="text-sm opacity-80">&copy; {{ new Date().getFullYear() }} Jennifer & Co. Made with ❤️ by CG. All rights reserved.</p>
     </footer>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import HeroSection from './components/HeroSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import ServicesSection from './components/ServicesSection.vue'
 import GallerySection from './components/GallerySection.vue'
 import TestimonialsSection from './components/TestimonialsSection.vue'
 import ContactSection from './components/ContactSection.vue'
+import { useSmoothScroll } from './composables/useSmoothScroll'
 import logoJen from './assets/logo.png'
 
 const menuOpen = ref(false)
+
+// Initialize smooth scroll
+const { smoothScrollTo } = useSmoothScroll({ duration: 800, offset: 80 })
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
@@ -80,6 +103,21 @@ const navItems = [
   { key: 'nav.gallery', href: '#gallery' },
   { key: 'nav.contact', href: '#contact' },
 ]
+
+const handleNavClick = (e, href) => {
+  e.preventDefault()
+  smoothScrollTo(href)
+  menuOpen.value = false
+}
+
+onMounted(() => {
+  // Smooth scroll on page load if hash exists
+  if (window.location.hash) {
+    setTimeout(() => {
+      smoothScrollTo(window.location.hash)
+    }, 100)
+  }
+})
 
 
 </script>

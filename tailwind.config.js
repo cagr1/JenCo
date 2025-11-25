@@ -1,15 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx.html}"],
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx,html}"],
   theme: {
     extend: {
       colors: {
-         linen: "#FFF8F2",
-        rose: "#E8A0B0",
-        gold: "#D9B44A",
-        cocoa: "#4B3832",
-        graphite: "#2F2E2E",
-        champagne: "#F6E2C0",
+        // Coolors palette: https://coolors.co/palette/463f3a-8a817c-bcb8b1-f4f3ee-e0afa0
+        cocoa: "#463f3a",      // Dark brown-gray
+        graphite: "#8a817c",   // Medium gray-brown
+        champagne: "#bcb8b1",  // Light neutral gray
+        linen: "#f4f3ee",      // Lightest cream/beige
+        rose: "#e0afa0",       // Peachy pink accent
       },
       keyframes: {
         float: {
@@ -24,17 +24,26 @@ export default {
           "0%": { transform: "translateY(-100vh)", opacity: 0 },
           "100%": { transform: "translateY(100vh)", opacity: 1 },
         },
+        // AGREGADO: Hero gradient animation
+        HeroAnimation: {
+          "0%": { backgroundPosition: "92% 0%" },
+          "50%": { backgroundPosition: "9% 100%" },
+          "100%": { backgroundPosition: "92% 0%" },
+        },
       },
       fontFamily: {
         lucida: ['"Lucida Handwriting"', 'cursive'],
         rage: ['"Rage Italic"', 'cursive'],
         playfair: ['"Playfair Display"', 'serif'],
         inter: ['"Inter"', 'sans-serif'],
+        haviland: ["Mr De Haviland", 'cursive'],
       },
       animation: {
-       float: "float 8s ease-in-out infinite",
+        float: "float 8s ease-in-out infinite",
         fadeInUp: "fadeInUp 1.2s ease-out forwards",
         fall: "fall 5s linear infinite",
+        // AGREGADO: Hero gradient animation
+        'hero-gradient': "HeroAnimation 14s ease infinite",
       },
     },
   },
