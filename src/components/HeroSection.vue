@@ -79,19 +79,28 @@
     <!-- VIDEO CARD - TAMAÑO CONSTANTE A PARTIR DE 640px -->
     <div
       ref="videoCard"
-      class="relative z-10 w-[85%] sm:w-[380px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-black/40 backdrop-blur-xl border border-white/10 mb-16 md:mb-10 transition-transform duration-300 ease-out"
+      class="relative z-10 w-[85%] sm:w-[420px]  rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-black/40 backdrop-blur-xl border border-white/10 mb-16 md:mb-20 transition-transform duration-300 ease-out"
     >
       <video ref="videoEl" class="w-full h-full object-cover" style="transition: filter 0.3s ease-out;" autoplay muted loop playsinline preload="auto">
-        <source src="/src/assets/heroVideo.webm" type="video/webm" />
+        <source src="/src/assets/demo2.webm" type="video/webm" />
       </video>
+
+      <!-- <img 
+        ref="imageEl"
+        src="/src/assets/pexels-shiny-diamond.jpg"
+        alt="Hero Image"
+        class="w-full h-full object-contain object-center"
+        style="transition: filter 0.3s ease-out;"
+      /> -->
+
     </div>
 
     <!-- TEXT + CTA - SIEMPRE PEGADO AL BOTTOM -->
-    <div ref="textBlock" class="absolute bottom-12 sm:bottom-16 text-center z-20 px-4 sm:px-6 opacity-0 transition-all duration-300 ease-out max-w-4xl">
+    <div ref="textBlock" class="absolute bottom-4 sm:bottom-2 text-center z-20 px-4 sm:px-6 opacity-0 transition-all duration-300 ease-out max-w-4xl">
       <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#433623] drop-shadow-xl mb-4 sm:mb-5 md:mb-6 px-2">
         {{ $t('hero.tagline') }}
       </p>
-      <button ref="ctaButton" @click="scrollToContact" class="px-8 sm:px-8 md:px-10 py-3 md:py-4 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110 opacity-0">
+      <button ref="ctaButton" @click="scrollToContact" class="px-8 sm:px-10 md:px-12 py-3 md:py-4 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110 opacity-0">
         {{ $t('hero.cta') }}
       </button>
     </div>
@@ -150,7 +159,7 @@ onMounted(() => {
 
     // Rotación continua INFINITA - Empieza desde el lado derecho (90deg)
     gsap.to(blob.value, {
-      rotation: 450, // 90 + 360 = 450 (vuelta completa desde la derecha)
+      rotation: 800, // 90 + 360 = 450 (vuelta completa desde la derecha)
       duration: 42,
       repeat: -1,
       ease: "none"
