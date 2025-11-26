@@ -4,33 +4,43 @@
     ref="heroSection"
     class="relative h-screen flex items-center justify-center overflow-hidden bg-[#fffbe5]"
   >
-    <!-- Blob Volumétrico Animado - LUZ ROTATIVA CIRCULAR -->
+    <!-- Blob Volumétrico Animado - MÁS VIDA Y COLOR -->
     <div 
       ref="blobContainer" 
-      class="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+      class="absolute inset-0 z-0 pointer-events-none"
+      style="overflow: hidden;"
     >
-      <!-- Blob que rota alrededor del centro -->
+      <!-- Contenedor que rota -->
       <div
         ref="blob"
-        class="absolute top-1/2 left-1/2 w-[120vw] h-[120vw] opacity-0"
+        class="absolute opacity-0"
         style="
+          top: 50%;
+          left: 50%;
+          width: 140vmax;
+          height: 140vmax;
+          transform: translate(-50%, -50%) rotate(90deg);
           transform-origin: center center;
-          will-change: transform, opacity;
+          will-change: transform;
         "
       >
+        <!-- Gradiente MÁS INTENSO Y VIBRANTE -->
         <div
-          class="absolute w-full h-full"
+          ref="blobInner"
+          class="absolute inset-0"
           style="
             background: radial-gradient(
-              ellipse 45% 35% at 50% 100%,
-              rgba(201, 81, 54, 0.65) 0%,
-              rgba(201, 81, 54, 0.45) 25%,
-              rgba(201, 81, 54, 0.25) 50%,
-              rgba(201, 81, 54, 0.08) 70%,
-              transparent 85%
+              ellipse 42% 32% at 50% 18%,
+              rgba(201, 81, 54, 0.95) 0%,
+              rgba(201, 81, 54, 0.82) 18%,
+              rgba(201, 81, 54, 0.68) 32%,
+              rgba(201, 81, 54, 0.52) 46%,
+              rgba(201, 81, 54, 0.35) 60%,
+              rgba(201, 81, 54, 0.20) 72%,
+              rgba(201, 81, 54, 0.08) 84%,
+              transparent 95%
             );
-            filter: blur(120px);
-            transform: translate(-50%, -50%);
+            filter: blur(130px);
           "
         ></div>
       </div>
@@ -46,9 +56,9 @@
       <defs>
         <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color: transparent; stop-opacity: 0" />
-          <stop offset="35%" style="stop-color: #E23D28; stop-opacity: 0.6" />
-          <stop offset="50%" style="stop-color: #E23D28; stop-opacity: 1" />
-          <stop offset="65%" style="stop-color: #E23D28; stop-opacity: 0.6" />
+          <stop offset="35%" style="stop-color: #E44D2E; stop-opacity: 0.6" />
+          <stop offset="50%" style="stop-color: #E44D2E; stop-opacity: 1" />
+          <stop offset="65%" style="stop-color: #E44D2E; stop-opacity: 0.6" />
           <stop offset="100%" style="stop-color: transparent; stop-opacity: 0" />
         </linearGradient>
         <filter id="glow">
@@ -66,22 +76,22 @@
       <path ref="shimmer4" d="M 50 120 C 48 105, 46 90, 48 75 C 50 60, 54 48, 58 38 C 60 32, 62 28, 64 26 C 66 24, 70 24, 72 26 C 74 28, 76 32, 76 36 C 76 40, 74 44, 70 46 C 66 48, 62 46, 60 42 C 60 38, 62 34, 66 32 C 72 30, 80 28, 90 22 C 100 16, 110 8, 118 0 C 122 -6, 125 -12, 128 -18" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" filter="url(#glow)" stroke-linecap="round" class="shimmer-line" opacity="0" />
     </svg>
 
-    <!-- VIDEO CARD -->
+    <!-- VIDEO CARD - TAMAÑO CONSTANTE A PARTIR DE 640px -->
     <div
       ref="videoCard"
-      class="relative z-10 w-[70%] md:w-[300px] lg:w-[450px] rounded-3xl overflow-hidden shadow-2xl bg-black/40 backdrop-blur-xl border border-white/10 mb-20 transition-transform duration-300 ease-out"
+      class="relative z-10 w-[85%] sm:w-[380px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-black/40 backdrop-blur-xl border border-white/10 mb-16 md:mb-10 transition-transform duration-300 ease-out"
     >
       <video ref="videoEl" class="w-full h-full object-cover" style="transition: filter 0.3s ease-out;" autoplay muted loop playsinline preload="auto">
         <source src="/src/assets/heroVideo.webm" type="video/webm" />
       </video>
     </div>
 
-    <!-- TEXT + CTA -->
-    <div ref="textBlock" class="absolute bottom-20 text-center z-20 px-6 opacity-0 transition-all duration-300 ease-out">
-      <p class="text-2xl md:text-3xl lg:text-4xl text-[#433623] drop-shadow-xl mb-6">
+    <!-- TEXT + CTA - SIEMPRE PEGADO AL BOTTOM -->
+    <div ref="textBlock" class="absolute bottom-12 sm:bottom-16 text-center z-20 px-4 sm:px-6 opacity-0 transition-all duration-300 ease-out max-w-4xl">
+      <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#433623] drop-shadow-xl mb-4 sm:mb-5 md:mb-6 px-2">
         {{ $t('hero.tagline') }}
       </p>
-      <button ref="ctaButton" @click="scrollToContact" class="px-12 py-4 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110 opacity-0">
+      <button ref="ctaButton" @click="scrollToContact" class="px-8 sm:px-8 md:px-10 py-3 md:py-4 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110 opacity-0">
         {{ $t('hero.cta') }}
       </button>
     </div>
@@ -96,6 +106,7 @@ import { useSmoothScroll } from '../composables/useSmoothScroll'
 const heroSection = ref(null)
 const blobContainer = ref(null)
 const blob = ref(null)
+const blobInner = ref(null)
 const shimmer1 = ref(null)
 const shimmer2 = ref(null)
 const shimmer3 = ref(null)
@@ -128,30 +139,29 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
-  // ===== LUZ VOLUMÉTRICA ROTATIVA (ESTILO ZUFFA) =====
-  if (blob.value) {
+  // ===== LUZ VOLUMÉTRICA QUE RECORRE EL CONTORNO =====
+  if (blob.value && blobInner.value) {
     // Fade in inicial
     gsap.to(blob.value, {
       opacity: 1,
-      duration: 2,
+      duration: 2.5,
       ease: "power2.out"
     })
 
-    // Rotación continua suave alrededor del centro
+    // Rotación continua INFINITA - Empieza desde el lado derecho (90deg)
     gsap.to(blob.value, {
-      rotation: 360,
-      duration: 45, // 45 segundos para dar la vuelta completa
+      rotation: 450, // 90 + 360 = 450 (vuelta completa desde la derecha)
+      duration: 42,
       repeat: -1,
-      ease: "none",
-      transformOrigin: "center center"
+      ease: "none"
     })
 
-    // Respiración sutil del blur
-    gsap.to(blob.value.querySelector('div'), {
+    // Respiración MÁS PRONUNCIADA del blur para más vida
+    gsap.to(blobInner.value, {
       onUpdate: function() {
         const progress = (Date.now() % 20000) / 20000
-        const blurValue = 120 + Math.sin(progress * Math.PI * 2) * 30
-        blob.value.querySelector('div').style.filter = `blur(${blurValue}px)`
+        const blurValue = 130 + Math.sin(progress * Math.PI * 2) * 45
+        blobInner.value.style.filter = `blur(${blurValue}px)`
       },
       duration: 20,
       repeat: -1,
@@ -209,6 +219,19 @@ const scrollToContact = () => smoothScrollTo('#contact')
 @media (max-width: 768px) {
   section {
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height para móviles */
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 380px) {
+  [ref="textBlock"] p {
+    font-size: 1.125rem;
+  }
+  
+  [ref="ctaButton"] {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.875rem;
   }
 }
 </style>
