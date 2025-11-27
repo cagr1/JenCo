@@ -6,10 +6,12 @@ export default defineConfig({
   plugins: [vue()
 
   ],
-//   server
-// : {
-//     host: '0.0.0.0',
-//     port: 5173,
-//     allowedHosts: ['vicente-phototelegraphic-ominously.ngrok-free.dev']
-//   }
+  server
+: {
+    host: true,
+    port: 5173,
+    cors: true,
+    strictPort: true
+
+  }
 })

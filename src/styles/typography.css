@@ -7,8 +7,7 @@
   /* Font Families */
   --font-display: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
-  --font-accent: 'Cormorant Garamond', serif;
-  --font-script: 'Kaushan Script', cursive;
+  
 
   /* Typography Scale */
   --text-6xl: clamp(3rem, 8vw, 6rem);

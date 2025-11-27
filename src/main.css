@@ -1,11 +1,5 @@
-/* ============================================
-   IMPORTS - DEBEN IR PRIMERO
-   ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&family=Cormorant+Garamond:wght@300;500&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500;1,6..96,600;1,6..96,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
+
+
 
 /* Custom Styles - ANTES de Tailwind */
 @import './styles/variables.css';
@@ -17,35 +11,6 @@
    ============================================ */
 @tailwind base;
 @tailwind components;
-
-/* ============================================
-   GRADIENTE HERO ANIMATION - ENTRE COMPONENTS Y UTILITIES
-   CRÍTICO: Aquí Tailwind no lo sobrescribe
-   ============================================ */
-.gradient-background {
-  position: absolute;
-  inset: 0;
-  z-index: -10;
-  opacity: 0.7;
-  pointer-events: none;
-  background: linear-gradient(251deg, #463f3a, #bcb8b1, #eed8d1);
-  background-size: 600% 600%;
-  filter: blur(160px);
-  animation: HeroAnimation 14s ease infinite;
-}
-
-@keyframes HeroAnimation {
-  0% {
-    background-position: 92% 0%;
-  }
-  50% {
-    background-position: 9% 100%;
-  }
-  100% {
-    background-position: 92% 0%;
-  }
-}
-
 @tailwind utilities;
 
 /* ============================================
