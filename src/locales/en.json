@@ -8,7 +8,12 @@
     "contact": "Contact"
   },
   "hero": {
-    "tagline": "Beauty & Wellness Experience",
+    "title1":"The",
+    "title2":"Best",
+    "title3":"Version",
+    "title4":"Of  yourself",
+    "message1": "Welcome to Your Transformation",
+    "message2": "Professional beauty services designed to highlight your unique essence and reveal the best version of yourself",
     "cta": "Book Appointment"
   },
   "about": {
