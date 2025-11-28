@@ -4,70 +4,25 @@
     ref="heroSection"
     class="relative h-screen flex items-center justify-center overflow-hidden bg-[#fffbe5]"
   >
-    <!-- Blob Volumétrico Animado - DETECCIÓN INTELIGENTE -->
-    <div 
-      v-if="performanceLevel !== 'low'"
-      ref="blobContainer" 
-      class="absolute inset-0 z-0 pointer-events-none"
-      style="overflow: hidden;"
-    >
+    <!-- Blob Volumétrico (light, no blur animado) -->
+    <div ref="blobContainer" class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       <div
         ref="blob"
         class="absolute opacity-0"
-        style="
-          top: 50%;
-          left: 50%;
-          width: 140vmax;
-          height: 140vmax;
-          transform: translate(-50%, -50%) rotate(90deg);
-          transform-origin: center center;
-          will-change: transform;
-        "
+        style="top:50%; left:50%; width:140vmax; height:140vmax; transform:translate(-50%,-50%) rotate(90deg); transform-origin:center center; will-change:transform;"
       >
         <div
           ref="blobInner"
           class="absolute inset-0"
           :style="{
-            background: `radial-gradient(
-              ellipse 42% 32% at 50% 18%,
-              rgba(201, 81, 54, ${performanceLevel === 'medium' ? 0.85 : 0.95}) 0%,
-              rgba(201, 81, 54, ${performanceLevel === 'medium' ? 0.72 : 0.82}) 18%,
-              rgba(201, 81, 54, ${performanceLevel === 'medium' ? 0.58 : 0.68}) 32%,
-              rgba(201, 81, 54, ${performanceLevel === 'medium' ? 0.42 : 0.52}) 46%,
-              rgba(201, 81, 54, ${performanceLevel === 'medium' ? 0.25 : 0.35}) 60%,
-              rgba(201, 81, 54, ${performanceLevel === 'medium' ? 0.12 : 0.20}) 72%,
-              rgba(201, 81, 54, ${performanceLevel === 'medium' ? 0.04 : 0.08}) 84%,
-              transparent 95%
-            )`,
-            filter: `blur(${performanceLevel === 'medium' ? '100px' : '130px'})`
+            background: 'radial-gradient(ellipse 42% 32% at 50% 18%, rgba(201,81,54,0.95) 0%, rgba(201,81,54,0.82) 18%, rgba(201,81,54,0.68) 32%, rgba(201,81,54,0.52) 46%, rgba(201,81,54,0.35) 60%, rgba(201,81,54,0.20) 72%, rgba(201,81,54,0.08) 84%, transparent 95%)'
           }"
         ></div>
       </div>
     </div>
-    
-    <!-- Gradiente estático para dispositivos de gama baja -->
-    <div 
-      v-else
-      class="absolute inset-0 z-0 pointer-events-none"
-      style="
-        background: radial-gradient(
-          ellipse 60% 50% at 50% 40%,
-          rgba(201, 81, 54, 0.5) 0%,
-          rgba(201, 81, 54, 0.25) 40%,
-          rgba(201, 81, 54, 0.08) 70%,
-          transparent 100%
-        );
-      "
-    ></div>
 
-    <!-- SVG Destello Animado - HIGH y MEDIUM -->
-    <svg
-      v-if="performanceLevel === 'high' || (performanceLevel === 'medium' && !isMobile)"
-      class="absolute inset-0 w-full h-full pointer-events-none z-5"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="none"
-      viewBox="0 0 100 100"
-    >
+    <!-- SVG destellos (shimmer animations) -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none z-5" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 100">
       <defs>
         <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color: transparent; stop-opacity: 0" />
@@ -76,357 +31,506 @@
           <stop offset="65%" style="stop-color: #E44D2E; stop-opacity: 0.6" />
           <stop offset="100%" style="stop-color: transparent; stop-opacity: 0" />
         </linearGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
-          <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
       </defs>
-      
-      <path ref="shimmer1" d="M 25 -15 C 15 0, 10 20, 12 40 C 14 55, 20 65, 30 70 C 38 74, 46 74, 52 70 C 58 66, 62 58, 62 48 C 62 38, 58 30, 50 26 C 42 22, 32 24, 26 32 C 22 38, 22 46, 26 52 C 30 58, 38 60, 46 58 C 56 55, 68 48, 78 38 C 88 28, 98 15, 108 0 C 115 -10, 120 -18, 125 -25" stroke="url(#shimmerGradient)" stroke-width="0.15" fill="none" filter="url(#glow)" stroke-linecap="round" class="shimmer-line" opacity="0" />
-      <path ref="shimmer2" d="M 115 15 C 100 25, 85 38, 72 52 C 58 68, 48 82, 42 90 C 38 95, 36 98, 36 98 C 36 98, 38 94, 42 88 C 48 78, 56 68, 62 60 C 68 52, 72 46, 74 42 C 76 38, 76 36, 74 36 C 72 36, 68 38, 62 44 C 54 52, 44 64, 32 78 C 20 92, 8 104, -4 110 C -12 114, -18 115, -22 114" stroke="url(#shimmerGradient)" stroke-width="0.15" fill="none" filter="url(#glow)" stroke-linecap="round" class="shimmer-line" opacity="0" />
-      <path ref="shimmer3" d="M -20 120 C -5 105, 5 90, 18 75 C 31 60, 42 48, 50 40 C 54 36, 58 34, 62 34 C 66 34, 70 36, 72 40 C 74 44, 74 48, 72 52 C 70 56, 66 58, 62 58 C 58 58, 54 56, 52 52 C 52 48, 54 44, 58 42 C 64 40, 72 38, 82 30 C 92 22, 102 12, 112 0 C 118 -8, 122 -15, 125 -22" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" filter="url(#glow)" stroke-linecap="round" class="shimmer-line" opacity="0" />
-      <path ref="shimmer4" d="M 50 120 C 48 105, 46 90, 48 75 C 50 60, 54 48, 58 38 C 60 32, 62 28, 64 26 C 66 24, 70 24, 72 26 C 74 28, 76 32, 76 36 C 76 40, 74 44, 70 46 C 66 48, 62 46, 60 42 C 60 38, 62 34, 66 32 C 72 30, 80 28, 90 22 C 100 16, 110 8, 118 0 C 122 -6, 125 -12, 128 -18" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" filter="url(#glow)" stroke-linecap="round" class="shimmer-line" opacity="0" />
+      <path ref="shimmer1" d="M 25 -15 C 15 0, 10 20, 12 40 C 14 55, 20 65, 30 70 C 38 74, 46 74, 52 70 C 58 66, 62 58, 62 48 C 62 38, 58 30, 50 26 C 42 22, 32 24, 26 32 C 22 38, 22 46, 26 52 C 30 58, 38 60, 46 58 C 56 55, 68 48, 78 38 C 88 28, 98 15, 108 0 C 115 -10, 120 -18, 125 -25" stroke="url(#shimmerGradient)" stroke-width="0.15" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
+      <path ref="shimmer2" d="M 115 15 C 100 25, 85 38, 72 52 C 58 68, 48 82, 42 90 C 38 95, 36 98, 36 98 C 36 98, 38 94, 42 88 C 48 78, 56 68, 62 60 C 68 52, 72 46, 74 42 C 76 38, 76 36, 74 36 C 72 36, 68 38, 62 44 C 54 52, 44 64, 32 78 C 20 92, 8 104, -4 110 C -12 114, -18 115, -22 114" stroke="url(#shimmerGradient)" stroke-width="0.15" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
+      <path ref="shimmer3" d="M -20 120 C -5 105, 5 90, 18 75 C 31 60, 42 48, 50 40 C 54 36, 58 34, 62 34 C 66 34, 70 36, 72 40 C 74 44, 74 48, 72 52 C 70 56, 66 58, 62 58 C 58 58, 54 56, 52 52 C 52 48, 54 44, 58 42 C 64 40, 72 38, 82 30 C 92 22, 102 12, 112 0 C 118 -8, 122 -15, 125 -22" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
+      <path ref="shimmer4" d="M 50 120 C 48 105, 46 90, 48 75 C 50 60, 54 48, 58 38 C 60 32, 62 28, 64 26 C 66 24, 70 24, 72 26 C 74 28, 76 32, 76 36 C 76 40, 74 44, 70 46 C 66 48, 62 46, 60 42 C 60 38, 62 34, 66 32 C 72 30, 80 28, 90 22 C 100 16, 110 8, 118 0 C 122 -6, 125 -12, 128 -18" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
     </svg>
 
-    <!-- VIDEO CARD - Optimizado según rendimiento -->
+    <!-- CENTER ROW: left text | image | right text -->
+<div
+  ref="centerRow"
+  class="absolute inset-0 z-10 pointer-events-none flex items-center justify-center"
+>
+  <!-- LEFT TEXT -->
+  <div
+    ref="textLeft"
+    class="flex flex-col items-end text-right mr-6"
+    :style="{
+      opacity: sideTextOpacity,
+      transform: `translateY(${ -30 * (1 - sideTextOpacity) }px)`
+    }"
+  >
+    <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold text-[#433623] leading-tight">
+      <span class="block">LA</span>
+      <span class="block mt-0.5">MEJOR</span>
+    </h1>
+  </div>
+
+  <!-- IMAGE CARD (mantengo el ref imageCard) -->
+  <div
+    ref="imageCard"
+    class="relative z-10 w-[210px] h-[340px] rounded-2xl overflow-hidden shadow-2xl bg-black/10 transition-transform duration-150 ease-out"
+    style="border: none; transform-origin: center center;"
+  >
+    <img
+      ref="imageEl"
+      src="/src/assets/pexels-shiny-diamond.jpg"
+      alt="Hero Image"
+      class="w-full h-full object-cover"
+      draggable="false"
+      :style="{ objectPosition: '50% 35%' }"
+    />
     <div
-      ref="videoCard"
-      class="relative z-10 w-[85%] sm:w-[420px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-black/40 backdrop-blur-xl border border-white/10 mb-16 md:mb-20"
+      ref="imageOverlay"
+      class="absolute inset-0 bg-black pointer-events-none"
+      style="opacity: 0; will-change: opacity;"
+    ></div>
+  </div>
+
+  <!-- RIGHT TEXT -->
+  <div
+    ref="textRight"
+    class="flex flex-col items-start text-left ml-6"
+    :style="{
+      opacity: sideTextOpacity,
+      transform: `translateY(${ 30 * (1 - sideTextOpacity) }px)`
+    }"
+  >
+    <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold text-[#433623] leading-tight">
+      <span class="block">VERSIÓN</span>
+      <span class="block mt-0.5">DE TI</span>
+    </h1>
+  </div>
+</div>
+
+
+    <!-- Mensaje elegante durante el zoom (SOBRE la imagen con overlay) -->
+    <div
+      ref="zoomMessage"
+      class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-6"
       :style="{
-        transition: performanceLevel === 'low' ? 'none' : 'transform 0.3s ease-out',
-        backdropFilter: performanceLevel === 'low' ? 'blur(4px)' : 'blur(12px)'
+        opacity: messageOpacity,
+        transform: `scale(${ 0.95 + 0.05 * messageOpacity })`,
       }"
     >
-      <video 
-        ref="videoEl" 
-        class="w-full h-full object-cover" 
-        :style="{
-          transition: performanceLevel === 'high' ? 'filter 0.3s ease-out' : 'filter 0.2s ease-out'
-        }" 
-        autoplay 
-        muted 
-        loop 
-        playsinline 
-        preload="auto"
-      >
-        <source src="/src/assets/demo2.webm" type="video/webm" />
-      </video>
+      <h2 class="text-powder-blush-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-2xl leading-tight" style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
+        Bienvenida a tu Transformación
+      </h2>
+      <p class="text-powder-blush-50/95 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl leading-relaxed" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
+        Servicios profesionales de belleza diseñados para resaltar tu esencia única y revelar la mejor versión de ti misma
+      </p>
     </div>
 
-    <!-- TEXT + CTA -->
-    <div ref="textBlock" class="absolute bottom-4 sm:bottom-2 text-center z-20 px-4 sm:px-6 opacity-0 transition-all duration-300 ease-out max-w-4xl">
-      <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#433623] drop-shadow-xl mb-4 sm:mb-5 md:mb-6 px-2">
-        {{ $t('hero.tagline') }}
-      </p>
-      <button ref="ctaButton" @click="scrollToContact" class="px-8 sm:px-10 md:px-12 py-3 md:py-4 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110 opacity-0">
+    <!-- TEXT + CTA (will blur & fade during zoom) -->
+    <div
+      ref="textBlock"
+      class="absolute bottom-8 text-center z-20 px-4 sm:px-6 max-w-4xl transition-all duration-150 ease-out"
+      :style="{
+        opacity: textOpacity,
+        transform: `translateY(${ textTranslateY }px)`,
+        filter: `blur(${ textBlur }px)`
+      }"
+    >
+      <button
+        ref="ctaButton"
+        @click="scrollToContact"
+        class="px-7 sm:px-8 md:px-10 py-3 md:py-3 mr-5 sm:mr-6 md:mr-7 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110"
+      >
         {{ $t('hero.cta') }}
       </button>
-    </div>
-
-    <!-- Debug info (eliminar en producción) -->
-    <div v-if="showDebug" class="fixed top-4 left-4 bg-black/80 text-white p-4 rounded-lg text-xs z-50 font-mono">
-      <div>Performance: <strong>{{ performanceLevel.toUpperCase() }}</strong></div>
-      <div>Score: {{ performanceScore }}</div>
-      <div>Device: {{ deviceInfo.device }}</div>
-      <div>RAM: {{ deviceInfo.memory }}GB</div>
-      <div>CPU: {{ deviceInfo.cores }} cores</div>
-      <div>GPU: {{ deviceInfo.gpu }}</div>
-      <div>Mobile: {{ isMobile ? 'Yes' : 'No' }}</div>
-      <div>FPS: {{ currentFPS }}</div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useSmoothScroll } from '../composables/useSmoothScroll'
 
+gsap.registerPlugin(ScrollTrigger)
+
 const heroSection = ref(null)
-const blobContainer = ref(null)
 const blob = ref(null)
 const blobInner = ref(null)
+const blobContainer = ref(null)
 const shimmer1 = ref(null)
 const shimmer2 = ref(null)
 const shimmer3 = ref(null)
 const shimmer4 = ref(null)
-const videoCard = ref(null)
-const videoEl = ref(null)
+const imageCard = ref(null)
+const imageEl = ref(null)
+const imageOverlay = ref(null)
 const textBlock = ref(null)
+const textLeft = ref(null)
+const textRight = ref(null)
 const ctaButton = ref(null)
-const { smoothScrollTo } = useSmoothScroll({ duration: 900, offset: 80 })
+const zoomMessage = ref(null)
 
-// Sistema de detección inteligente de rendimiento
-const performanceScore = ref(0)
-const performanceLevel = ref('high') // 'high', 'medium', 'low'
-const deviceInfo = ref({})
-const currentFPS = ref(60)
-const showDebug = ref(false) // Cambiar a true para ver debug info
+const useScrollTrigger = true
 
-const isMobile = computed(() => window.innerWidth < 768)
+//control devices 
+const lightMode = ref(false)
+let demoWrapper = null
 
-// Función de detección de rendimiento
-const detectPerformance = () => {
-  let score = 100
 
-  // 1. Hardware Detection
-  const memory = navigator.deviceMemory || 4
-  const cores = navigator.hardwareConcurrency || 2
-  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection
+const DEMO_BLOB_HTML = 
+`
+  <div class="absolute inset-0 z-0 overflow-hidden flex items-center justify-center pointer-events-none">
+    <!-- Rotating Aura Blob -->
+    <div class="relative w-[150vw] h-[150vw] md:w-[80vw] md:h-[80vw] max-w-[1000px] max-h-[1000px] animate-spin-slow opacity-60">
+      <div class="absolute inset-0 rounded-full conic-aura blur-[80px] md:blur-[120px]"></div>
+    </div>
+    <!-- Secondary Pulse Blob (Static but pulsing) -->
+    <div class="absolute w-[40vw] h-[40vw] bg-rose-100/30 rounded-full blur-3xl animate-float"></div>
+  </div>
+`
 
-  deviceInfo.value = {
-    memory,
-    cores,
-    device: isMobile.value ? 'Mobile' : 'Desktop',
-    gpu: 'Unknown'
-  }
-
-  // 2. Memory Score (0-30 puntos)
-  if (memory >= 8) score += 0
-  else if (memory >= 4) score -= 10
-  else score -= 25
-
-  // 3. CPU Score (0-25 puntos)
-  if (cores >= 8) score += 0
-  else if (cores >= 4) score -= 8
-  else score -= 20
-
-  // 4. Connection Score (0-15 puntos)
-  if (connection) {
-    const effectiveType = connection.effectiveType
-    if (effectiveType === '4g') score += 0
-    else if (effectiveType === '3g') score -= 10
-    else score -= 15
-  }
-
-  // 5. GPU Detection (0-20 puntos)
+function detectLightMode(){
   try {
-    const canvas = document.createElement('canvas')
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-    if (gl) {
-      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
-      if (debugInfo) {
-        const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
-        deviceInfo.value.gpu = renderer
-        
-        // GPU potente (Apple, NVIDIA, AMD high-end)
-        if (/(Apple|NVIDIA|AMD|Mali-G|Adreno 6|Adreno 7)/i.test(renderer)) {
-          score += 0
-        }
-        // GPU media (Adreno 5xx, Mali-G5x)
-        else if (/(Adreno 5|Mali-G5)/i.test(renderer)) {
-          score -= 10
-        }
-        // GPU baja
-        else {
-          score -= 20
-        }
-      }
-    }
-  } catch (e) {
-    score -= 15
-  }
-
-  // 6. FPS Test (0-10 puntos) - Test real de rendimiento
-  let frameCount = 0
-  let lastTime = performance.now()
-  let testDuration = 1000 // 1 segundo
-
-  const measureFPS = () => {
-    frameCount++
-    const currentTime = performance.now()
-    
-    if (currentTime - lastTime >= testDuration) {
-      const fps = Math.round((frameCount * 1000) / (currentTime - lastTime))
-      currentFPS.value = fps
-      
-      if (fps >= 55) score += 0
-      else if (fps >= 40) score -= 5
-      else score -= 10
-
-      // Determinar nivel final
-      performanceScore.value = Math.max(0, Math.min(100, score))
-      
-      if (performanceScore.value >= 75) {
-        performanceLevel.value = 'high'
-      } else if (performanceScore.value >= 50) {
-        performanceLevel.value = 'medium'
-      } else {
-        performanceLevel.value = 'low'
-      }
-
-      console.log('🎯 Performance Detection:', {
-        score: performanceScore.value,
-        level: performanceLevel.value,
-        fps,
-        device: deviceInfo.value
-      })
-    } else {
-      requestAnimationFrame(measureFPS)
-    }
-  }
-
-  requestAnimationFrame(measureFPS)
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true
+    if (window.innerWidth < 900) return true
+    if (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) return true
+    if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return true
+  } catch (e) { /* safe fallback */ }
+  return false
 }
 
-// Scroll handler optimizado
+function enableLightMode(){
+  if (!blobContainer.value) return
+  // hide original heavy blob (if exists)
+  if (blob.value) blob.value.style.display = 'none'
+  if (blobInner.value) blobInner.value.style.display = 'none'
+
+  // hide SVG shimmer
+  const svg = heroSection.value?.querySelector('svg')
+  if (svg) svg.style.display = 'none'
+
+  // append demo wrapper (avoid re-creating if ya existe)
+  if (!blobContainer.value.querySelector('.hero-demo-blob')) {
+    demoWrapper = document.createElement('div')
+    demoWrapper.className = 'hero-demo-blob'
+    demoWrapper.innerHTML = DEMO_BLOB_HTML
+    blobContainer.value.appendChild(demoWrapper)
+  }
+
+  // kill heavy blob tweens (si estan corriendo)
+  try { gsap.killTweensOf(blob.value); gsap.killTweensOf(blobInner.value) } catch (e) {}
+}
+
+function disableLightMode() {
+  if (!blobContainer.value) return
+  // reveal original blob
+  if (blob.value) blob.value.style.display = ''
+  if (blobInner.value) blobInner.value.style.display = ''
+
+  // show svg again
+  const svg = heroSection.value?.querySelector('svg')
+  if (svg) svg.style.display = ''
+
+  // remove demo wrapper if existe
+  const existing = blobContainer.value.querySelector('.hero-demo-blob')
+  if (existing) existing.remove()
+
+  // restart light blob animations if necessary (we'll re-run animation block in onMounted or handleModeChange triggers)
+  // animateShimmer & blob tweens serán llamados desde onMounted cuando no estemos en light mode
+
+  try {
+    if (blob.value && blobInner.value) {
+      gsap.to(blob.value, { opacity: 1, duration: 2.2, ease: 'power2.out' })
+      gsap.to(blob.value, { rotation: 800, duration: 42, repeat: -1, ease: 'none' })
+      gsap.to(blobInner.value, {
+        scale: 1.06,
+        opacity: 0.9,
+        duration: 8,
+        yoyo: true,
+        repeat: -1,
+        ease: 'sine.inOut'
+      })
+    }
+    animateShimmer(shimmer1, 2.5)
+    animateShimmer(shimmer2, 6.5)
+    animateShimmer(shimmer3, 10.5)
+    animateShimmer(shimmer4, 14.5)
+  } catch (e) {}
+
+
+}
+
+
+const { smoothScrollTo } = useSmoothScroll({ duration: 700, offset: 0 })
+
+// UI state
+const messageOpacity = ref(0)
+const overlayOpacity = ref(0)
+const textOpacity = ref(1)
+const textBlur = ref(0)
+const textTranslateY = ref(0)
+const sideTextOpacity = ref(1)
+
+let heroHeight = 0
+let heroWidth = 0
+let cardHeight = 340 // tamaño actualizado a 340px
+let cardWidth = 200  // tamaño actualizado a 200px
+let scaleMax = 1
+let scrollLocked = false
+let messageShown = false
+
+// Fases de la animación - Ajustadas para mostrar mejor el mensaje
+const zoomPhase1 = 0.3  // hasta aquí la imagen crece
+const zoomPhase2 = 0.5 // aquí aparece el overlay oscuro
+const zoomPhase3 = 0.7 // aquí aparece el mensaje completamente
+const messageHoldDuration = 1500 // ms que el mensaje permanece antes de desbloquear scroll
+
+// rAF control
 let scrollTicking = false
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v))
+
+const updateDimensions = () => {
+  if (!heroSection.value || !imageCard.value) return
+  const rect = heroSection.value.getBoundingClientRect()
+  heroHeight = rect.height || window.innerHeight
+  heroWidth = rect.width || window.innerWidth
+
+  cardHeight = imageCard.value.clientHeight || 340
+  cardWidth = imageCard.value.clientWidth || 200
+
+  const scaleByHeight = heroHeight / cardHeight
+  const scaleByWidth = heroWidth / cardWidth
+  scaleMax = Math.max(scaleByHeight, scaleByWidth, 1)
+  scaleMax = Math.min(scaleMax, 12) // permitir más zoom para cubrir completamente
+
+  if (heroSection.value) {
+  heroSection.value.style.setProperty('--card-half', `${cardWidth / 2}px`)
+  }
+
+  try {
+    if (typeof ScrollTrigger !== 'undefined' && ScrollTrigger.getAll().length) {
+      ScrollTrigger.refresh()
+    }
+  } catch (e) { /* safe */ }
+
+
+   try {
+    const shouldLight = detectLightMode()
+    if (shouldLight !== lightMode.value) {
+      lightMode.value = shouldLight
+      if (lightMode.value) enableLightMode()
+      else disableLightMode()
+    }
+  } catch (e) { /* safe */ }
+
+}
+
 const handleScroll = () => {
   if (scrollTicking) return
   scrollTicking = true
-  
   requestAnimationFrame(() => {
-    const scroll = window.scrollY
-    
-    // Blur según performance
-    if (videoEl.value) {
-      const maxBlur = performanceLevel.value === 'high' ? 12 : 
-                     performanceLevel.value === 'medium' ? 8 : 4
-      const blurSpeed = performanceLevel.value === 'high' ? 50 : 80
-      const blur = scroll > 0 ? Math.min((scroll / blurSpeed) * maxBlur, maxBlur) : 0
-      videoEl.value.style.filter = `blur(${blur}px)`
+    if (!heroSection.value || !imageCard.value) {
+      scrollTicking = false
+      return
     }
 
-    // Scale solo en high y medium desktop
-    if (videoCard.value && performanceLevel.value !== 'low' && !isMobile.value) {
-      const scale = 1 + Math.min(scroll / 5000, 0.1)
-      videoCard.value.style.transform = `scale(${scale})`
-    }
-
-    // Fade out texto
-    if (textBlock.value) {
-      const opacity = Math.max(1 - scroll / 400, 0)
-      const translateY = -Math.min(scroll / 3, 100)
-      textBlock.value.style.opacity = opacity
-      textBlock.value.style.transform = `translateY(${translateY}px)`
+    const rect = heroSection.value.getBoundingClientRect()
+    let scrolled = -rect.top
+    
+    // Si estamos en fase de mensaje bloqueado, limitar el scroll
+    if (scrollLocked) {
+      scrolled = Math.min(scrolled, heroHeight * zoomPhase3)
     }
     
+    const progress = clamp(scrolled / heroHeight, 0, 1)
+
+    // Fase 1: Imagen crece (0 → zoomPhase1)
+    const phase1Progress = clamp(progress / zoomPhase1, 0, 1)
+    const scaleX = 1 + (scaleMax - 1) * phase1Progress
+    const scaleY = 1 + (scaleMax - 1) * Math.pow(phase1Progress, 1.55)
+    imageCard.value.style.transform = `scaleX(${scaleX}) scaleY(${scaleY})`
+    
+    overlayOpacity.value = Math.min(phase1Progress * 1.2, 0.85)
+
+    // Fase 2: Overlay oscuro aparece (zoomPhase1 → zoomPhase2)
+    if (progress >= zoomPhase1) {
+      const overlayProgress = clamp((progress - zoomPhase1) / (zoomPhase2 - zoomPhase1), 0, 1)
+      overlayOpacity.value = overlayProgress * 0.8 // 80% de opacidad máxima para mejor contraste
+    } else {
+      overlayOpacity.value = 0
+    }
+
+    // Fase 3: Mensaje aparece (zoomPhase2 → zoomPhase3)
+    if (progress >= zoomPhase2) {
+      const msgProgress = clamp((progress - zoomPhase2) / (zoomPhase3 - zoomPhase2), 0, 1)
+      messageOpacity.value = msgProgress
+      
+      // Bloquear scroll cuando el mensaje está completamente visible
+      if (msgProgress >= 0.98 && !messageShown) {
+        messageShown = true
+        scrollLocked = true
+        
+        // Desbloquear después de tiempo de lectura
+        setTimeout(() => {
+          scrollLocked = false
+        }, messageHoldDuration)
+      }
+    } else {
+      messageOpacity.value = 0
+      // Reset si el usuario vuelve atrás
+      if (messageShown && progress < zoomPhase2 - 0.05) {
+        messageShown = false
+        scrollLocked = false
+      }
+    }
+
+    if (useScrollTrigger) {
+      // Si ScrollTrigger está manejando el scroll, no hacemos más ajustes
+      return
+    }
+
+
+    // Text block transitions (se oculta rápido al inicio del zoom)
+    const textFadeProgress = clamp(progress / 0.2, 0, 1)
+    textOpacity.value = 1 - textFadeProgress
+    textBlur.value = textFadeProgress * 8
+    textTranslateY.value = -Math.min(textFadeProgress * 40, 40)
+
+    // Textos laterales - desaparecen más gradualmente
+    const sideTextFadeProgress = clamp(progress / 0.3, 0, 1)
+    sideTextOpacity.value = 1 - sideTextFadeProgress
+
     scrollTicking = false
   })
 }
 
+const animateShimmer = (elRef, delay = 0) => {
+  if (!elRef?.value) return
+  try {
+    const pathLength = elRef.value.getTotalLength()
+    elRef.value.style.strokeDasharray = pathLength
+    elRef.value.style.strokeDashoffset = pathLength
+    gsap.timeline({ delay, repeat: -1, repeatDelay: 12 })
+      .to(elRef.value, { opacity: 1, duration: 0.25, ease: 'power1.in' })
+      .to(elRef.value, { strokeDashoffset: 0, duration: 2.4, ease: 'power1.inOut' }, '<')
+      .to(elRef.value, { opacity: 0, duration: 0.45, ease: 'power1.out' }, '-=0.4')
+  } catch (e) { /* safe */ }
+}
+
 onMounted(() => {
-  // Detectar rendimiento primero
-  detectPerformance()
+  updateDimensions()
+  window.addEventListener('resize', updateDimensions)
 
-  // Esperar a que termine la detección (1 segundo)
-  setTimeout(() => {
-    // ===== LUZ VOLUMÉTRICA =====
-    if (blob.value && blobInner.value && performanceLevel.value !== 'low') {
-      gsap.to(blob.value, {
-        opacity: performanceLevel.value === 'high' ? 1 : 0.8,
-        duration: 2.5,
-        ease: "power2.out"
-      })
+  if( imageCard.value ) {
+    imageCard.value.style.transformOrigin = 'none'
+  }
 
-      // Rotación según performance
-      const rotationDuration = performanceLevel.value === 'high' ? 42 : 
-                              performanceLevel.value === 'medium' ? 55 : 70
-      
-      gsap.to(blob.value, {
-        rotation: 800,
-        duration: rotationDuration,
-        repeat: -1,
-        ease: "none"
-      })
+  lightMode.value = detectLightMode()
+  if (lightMode.value) {
+    enableLightMode()
+   
+  } else {
+    // blob animation (GPU-friendly; no dynamic blur)
+  if (blob.value && blobInner.value) {
+    gsap.to(blob.value, { opacity: 1, duration: 2.2, ease: 'power2.out' })
+    gsap.to(blob.value, { rotation: 800, duration: 42, repeat: -1, ease: 'none' })
+    gsap.to(blobInner.value, {
+      scale: 1.06,
+      opacity: 0.9,
+      duration: 8,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut'
+    })
+  }
 
-      // Respiración del blur
-      if (performanceLevel.value === 'high') {
-        // Animación completa en HIGH
-        gsap.to(blobInner.value, {
-          onUpdate: function() {
-            const progress = (Date.now() % 20000) / 20000
-            const blurValue = 130 + Math.sin(progress * Math.PI * 2) * 45
-            blobInner.value.style.filter = `blur(${blurValue}px)`
-          },
-          duration: 20,
-          repeat: -1,
-          ease: "none"
-        })
-      } else {
-        // Respiración suave en MEDIUM
-        gsap.to(blobInner.value, {
-          onUpdate: function() {
-            const progress = (Date.now() % 16000) / 16000
-            const blurValue = 100 + Math.sin(progress * Math.PI * 2) * 25
-            blobInner.value.style.filter = `blur(${blurValue}px)`
-          },
-          duration: 16,
-          repeat: -1,
-          ease: "none"
-        })
-      }
-    }
-
-    // ===== SHIMMERS =====
-    if (performanceLevel.value === 'high' || (performanceLevel.value === 'medium' && !isMobile.value)) {
-      const animateShimmer = (shimmerRef, delay = 0) => {
-        if (!shimmerRef.value) return
-        const pathLength = shimmerRef.value.getTotalLength()
-        shimmerRef.value.style.strokeDasharray = pathLength
-        shimmerRef.value.style.strokeDashoffset = pathLength
-        
-        const repeatDelay = performanceLevel.value === 'high' ? 16 : 20
-        
-        gsap.timeline({ delay, repeat: -1, repeatDelay })
-          .to(shimmerRef.value, { opacity: 1, duration: 0.3, ease: "power1.in" })
-          .to(shimmerRef.value, { strokeDashoffset: 0, duration: 3, ease: "power1.inOut" }, "<")
-          .to(shimmerRef.value, { opacity: 0, duration: 0.5, ease: "power1.out" }, "-=0.5")
-      }
-
-      animateShimmer(shimmer1, 3)
-      animateShimmer(shimmer2, 7)
-      animateShimmer(shimmer3, 11)
-      animateShimmer(shimmer4, 15)
-    }
-
-    // ===== ENTRADA =====
-    const entryDuration = performanceLevel.value === 'high' ? 1.6 : 
-                         performanceLevel.value === 'medium' ? 1.3 : 1.0
-    
-    const tl = gsap.timeline({ delay: 0.3 })
-    tl.fromTo(videoCard.value, 
-      { opacity: 0, scale: 0.95, filter: "blur(15px)" },
-      { 
-        opacity: 1, 
-        scale: 1, 
-        filter: "blur(0px)", 
-        duration: entryDuration, 
-        ease: "power3.out" 
-      }
-    )
-    .to(textBlock.value, { 
+  // shimmer animations
+  animateShimmer(shimmer1, 2.5)
+  animateShimmer(shimmer2, 6.5)
+  animateShimmer(shimmer3, 10.5)
+  animateShimmer(shimmer4, 14.5)
+  }
+  
+  // entry animations
+  gsap.fromTo(imageCard.value,
+    { opacity: 0, scale: 0.96, y: 10 },
+    { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.3 }
+  )
+  
+  // Animación de entrada para textos laterales (más pronunciada)
+  gsap.fromTo([textLeft.value, textRight.value],
+    { 
+      opacity: 0, 
+      x: (i) => i === 0 ? -60 : 60 
+    },
+    { 
       opacity: 1, 
-      y: -10, 
-      duration: 0.9, 
-      ease: "power2.out" 
-    }, "-=0.6")
-    .to(ctaButton.value, { 
-      opacity: 1, 
-      scale: 1.03, 
-      duration: 0.7, 
-      ease: "back.out(1.5)" 
-    }, "-=0.3")
-  }, 1100)
+      x: 0, 
+      duration: 1.4, 
+      ease: 'power3.out', 
+      delay: 0.5, 
+      stagger: 0.15 
+    }
+  )
+  
+  gsap.fromTo(textBlock.value,
+    { opacity: 0, y: 10 },
+    { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.8 }
+  )
 
+  // scroll listener
   window.addEventListener('scroll', handleScroll, { passive: true })
 
-  // Atajo para debug (Ctrl + Shift + D)
-  const handleKeyDown = (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'D') {
-      showDebug.value = !showDebug.value
-    }
+  // re-evaluate dims after image/font load
+  const img = imageEl.value
+  if (img && !img.complete) {
+    img.addEventListener('load', () => setTimeout(updateDimensions, 120))
+  } else {
+    setTimeout(updateDimensions, 120)
   }
-  window.addEventListener('keydown', handleKeyDown)
+
+  if (imageCard.value) {
+  imageCard.value.style.transition = 'none'
+}
+
+// esperar al siguiente frame para asegurar que el layout ya está finalizado
+requestAnimationFrame(() => {
+  // recalcular dimensiones basadas en layout definitivo
+  updateDimensions()
+
+  // overshoot para evitar huecos en pantallas ultra anchas
+  const finalScale = Math.max(1, Math.min(Math.max(heroWidth / cardWidth, heroHeight / cardHeight) * 1.06, 12))
+
+  // refrescar ScrollTrigger/layout por si hubo cambios
+  try { ScrollTrigger.refresh() } catch (e) {}
+
+  // timeline controlado por ScrollTrigger (igual que antes, pero usando finalScale actualizado)
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: heroSection.value,
+      start: "top top",
+      end: "+=150%",
+      scrub: 0.7,
+      pin: true,
+      anticipatePin: 1
+    }
+  })
+
+  // zoom y overlay desde el inicio (overlay ahora controla el DOM directamente)
+  tl.to(imageCard.value, { scale: finalScale, ease: "power2.out", duration: 1 }, 0)
+  tl.to(imageOverlay.value, { opacity: 0.78, ease: "none", duration: 1 }, 0)
+
+  tl.to(textBlock.value, { y: -24, opacity: 0, filter: "blur(6px)", ease: "power1.out", duration: 0.5 }, 0.35)
+  tl.to(zoomMessage.value, {
+    opacity: 1, scale: 1, ease: "power2.out", duration: 0.8,
+    onStart: () => { if (zoomMessage.value) zoomMessage.value.style.pointerEvents = "auto" },
+    onReverseComplete: () => { if (zoomMessage.value) zoomMessage.value.style.pointerEvents = "none" }
+  }, 0.6)
+})
+  
 })
 
 onUnmounted(() => {
+  try { 
+    ScrollTrigger.getAll().forEach(st => st.kill())
+    gsap.killTweensOf(imageCard.value)
+  }
+  catch (e) { /* safe */ }
+
   window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('resize', updateDimensions)
 })
 
+// keep existing exported function
 const scrollToContact = () => smoothScrollTo('#contact')
 </script>
 
@@ -436,7 +540,24 @@ const scrollToContact = () => smoothScrollTo('#contact')
   will-change: stroke-dashoffset, opacity;
 }
 
-/* Optimizaciones adaptativas */
+/* no borders, card look */
+[ref="imageCard"] {
+  border: none !important;
+}
+
+/* Ensure transform GPU compositing */
+[ref="imageCard"], [ref="imageCard"] img {
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* text block will-change */
+[ref="textBlock"] {
+  will-change: opacity, transform, filter;
+}
+
+/* viewport adjustments */
 @media (max-width: 768px) {
   section {
     height: 100vh;
@@ -444,38 +565,62 @@ const scrollToContact = () => smoothScrollTo('#contact')
   }
 }
 
-/* Will-change basado en performance */
-[ref="videoCard"], 
-[ref="videoEl"], 
-[ref="textBlock"], 
-[ref="blob"] {
-  will-change: auto;
-}
-
-@media (min-width: 769px) {
-  [ref="videoCard"]:not(.low-performance), 
-  [ref="videoEl"]:not(.low-performance), 
-  [ref="textBlock"]:not(.low-performance), 
-  [ref="blob"]:not(.low-performance) {
-    will-change: transform;
+/* Responsive para pantallas pequeñas */
+@media (max-width: 640px) {
+  [ref="imageCard"] {
+    width: 180px;
+    height: 306px;
   }
 }
 
-/* Ajustes pantallas pequeñas */
+/* tiny screens */
 @media (max-width: 380px) {
-  [ref="textBlock"] p {
-    font-size: 1.125rem;
+  [ref="imageCard"] {
+    width: 160px;
+    height: 272px;
   }
-  
+  [ref="textBlock"] p {
+    font-size: 1.05rem;
+  }
   [ref="ctaButton"] {
-    padding: 0.625rem 1.5rem;
-    font-size: 0.875rem;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.85rem;
+  }
+  [ref="zoomMessage"] h2 {
+    font-size: 1.75rem;
+  }
+  [ref="zoomMessage"] p {
+    font-size: 1rem;
   }
 }
 
-/* Hardware acceleration */
-video {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+[ref="textLeft"] h1,
+[ref="textRight"] h1 {
+  writing-mode: horizontal-tb !important;
+  text-orientation: initial !important;
+}
+
+/* ajuste fino del gap (puedes cambiar 1.125rem) */
+@media (max-width: 640px) {
+  .mr-6 { margin-right: 0.75rem; }
+  .ml-6 { margin-left: 0.75rem; }
+  [ref="textLeft"] h1, [ref="textRight"] h1 { font-size: 2.25rem; }
+}
+
+/* asegurar que los textos no capturen eventos */
+[ref="centerRow"] > div { pointer-events: none; }
+
+/* small tweak de line-height si quieres las palabras más pegadas */
+[ref="textLeft"] h1 span, [ref="textRight"] h1 span {
+  line-height: 0.95;
+}
+/* Asegurar que el mensaje sea visible */
+[ref="zoomMessage"] {
+  z-index: 30;
+}
+
+/* Mejorar la visibilidad del overlay */
+[ref="imageOverlay"] {
+  z-index: 15;
 }
 </style>
