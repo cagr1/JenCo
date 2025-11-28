@@ -188,7 +188,7 @@ function detectLightMode(){
     const isTouch = (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
 
     // activamos modo adaptado si hay touch o UA móvil
-    return !!(isMobileUA || isTouch)
+    return window.innerWidth < 380 || navigator.hardwareConcurrency <= 2
   } catch (e) {
     return false
   }
@@ -456,15 +456,15 @@ onMounted(() => {
   gsap.fromTo([textLeft.value, textRight.value],
     { 
       opacity: 0, 
-      x: (i) => i === 0 ? -60 : 60 
+      x: (i) => i === 0 ? -120 : 120 
     },
     { 
       opacity: 1, 
       x: 0, 
-      duration: 1.4, 
-      ease: 'power3.out', 
-      delay: 0.5, 
-      stagger: 0.15 
+      duration: 1.25, 
+      ease: 'power4.out', 
+      delay: 0.3, 
+      stagger: 0.1 
     }
   )
   
@@ -493,8 +493,9 @@ requestAnimationFrame(() => {
   // recalcular dimensiones basadas en layout definitivo
   updateDimensions()
 
-  // overshoot para evitar huecos en pantallas ultra anchas
-  const finalScale = Math.max(1, Math.min(Math.max(heroWidth / cardWidth, heroHeight / cardHeight) * 1.06, 12))
+  
+  const baseScale = Math.max(heroWidth / cardWidth, heroHeight / cardHeight)
+  const finalScale = Math.min(baseScale * 1.35, 14)
 
   // refrescar ScrollTrigger/layout por si hubo cambios
   try { ScrollTrigger.refresh() } catch (e) {}
@@ -513,11 +514,12 @@ requestAnimationFrame(() => {
 
   // zoom y overlay desde el inicio (overlay ahora controla el DOM directamente)
   tl.to(imageCard.value, { scale: finalScale, ease: "power2.out", duration: 1 }, 0)
-  tl.to(imageOverlay.value, { opacity: 0.78, ease: "none", duration: 1 }, 0)
+  tl.to(imageOverlay.value, { opacity: 0.92, ease: "power1.out", duration: 0.8 }, 0)
 
   tl.to(textBlock.value, { y: -24, opacity: 0, filter: "blur(6px)", ease: "power1.out", duration: 0.5 }, 0.35)
   tl.to(zoomMessage.value, {
-    opacity: 1, scale: 1, ease: "power2.out", duration: 0.8,
+    opacity: 0, scale: 0.7, y: 30,
+    opacity: 1, scale: 1, ease: "power3.out", duration: 0.9,
     onStart: () => { if (zoomMessage.value) zoomMessage.value.style.pointerEvents = "auto" },
     onReverseComplete: () => { if (zoomMessage.value) zoomMessage.value.style.pointerEvents = "none" }
   }, 0.6)
