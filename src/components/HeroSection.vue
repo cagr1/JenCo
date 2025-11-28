@@ -105,10 +105,10 @@
         transform: `scale(${ 0.95 + 0.05 * messageOpacity })`,
       }"
     >
-      <h2 class="text-powder-blush-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-2xl leading-tight" style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
+      <h2 class="text-powder-blush-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-2xl leading-tight " style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
         Bienvenida a tu Transformación
       </h2>
-      <p class="text-powder-blush-50/95 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl leading-relaxed" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
+      <p class="text-powder-blush-50/95 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl leading-relaxed italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
         Servicios profesionales de belleza diseñados para resaltar tu esencia única y revelar la mejor versión de ti misma
       </p>
     </div>
@@ -169,23 +169,29 @@ let demoWrapper = null
 const DEMO_BLOB_HTML = 
 `
   <div class="absolute inset-0 z-0 overflow-hidden flex items-center justify-center pointer-events-none">
-    <!-- Rotating Aura Blob -->
-    <div class="relative w-[150vw] h-[150vw] md:w-[80vw] md:h-[80vw] max-w-[1000px] max-h-[1000px] animate-spin-slow opacity-60">
-      <div class="absolute inset-0 rounded-full conic-aura blur-[80px] md:blur-[120px]"></div>
+    <!-- Mobile-adapted rotating aura (smaller blur, transform-only animation) -->
+    <div class="mobile-aura-wrap">
+      <div class="mobile-aura"></div>
+      <div class="mobile-pulse"></div>
     </div>
-    <!-- Secondary Pulse Blob (Static but pulsing) -->
-    <div class="absolute w-[40vw] h-[40vw] bg-rose-100/30 rounded-full blur-3xl animate-float"></div>
   </div>
 `
 
 function detectLightMode(){
   try {
+    // preferencia explícita del usuario: reduce-motion → light mode
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true
-    if (window.innerWidth < 900) return true
-    if (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) return true
-    if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return true
-  } catch (e) { /* safe fallback */ }
-  return false
+
+    // heurística más fiable para móvil: userAgent + touch + coarse pointer
+    const ua = navigator.userAgent || ''
+    const isMobileUA = /Mobi|Android|iPhone|iPad|iPod|Windows Phone|Opera Mini/i.test(ua)
+    const isTouch = (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
+
+    // activamos modo adaptado si hay touch o UA móvil
+    return !!(isMobileUA || isTouch)
+  } catch (e) {
+    return false
+  }
 }
 
 function enableLightMode(){
@@ -623,4 +629,51 @@ const scrollToContact = () => smoothScrollTo('#contact')
 [ref="imageOverlay"] {
   z-index: 15;
 }
+
+/* ---- Mobile-adapted blob styles: much lighter (transform + small blur) ---- */
+.mobile-aura-wrap { position: absolute; inset: 0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.mobile-aura {
+  width: 110vmax; height: 110vmax;
+  max-width: 900px; max-height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(228,77,46,0.95) 0%, rgba(228,77,46,0.45) 28%, rgba(228,77,46,0.18) 48%, transparent 70%);
+  filter: blur(26px); /* mucho más pequeño que en desktop */
+  transform-origin: center center;
+  will-change: transform, opacity;
+  animation: mobileAuraRotate 28s linear infinite;
+  opacity: 0.82;
+}
+
+/* ligera variación de pulso */
+.mobile-pulse {
+  position: absolute;
+  width: 36vmax; height: 36vmax;
+  max-width: 420px; max-height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(244,190,190,0.32), rgba(244,190,190,0.12));
+  filter: blur(18px);
+  will-change: transform, opacity;
+  animation: mobilePulse 6.5s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+/* Animaciones basadas en transform/opacity SOLO (GPU-friendly) */
+@keyframes mobileAuraRotate {
+  from { transform: rotate(0deg) translateZ(0); }
+  to   { transform: rotate(360deg) translateZ(0); }
+}
+@keyframes mobilePulse {
+  0% { transform: translateY(0) scale(0.98); opacity: 0.6; }
+  50% { transform: translateY(-6px) scale(1.02); opacity: 0.85; }
+  100% { transform: translateY(0) scale(0.98); opacity: 0.6; }
+}
+
+/* reduce blur on low-power devices even more */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-aura { animation: none; filter: blur(16px); }
+  .mobile-pulse { animation: none; filter: blur(10px); }
+}
+
+
+
 </style>
