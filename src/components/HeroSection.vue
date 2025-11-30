@@ -52,7 +52,7 @@
       transform: `translateY(${ -30 * (1 - sideTextOpacity) }px)`
     }"
   >
-    <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold text-[#433623] leading-tight">
+    <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold text-powder-blush-800 leading-tight ">
       <span class="block">{{ $t('hero.title1') }}</span>
       <span class="block mt-0.5">{{ $t('hero.title2') }}</span>
     </h1>
@@ -88,9 +88,9 @@
       transform: `translateY(${ 30 * (1 - sideTextOpacity) }px)`
     }"
   >
-    <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold text-[#433623] leading-tight">
-      <span class="block">{{ $t('hero.title3') }}</span>
-      <span class="block mt-0.5">{{ $t('hero.title4') }}</span>
+    <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold leading-tight">
+      <span class="block text-powder-blush-800">{{ $t('hero.title3') }}</span>
+      <span class="block mt-0.5 italic text-powder-blush-600">{{ $t('hero.title4') }}</span>
     </h1>
   </div>
 </div>
@@ -105,10 +105,10 @@
         transform: `scale(${ 0.95 + 0.05 * messageOpacity })`,
       }"
     >
-      <h2 class="text-powder-blush-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-2xl leading-tight " style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
+      <h2 class="text-powder-blush-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-2xl leading-relaxed " style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
         {{ $t('hero.message1') }}
       </h2>
-      <p class="text-powder-blush-50/95 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl leading-relaxed italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
+      <p class="text-powder-blush-50/95 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl font-serif italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
         {{ $t('hero.message2') }}
       </p>
     </div>
