@@ -41,6 +41,8 @@
       <path ref="shimmer4" d="M 50 120 C 48 105, 46 90, 48 75 C 50 60, 54 48, 58 38 C 60 32, 62 28, 64 26 C 66 24, 70 24, 72 26 C 74 28, 76 32, 76 36 C 76 40, 74 44, 70 46 C 66 48, 62 46, 60 42 C 60 38, 62 34, 66 32 C 72 30, 80 28, 90 22 C 100 16, 110 8, 118 0 C 122 -6, 125 -12, 128 -18" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
     </svg>
     
+    <!-- overlay de zoom -->
+    
     <!-- CENTER ROW: left text | image | right text -->
     <div
       ref="centerRow"
@@ -49,7 +51,7 @@
       <!-- LEFT TEXT -->
       <div
         ref="textLeft"
-        class="flex flex-col items-end text-right mr-6"
+        class="flex flex-col items-end text-right mr-3"
         :style="{
           opacity: sideTextOpacity,
           transform: `translateY(${ -30 * (1 - sideTextOpacity) }px)`
@@ -81,12 +83,13 @@
           class="absolute inset-0 bg-floral-white-50 pointer-events-none transition-opacity duration-300"
           style="opacity: 0; will-change: opacity;"
         ></div>
+        
       </div>
 
       <!-- RIGHT TEXT -->
       <div
         ref="textRight"
-        class="flex flex-col items-start text-left ml-6"
+        class="flex flex-col items-start text-left ml-3"
         :style="{
           opacity: sideTextOpacity,
           transform: `translateY(${ 30 * (1 - sideTextOpacity) }px)`
@@ -97,12 +100,26 @@
           <span class="block mt-0.5 italic text-powder-blush-600">{{ $t('hero.title4') }}</span>
         </h1>
       </div>
+
+    <!-- <button
+      ref="ctaButton"
+      @click="scrollToContact"
+      class="fixed left-1/2 transform -translate-x-1/2 bottom-8 z-20 px-7 sm:px-8 md:px-10 py-3 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110"
+      :style="{
+        opacity: textOpacity,
+        transform: `translateX(-50%) translateY(${textTranslateY}px)`,
+        filter: `blur(${textBlur}px)`
+      }"
+    >
+      {{ $t('hero.cta') }}
+    </button> -->
+
     </div>
     
     <!-- Mensaje elegante durante el zoom -->
     <div
       ref="zoomMessage"
-      class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-6"
+      class="absolute inset-0 flex flex-col  items-center justify-center pointer-events-none z-30 px-6"
       :style="{
         opacity: messageOpacity,
         transform: `scale(${ 0.95 + 0.05 * messageOpacity })`,
@@ -116,31 +133,12 @@
       </p>
     </div>
 
-    <!-- TEXT + CTA - POSICIONAMIENTO ABSOLUTO CALCULADO RESPONSIVE -->
-    <div
-      ref="textBlock"
-      class="absolute z-20 transition-all duration-150 ease-out"
-      :style="{
-        bottom: '2rem',
-        left: buttonPosition.left,
-        transform: `${buttonPosition.transform} translateY(${ textTranslateY }px)`,
-        opacity: textOpacity,
-        filter: `blur(${ textBlur }px)`
-      }"
-    >
-      <button
-        ref="ctaButton"
-        @click="scrollToContact"
-        class="px-7 sm:px-8 md:px-10 py-3 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110 whitespace-nowrap"
-      >
-        {{ $t('hero.cta') }}
-      </button>
-    </div>
+    
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useSmoothScroll } from '../composables/useSmoothScroll'
@@ -196,42 +194,12 @@ const textOpacity = ref(1)
 const textBlur = ref(0)
 const textTranslateY = ref(0)
 const sideTextOpacity = ref(1)
-const buttonPosition = ref({ left: '50%', transform: 'translateX(-50%)' })
 
 // Scroll animation variables
 let heroHeight = 0
 let heroWidth = 0
 let cardHeight = 340
 let cardWidth = 200
-
-// FUNCIÓN CLAVE: Calcular posición del botón (RESPONSIVE)
-const calculateButtonPosition = () => {
-  if (typeof window === 'undefined') return { left: '50%', transform: 'translateX(-50%)' }
-  
-  // Siempre alinear con la imagen en TODAS las resoluciones
-  if (imageCard.value && ctaButton.value) {
-    const imageRect = imageCard.value.getBoundingClientRect()
-    const buttonWidth = ctaButton.value.offsetWidth
-    
-    // Centro de la imagen
-    const imageCenterX = imageRect.left + (imageRect.width / 2)
-    
-    // Posición izquierda del botón (centro de imagen - mitad del botón)
-    const buttonLeft = imageCenterX - (buttonWidth / 2)
-    
-    return { 
-      left: `${buttonLeft}px`,
-      transform: 'translateX(0)'
-    }
-  }
-  
-  // Fallback: centrado normal
-  return { left: '50%', transform: 'translateX(-50%)' }
-}
-
-const updateButtonPosition = () => {
-  buttonPosition.value = calculateButtonPosition()
-}
 
 const updateDimensions = () => {
   if (!heroSection.value || !imageCard.value) return
@@ -245,9 +213,6 @@ const updateDimensions = () => {
   if (heroSection.value) {
     heroSection.value.style.setProperty('--card-half', `${cardWidth / 2}px`)
   }
-
-  // Actualizar posición del botón
-  updateButtonPosition()
 
   try {
     if (typeof ScrollTrigger !== 'undefined' && ScrollTrigger.getAll().length) {
@@ -294,21 +259,10 @@ onMounted(() => {
   // Re-evaluate dims after image/font load
   const img = imageEl.value
   if (img && !img.complete) {
-    img.addEventListener('load', () => {
-      setTimeout(() => {
-        updateDimensions()
-      }, 120)
-    })
+    img.addEventListener('load', () => setTimeout(updateDimensions, 120))
   } else {
-    setTimeout(() => {
-      updateDimensions()
-    }, 120)
+    setTimeout(updateDimensions, 120)
   }
-
-  // Actualizar posición después de que todo esté renderizado
-  setTimeout(updateButtonPosition, 100)
-  setTimeout(updateButtonPosition, 300)
-  setTimeout(updateButtonPosition, 600)
 
   // ScrollTrigger animation
   requestAnimationFrame(() => {
@@ -398,6 +352,9 @@ const scrollToContact = () => smoothScrollTo('#contact')
   [ref="imageCard"] {
     width: 160px;
     height: 272px;
+  }
+  [ref="textBlock"] p {
+    font-size: 1.05rem;
   }
   [ref="ctaButton"] {
     padding: 0.55rem 1.25rem;
