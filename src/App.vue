@@ -25,50 +25,39 @@
             
           </div>
 
-          <!-- center: nav links (desktop) -->
+          <!-- center: nav links (desktop) CON EFECTO GRADIENT -->
           <div class="hidden md:flex items-center gap-8">
             <a
               v-for="item in navItems"
               :key="item.key"
               :href="item.href"
               @click.prevent="handleNavClick($event, item.href)"
-              class="text-sm font-inter hover:text-rose transition-colors duration-300 relative group"
+              class="nav-link text-sm font-inter text-stone-700 py-2 transition-colors duration-300"
             >
               {{ $t(item.key) }}
-              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-rose transition-all duration-300 group-hover:w-full"></span>
             </a>
           </div>
 
           <!-- right: language switch + mobile button -->
           <div class="flex items-center gap-3">
-            <!-- Language switch pill -->
-            <div
-              class="flex items-center rounded-full px-1.5 py-0.5 border border-white/10 bg-white/5"
-              role="tablist"
-              aria-label="Idioma"
-            >
-              <button
-                @click="setLocale('en')"
-                :aria-pressed="$i18n.locale === 'en'"
-                class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full transition-all duration-250"
-                :class="locale.value === 'en' ? 'bg-rose/10 text-rose font-bold' : 'text-graphite hover:text-rose-300 hover:bg-white/3'"
+            <!-- True Language Switch -->
+            <div class="switch">
+              <input 
+                id="language-toggle" 
+                class="check-toggle check-toggle-round-flat" 
+                type="checkbox"
+                :checked="locale.value === 'es'"
+                @change="toggleLocale"
               >
-                EN
-              </button>
-              <button
-                @click="setLocale('es')"
-                :aria-pressed="$i18n.locale === 'es'"
-                class="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full transition-all duration-250"
-                :class="locale.value === 'es' ? 'bg-rose/10 text-rose font-bold' : 'text-graphite hover:text-rose-300 hover:bg-white/3'"
-              >
-                ES
-              </button>
+              <label for="language-toggle"></label>
+              <span class="on">ES</span>
+              <span class="off">EN</span>
             </div>
 
             <!-- Hamburger (mobile) -->
             <button
               @click="toggleMenu"
-              class="md:hidden text-2xl p-2 rounded-full hover:bg-white/5 transition-all"
+              class="md:hidden text-2xl p-2 rounded-full hover:bg-white/10 transition-all duration-300"
               :aria-expanded="menuOpen"
               aria-label="Open menu"
             >
@@ -87,21 +76,32 @@
         class="fixed inset-0 z-40 md:hidden"
         @click.self="menuOpen = false"
       >
-        <div class="absolute top-20 left-4 right-4 bg-white/6 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-lg">
-          <nav class="flex flex-col gap-4">
+        <div class="absolute top-20 left-4 right-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-lg">
+          <nav class="flex flex-col gap-3">
             <a
               v-for="item in navItems"
               :key="item.key + '-mobile'"
               :href="item.href"
               @click.prevent="handleNavClick($event, item.href)"
-              class="text-lg font-medium"
+              class="nav-link-mobile text-lg font-medium text-stone-700 py-3 px-4 rounded-lg transition-all duration-300"
             >
               {{ $t(item.key) }}
             </a>
 
-            <div class="pt-2 border-t border-white/6 mt-2 flex items-center gap-2">
-              <button @click="setLocale('en')" :class="localeBtnClass('en')" class="flex-1 py-2 rounded-md">EN</button>
-              <button @click="setLocale('es')" :class="localeBtnClass('es')" class="flex-1 py-2 rounded-md">ES</button>
+            <!-- True Language Switch for Mobile -->
+            <div class="pt-4 border-t border-white/20 mt-2 flex justify-center">
+              <div class="switch switch-mobile">
+                <input 
+                  id="language-toggle-mobile" 
+                  class="check-toggle check-toggle-round-flat" 
+                  type="checkbox"
+                  :checked="locale.value === 'es'"
+                  @change="toggleLocale"
+                >
+                <label for="language-toggle-mobile"></label>
+                <span class="on">ES</span>
+                <span class="off">EN</span>
+              </div>
             </div>
           </nav>
         </div>
@@ -174,17 +174,9 @@ const handleNavClick = (e, href) => {
   menuOpen.value = false
 }
 
-// Locale helpers (keeps your existing i18n API)
-const setLocale = (l) => {
-  if (locale.value === l) return
-  locale.value = l
-}
-
-// classes for mobile locale buttons
-const localeBtnClass = (l) => {
-  return $i18n.locale === l
-    ? 'bg-rose/10 text-rose font-bold'
-    : 'text-white/80 hover:bg-white/3'
+// Toggle locale function for the switch
+const toggleLocale = () => {
+  locale.value = locale.value === 'en' ? 'es' : 'en'
 }
 
 const toggleMenu = () => {
@@ -290,5 +282,197 @@ header {
 }
 header > nav {
   pointer-events: auto;
+}
+
+/* Efectos de transform mejorados */
+.transform {
+  transform: translateZ(0);
+}
+.hover\:scale-102:hover {
+  transform: scale(1.02) translateZ(0);
+}
+.scale-105 {
+  transform: scale(1.05) translateZ(0);
+}
+
+/* EFECTO GRADIENT PARA NAV LINKS - Desktop */
+.nav-link {
+  background:
+    linear-gradient(
+      to right,
+      rgba(120, 53, 15, 1),  /* stone-700 */
+      rgba(120, 53, 15, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(223, 150, 134, 1),  
+      rgba(212, 116, 94, 1),  
+      rgba(81, 32, 21, 1)   
+  );
+  background-size: 0 2px, 0 2px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms, color 300ms;
+}
+
+.nav-link:hover {
+  background-size: 0 2px, 100% 2px;
+  color: rgba(120, 53, 15, 0.9); /* stone-700 con opacidad */
+}
+
+/* EFECTO GRADIENT PARA NAV LINKS - Mobile */
+.nav-link-mobile {
+  background:
+    linear-gradient(
+      to right,
+      rgba(120, 53, 15, 1),  /* stone-700 */
+      rgba(120, 53, 15, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(223, 150, 134, 1),  
+      rgba(212, 116, 94, 1),  
+      rgba(81, 32, 21, 1)   
+  );
+  background-size: 0 2px, 0 2px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms, color 300ms, background-color 300ms;
+}
+
+.nav-link-mobile:hover {
+  background-size: 0 2px, 100% 2px;
+  color: rgba(120, 53, 15, 0.9);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* TRUE LANGUAGE SWITCH STYLES - Professional color scheme */
+.switch {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.switch > span {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  width: 50%;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Estado cuando está en ES (checked) - ES activo */
+input.check-toggle-round-flat:checked ~ .off {
+  color: #8e7171; /* EN en shadow-grey-500 cuando ES está activo */
+}
+
+input.check-toggle-round-flat:checked ~ .on {
+  color: #fff; /* ES en blanco cuando está activo */
+}
+
+/* Estado por defecto (EN activo) */
+.switch > span.on {
+  left: 0;
+  padding-left: 4px;
+  color: #8e7171; /* ES en shadow-grey-500 por defecto */
+}
+
+.switch > span.off {
+  right: 0;
+  padding-right: 4px;
+  color: #fff; /* EN en blanco por defecto */
+}
+
+.check-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+
+.check-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+/* Switch background - usando cinnamon-wood para mejor contraste */
+input.check-toggle-round-flat + label {
+  padding: 2px;
+  width: 80px;
+  height: 32px;
+  background: linear-gradient(135deg, rgba(191, 104, 64, 0.4), rgba(153, 83, 51, 0.4)); /* cinnamon-wood gradient */
+  border-radius: 60px;
+  transition: all 0.3s ease;
+  
+}
+
+input.check-toggle-round-flat + label:before, 
+input.check-toggle-round-flat + label:after {
+  display: block;
+  position: absolute;
+  content: "";
+}
+
+input.check-toggle-round-flat + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: rgba(250, 243, 234, 0.15); /* antique-white-50 con opacidad */
+  backdrop-filter: blur(8px);
+  border-radius: 60px;
+  transition: background-color 0.3s;
+}
+
+input.check-toggle-round-flat + label:after {
+  top: 3px;
+  left: 3px;
+  bottom: 3px;
+  width: 38px;
+  background: linear-gradient(135deg, #f6e8d5, #d9a259); /* antique-white-100 a antique-white-400 */
+  border-radius: 50px;
+  transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.1),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Estado cuando está activado (ES seleccionado) */
+input.check-toggle-round-flat:checked + label {
+  background: linear-gradient(135deg, rgba(191, 104, 64, 0.4), rgba(153, 83, 51, 0.4)); /* muted-olive gradient cuando activo */
+  
+}
+
+input.check-toggle-round-flat:checked + label:after {
+  margin-left: 36px; /* mueve el slider a la derecha para ES */
+  background: linear-gradient(135deg, #f6e8d5, #d9a259); 
+}
+
+/* Mobile version adjustments */
+.switch-mobile {
+  margin: 0;
+}
+
+.switch-mobile input.check-toggle-round-flat + label {
+  width: 90px;
+  height: 36px;
+}
+
+.switch-mobile input.check-toggle-round-flat + label:after {
+  width: 40px;
+}
+
+.switch-mobile input.check-toggle-round-flat:checked + label:after {
+  margin-left: 40px;
 }
 </style>

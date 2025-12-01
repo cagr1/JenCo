@@ -2,7 +2,7 @@
   <section
     id="home"
     ref="heroSection"
-    class="relative h-screen flex items-center justify-center overflow-hidden bg-[#fffbe5]"
+    class="relative h-screen flex items-center justify-center overflow-hidden bg-porcelain-50"
   >
     <!-- Blob Volumétrico (light, no blur animado) -->
     <div ref="blobContainer" class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -99,16 +99,16 @@
     <!-- Mensaje elegante durante el zoom (SOBRE la imagen con overlay) -->
     <div
       ref="zoomMessage"
-      class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-6"
+      class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-6 "
       :style="{
         opacity: messageOpacity,
         transform: `scale(${ 0.95 + 0.05 * messageOpacity })`,
       }"
     >
-      <h2 class="text-powder-blush-50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-2xl leading-relaxed " style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
+      <h2 class="text-floral-white-100 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-2xl leading-relaxed " style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
         {{ $t('hero.message1') }}
       </h2>
-      <p class="text-powder-blush-50/95 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl font-serif italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
+      <p class="text-floral-white-100 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl font-serif italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
         {{ $t('hero.message2') }}
       </p>
     </div>

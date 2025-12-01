@@ -1,5 +1,5 @@
 <template>
-  <section id="services" class="py-24 px-4 bg-cream">
+  <section id="services" class="py-24 px-4 bg-[#fffbe5]">
     <div class="max-w-6xl mx-auto">
       <h2 class="section-title">{{ $t('services.title') }}</h2>
 

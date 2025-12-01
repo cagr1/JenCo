@@ -1,21 +1,21 @@
 <template>
-  <section id="about" class="py-24 px-4 bg-white">
+  <section id="about" class="py-24 px-4 bg-porcelain-50">
     <div class="max-w-5xl mx-auto">
-      <h2 class="section-title">{{ $t('about.title') }}</h2>
+      <h2 class="section-title text-powder-blush-800">{{ $t('about.title') }}</h2>
 
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <!-- Image -->
-        <div ref="imageRef" class="rounded-lg overflow-hidden shadow-lg">
-          <!-- <img
-            src="/placeholder.svg?height=400&width=400"
+        <div ref="imageRef" class="w-[300px] h-[440px] rounded-2xl overflow-hidden shadow-lg text-center mx-auto">
+          <img
+            :src="profile"
             alt="Jennifer Gallardo"
             class="w-full h-full object-cover"
-          /> -->
+          />
         </div>
 
         <!-- Text Content -->
         <div ref="contentRef" class="space-y-6">
-          <p class="text-lg font-inter text-gray-700 leading-relaxed">
+          <p class="text-lg font-inter text-powder-blush-800 leading-relaxed">
             {{ $t('about.bio') }}
           </p>
 
@@ -45,6 +45,7 @@
 import { onMounted, ref } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import profile from '../assets/Profile.png'
 
 gsap.registerPlugin(ScrollTrigger)
 

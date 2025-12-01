@@ -1,5 +1,5 @@
 <template>
-  <section id="gallery" class="py-24 px-4 bg-white">
+  <section id="gallery" class="py-24 px-4 bg-[#fffbe5]">
     <div class="max-w-6xl mx-auto">
       <h2 class="section-title">{{ $t('nav.gallery') }}</h2>
 
