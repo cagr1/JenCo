@@ -4,6 +4,7 @@
 /* Custom Styles - ANTES de Tailwind */
 @import './styles/variables.css';
 @import './styles/typography.css';
+@import './styles/effects.css';
 /* @import './styles/animations.css'; */
 
 /* ============================================

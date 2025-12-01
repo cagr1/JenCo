@@ -18,7 +18,8 @@
   },
   "about": {
     "title": "About Jennifer",
-    "bio": "With over 10 years of experience in the beauty industry, Jennifer Gallardo is dedicated to helping you feel confident and beautiful. From bridal makeup to relaxing treatments, every service is tailored to bring out your natural radiance.",
+    "bio1": "With over 10 years of experience in the beauty industry, Jennifer Gallardo is dedicated to helping you feel confident and beautiful.",
+    "bio2": "From bridal makeup to relaxing treatments, every service is tailored to bring out your natural radiance.",
     "philosophy": "Your beauty, your way"
   },
   "services": {

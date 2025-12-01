@@ -4,7 +4,7 @@
     ref="heroSection"
     class="relative h-screen flex items-center justify-center overflow-hidden bg-porcelain-50"
   >
-    <!-- Blob Volumétrico (light, no blur animado) -->
+    <!-- Blob Volumétrico -->
     <div ref="blobContainer" class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       <div
         ref="blob"
@@ -14,15 +14,18 @@
         <div
           ref="blobInner"
           class="absolute inset-0"
-          :style="{
-            background: 'radial-gradient(ellipse 42% 32% at 50% 18%, rgba(201,81,54,0.95) 0%, rgba(201,81,54,0.82) 18%, rgba(201,81,54,0.68) 32%, rgba(201,81,54,0.52) 46%, rgba(201,81,54,0.35) 60%, rgba(201,81,54,0.20) 72%, rgba(201,81,54,0.08) 84%, transparent 95%)'
-          }"
+          :style="getBlobInnerStyle()"
         ></div>
       </div>
     </div>
 
     <!-- SVG destellos (shimmer animations) -->
-    <svg class="absolute inset-0 w-full h-full pointer-events-none z-5" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+    <svg 
+      class="absolute inset-0 w-full h-full pointer-events-none z-5" 
+      xmlns="http://www.w3.org/2000/svg" 
+      preserveAspectRatio="none" 
+      viewBox="0 0 100 100"
+    >
       <defs>
         <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color: transparent; stop-opacity: 0" />
@@ -37,96 +40,98 @@
       <path ref="shimmer3" d="M -20 120 C -5 105, 5 90, 18 75 C 31 60, 42 48, 50 40 C 54 36, 58 34, 62 34 C 66 34, 70 36, 72 40 C 74 44, 74 48, 72 52 C 70 56, 66 58, 62 58 C 58 58, 54 56, 52 52 C 52 48, 54 44, 58 42 C 64 40, 72 38, 82 30 C 92 22, 102 12, 112 0 C 118 -8, 122 -15, 125 -22" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
       <path ref="shimmer4" d="M 50 120 C 48 105, 46 90, 48 75 C 50 60, 54 48, 58 38 C 60 32, 62 28, 64 26 C 66 24, 70 24, 72 26 C 74 28, 76 32, 76 36 C 76 40, 74 44, 70 46 C 66 48, 62 46, 60 42 C 60 38, 62 34, 66 32 C 72 30, 80 28, 90 22 C 100 16, 110 8, 118 0 C 122 -6, 125 -12, 128 -18" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
     </svg>
-
+    
     <!-- CENTER ROW: left text | image | right text -->
-<div
-  ref="centerRow"
-  class="absolute inset-0 z-10 pointer-events-none flex items-center justify-center"
->
-  <!-- LEFT TEXT -->
-  <div
-    ref="textLeft"
-    class="flex flex-col items-end text-right mr-6"
-    :style="{
-      opacity: sideTextOpacity,
-      transform: `translateY(${ -30 * (1 - sideTextOpacity) }px)`
-    }"
-  >
-    <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold text-powder-blush-800 leading-tight ">
-      <span class="block">{{ $t('hero.title1') }}</span>
-      <span class="block mt-0.5">{{ $t('hero.title2') }}</span>
-    </h1>
-  </div>
-
-  <!-- IMAGE CARD (mantengo el ref imageCard) -->
-  <div
-    ref="imageCard"
-    class="relative z-10 w-[210px] h-[340px] rounded-2xl overflow-hidden shadow-2xl bg-black/10 transition-transform duration-150 ease-out"
-    style="border: none; transform-origin: center center;"
-  >
-    <img
-      ref="imageEl"
-      src="/src/assets/pexels-shiny-diamond.jpg"
-      alt="Hero Image"
-      class="w-full h-full object-cover"
-      draggable="false"
-      :style="{ objectPosition: '50% 35%' }"
-    />
     <div
-      ref="imageOverlay"
-      class="absolute inset-0 bg-black pointer-events-none"
-      style="opacity: 0; will-change: opacity;"
-    ></div>
-  </div>
+      ref="centerRow"
+      class="absolute inset-0 z-10 pointer-events-none flex items-center justify-center"
+    >
+      <!-- LEFT TEXT -->
+      <div
+        ref="textLeft"
+        class="flex flex-col items-end text-right mr-6"
+        :style="{
+          opacity: sideTextOpacity,
+          transform: `translateY(${ -30 * (1 - sideTextOpacity) }px)`
+        }"
+      >
+        <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold text-powder-blush-800 leading-tight ">
+          <span class="block">{{ $t('hero.title1') }}</span>
+          <span class="block mt-0.5">{{ $t('hero.title2') }}</span>
+        </h1>
+      </div>
 
-  <!-- RIGHT TEXT -->
-  <div
-    ref="textRight"
-    class="flex flex-col items-start text-left ml-6"
-    :style="{
-      opacity: sideTextOpacity,
-      transform: `translateY(${ 30 * (1 - sideTextOpacity) }px)`
-    }"
-  >
-    <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold leading-tight">
-      <span class="block text-powder-blush-800">{{ $t('hero.title3') }}</span>
-      <span class="block mt-0.5 italic text-powder-blush-600">{{ $t('hero.title4') }}</span>
-    </h1>
-  </div>
-</div>
+      <!-- IMAGE CARD -->
+      <div
+        ref="imageCard"
+        class="relative z-10 w-[210px] h-[340px] rounded-2xl overflow-hidden shadow-2xl bg-black/10 transition-transform duration-150 ease-out"
+        style="border: none; transform-origin: center center;"
+      >
+        <img
+          ref="imageEl"
+          src="/src/assets/pexels-shiny-diamond.jpg"
+          alt="Hero Image"
+          class="w-full h-full object-cover"
+          draggable="false"
+          :style="{ objectPosition: '50% 35%' }"
+        />
 
+        <div
+          ref="imageOverlay"
+          class="absolute inset-0 bg-floral-white-50 pointer-events-none transition-opacity duration-300"
+          style="opacity: 0; will-change: opacity;"
+        ></div>
+      </div>
 
-    <!-- Mensaje elegante durante el zoom (SOBRE la imagen con overlay) -->
+      <!-- RIGHT TEXT -->
+      <div
+        ref="textRight"
+        class="flex flex-col items-start text-left ml-6"
+        :style="{
+          opacity: sideTextOpacity,
+          transform: `translateY(${ 30 * (1 - sideTextOpacity) }px)`
+        }"
+      >
+        <h1 class="text-2xl sm:text-2xl md:text-4xl lg:text-7xl font-bold leading-tight">
+          <span class="block text-powder-blush-800">{{ $t('hero.title3') }}</span>
+          <span class="block mt-0.5 italic text-powder-blush-600">{{ $t('hero.title4') }}</span>
+        </h1>
+      </div>
+    </div>
+    
+    <!-- Mensaje elegante durante el zoom -->
     <div
       ref="zoomMessage"
-      class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-6 "
+      class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-30 px-6"
       :style="{
         opacity: messageOpacity,
         transform: `scale(${ 0.95 + 0.05 * messageOpacity })`,
       }"
     >
-      <h2 class="text-floral-white-100 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-2xl leading-relaxed " style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
+      <h2 class="text-powder-blush-800 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-lg leading-relaxed" style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
         {{ $t('hero.message1') }}
       </h2>
-      <p class="text-floral-white-100 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl font-serif italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
+      <p class="text-powder-blush-900 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl font-serif italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
         {{ $t('hero.message2') }}
       </p>
     </div>
 
-    <!-- TEXT + CTA (will blur & fade during zoom) -->
+    <!-- TEXT + CTA - POSICIONAMIENTO ABSOLUTO CALCULADO RESPONSIVE -->
     <div
       ref="textBlock"
-      class="absolute bottom-8 text-center z-20 px-4 sm:px-6 max-w-4xl transition-all duration-150 ease-out"
+      class="absolute z-20 transition-all duration-150 ease-out"
       :style="{
+        bottom: '2rem',
+        left: buttonPosition.left,
+        transform: `${buttonPosition.transform} translateY(${ textTranslateY }px)`,
         opacity: textOpacity,
-        transform: `translateY(${ textTranslateY }px)`,
         filter: `blur(${ textBlur }px)`
       }"
     >
       <button
         ref="ctaButton"
         @click="scrollToContact"
-        class="px-7 sm:px-8 md:px-10 py-3 md:py-3 mr-5 sm:mr-6 md:mr-7 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110"
+        class="px-7 sm:px-8 md:px-10 py-3 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110 whitespace-nowrap"
       >
         {{ $t('hero.cta') }}
       </button>
@@ -135,21 +140,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useSmoothScroll } from '../composables/useSmoothScroll'
+import { useBlobEffect } from '../composables/useBlobEffect'
+import { useShimmerEffect } from '../composables/useShimmerEffect'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Referencias del componente
 const heroSection = ref(null)
-const blob = ref(null)
-const blobInner = ref(null)
-const blobContainer = ref(null)
-const shimmer1 = ref(null)
-const shimmer2 = ref(null)
-const shimmer3 = ref(null)
-const shimmer4 = ref(null)
 const imageCard = ref(null)
 const imageEl = ref(null)
 const imageOverlay = ref(null)
@@ -159,130 +160,78 @@ const textRight = ref(null)
 const ctaButton = ref(null)
 const zoomMessage = ref(null)
 
-const useScrollTrigger = true
+// Composables de efectos visuales
+const {
+  blobContainer,
+  blob,
+  blobInner,
+  getBlobInnerStyle
+} = useBlobEffect({
+  autoDetectLightMode: true,
+  rotationDuration: 42,
+  pulseDuration: 8,
+  fadeInDuration: 2.2
+})
 
-//control devices 
-const lightMode = ref(false)
-let demoWrapper = null
-
-
-const DEMO_BLOB_HTML = 
-`
-  <div class="absolute inset-0 z-0 overflow-hidden flex items-center justify-center pointer-events-none">
-    <!-- Mobile-adapted rotating aura (smaller blur, transform-only animation) -->
-    <div class="mobile-aura-wrap">
-      <div class="mobile-aura"></div>
-      <div class="mobile-pulse"></div>
-    </div>
-  </div>
-`
-
-function detectLightMode(){
-  try {
-    // preferencia explícita del usuario: reduce-motion → light mode
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true
-
-    // heurística más fiable para móvil: userAgent + touch + coarse pointer
-    const ua = navigator.userAgent || ''
-    const isMobileUA = /Mobi|Android|iPhone|iPad|iPod|Windows Phone|Opera Mini/i.test(ua)
-    const isTouch = (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
-
-    // activamos modo adaptado si hay touch o UA móvil
-    return window.innerWidth < 380 || navigator.hardwareConcurrency <= 2
-  } catch (e) {
-    return false
-  }
-}
-
-function enableLightMode(){
-  if (!blobContainer.value) return
-  // hide original heavy blob (if exists)
-  if (blob.value) blob.value.style.display = 'none'
-  if (blobInner.value) blobInner.value.style.display = 'none'
-
-  // hide SVG shimmer
-  const svg = heroSection.value?.querySelector('svg')
-  if (svg) svg.style.display = 'none'
-
-  // append demo wrapper (avoid re-creating if ya existe)
-  if (!blobContainer.value.querySelector('.hero-demo-blob')) {
-    demoWrapper = document.createElement('div')
-    demoWrapper.className = 'hero-demo-blob'
-    demoWrapper.innerHTML = DEMO_BLOB_HTML
-    blobContainer.value.appendChild(demoWrapper)
-  }
-
-  // kill heavy blob tweens (si estan corriendo)
-  try { gsap.killTweensOf(blob.value); gsap.killTweensOf(blobInner.value) } catch (e) {}
-}
-
-function disableLightMode() {
-  if (!blobContainer.value) return
-  // reveal original blob
-  if (blob.value) blob.value.style.display = ''
-  if (blobInner.value) blobInner.value.style.display = ''
-
-  // show svg again
-  const svg = heroSection.value?.querySelector('svg')
-  if (svg) svg.style.display = ''
-
-  // remove demo wrapper if existe
-  const existing = blobContainer.value.querySelector('.hero-demo-blob')
-  if (existing) existing.remove()
-
-  // restart light blob animations if necessary (we'll re-run animation block in onMounted or handleModeChange triggers)
-  // animateShimmer & blob tweens serán llamados desde onMounted cuando no estemos en light mode
-
-  try {
-    if (blob.value && blobInner.value) {
-      gsap.to(blob.value, { opacity: 1, duration: 2.2, ease: 'power2.out' })
-      gsap.to(blob.value, { rotation: 800, duration: 42, repeat: -1, ease: 'none' })
-      gsap.to(blobInner.value, {
-        scale: 1.06,
-        opacity: 0.9,
-        duration: 8,
-        yoyo: true,
-        repeat: -1,
-        ease: 'sine.inOut'
-      })
-    }
-    animateShimmer(shimmer1, 2.5)
-    animateShimmer(shimmer2, 6.5)
-    animateShimmer(shimmer3, 10.5)
-    animateShimmer(shimmer4, 14.5)
-  } catch (e) {}
-
-
-}
-
+const {
+  shimmer1,
+  shimmer2,
+  shimmer3,
+  shimmer4,
+  animateShimmer
+} = useShimmerEffect({
+  strokeWidth: 0.15,
+  gradientId: 'shimmerGradient',
+  animationDuration: 2.4,
+  repeatDelay: 12,
+  delays: [2.5, 6.5, 10.5, 14.5],
+  paths: 4
+})
 
 const { smoothScrollTo } = useSmoothScroll({ duration: 700, offset: 0 })
 
 // UI state
 const messageOpacity = ref(0)
-const overlayOpacity = ref(0)
 const textOpacity = ref(1)
 const textBlur = ref(0)
 const textTranslateY = ref(0)
 const sideTextOpacity = ref(1)
+const buttonPosition = ref({ left: '50%', transform: 'translateX(-50%)' })
 
+// Scroll animation variables
 let heroHeight = 0
 let heroWidth = 0
-let cardHeight = 340 // tamaño actualizado a 340px
-let cardWidth = 200  // tamaño actualizado a 200px
-let scaleMax = 1
-let scrollLocked = false
-let messageShown = false
+let cardHeight = 340
+let cardWidth = 200
 
-// Fases de la animación - Ajustadas para mostrar mejor el mensaje
-const zoomPhase1 = 0.3  // hasta aquí la imagen crece
-const zoomPhase2 = 0.5 // aquí aparece el overlay oscuro
-const zoomPhase3 = 0.7 // aquí aparece el mensaje completamente
-const messageHoldDuration = 1500 // ms que el mensaje permanece antes de desbloquear scroll
+// FUNCIÓN CLAVE: Calcular posición del botón (RESPONSIVE)
+const calculateButtonPosition = () => {
+  if (typeof window === 'undefined') return { left: '50%', transform: 'translateX(-50%)' }
+  
+  // Siempre alinear con la imagen en TODAS las resoluciones
+  if (imageCard.value && ctaButton.value) {
+    const imageRect = imageCard.value.getBoundingClientRect()
+    const buttonWidth = ctaButton.value.offsetWidth
+    
+    // Centro de la imagen
+    const imageCenterX = imageRect.left + (imageRect.width / 2)
+    
+    // Posición izquierda del botón (centro de imagen - mitad del botón)
+    const buttonLeft = imageCenterX - (buttonWidth / 2)
+    
+    return { 
+      left: `${buttonLeft}px`,
+      transform: 'translateX(0)'
+    }
+  }
+  
+  // Fallback: centrado normal
+  return { left: '50%', transform: 'translateX(-50%)' }
+}
 
-// rAF control
-let scrollTicking = false
-const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v))
+const updateButtonPosition = () => {
+  buttonPosition.value = calculateButtonPosition()
+}
 
 const updateDimensions = () => {
   if (!heroSection.value || !imageCard.value) return
@@ -293,122 +242,17 @@ const updateDimensions = () => {
   cardHeight = imageCard.value.clientHeight || 340
   cardWidth = imageCard.value.clientWidth || 200
 
-  const scaleByHeight = heroHeight / cardHeight
-  const scaleByWidth = heroWidth / cardWidth
-  scaleMax = Math.max(scaleByHeight, scaleByWidth, 1)
-  scaleMax = Math.min(scaleMax, 12) // permitir más zoom para cubrir completamente
-
   if (heroSection.value) {
-  heroSection.value.style.setProperty('--card-half', `${cardWidth / 2}px`)
+    heroSection.value.style.setProperty('--card-half', `${cardWidth / 2}px`)
   }
+
+  // Actualizar posición del botón
+  updateButtonPosition()
 
   try {
     if (typeof ScrollTrigger !== 'undefined' && ScrollTrigger.getAll().length) {
       ScrollTrigger.refresh()
     }
-  } catch (e) { /* safe */ }
-
-
-   try {
-    const shouldLight = detectLightMode()
-    if (shouldLight !== lightMode.value) {
-      lightMode.value = shouldLight
-      if (lightMode.value) enableLightMode()
-      else disableLightMode()
-    }
-  } catch (e) { /* safe */ }
-
-}
-
-const handleScroll = () => {
-  if (scrollTicking) return
-  scrollTicking = true
-  requestAnimationFrame(() => {
-    if (!heroSection.value || !imageCard.value) {
-      scrollTicking = false
-      return
-    }
-
-    const rect = heroSection.value.getBoundingClientRect()
-    let scrolled = -rect.top
-    
-    // Si estamos en fase de mensaje bloqueado, limitar el scroll
-    if (scrollLocked) {
-      scrolled = Math.min(scrolled, heroHeight * zoomPhase3)
-    }
-    
-    const progress = clamp(scrolled / heroHeight, 0, 1)
-
-    // Fase 1: Imagen crece (0 → zoomPhase1)
-    const phase1Progress = clamp(progress / zoomPhase1, 0, 1)
-    const scaleX = 1 + (scaleMax - 1) * phase1Progress
-    const scaleY = 1 + (scaleMax - 1) * Math.pow(phase1Progress, 1.55)
-    imageCard.value.style.transform = `scaleX(${scaleX}) scaleY(${scaleY})`
-    
-    overlayOpacity.value = Math.min(phase1Progress * 1.2, 0.85)
-
-    // Fase 2: Overlay oscuro aparece (zoomPhase1 → zoomPhase2)
-    if (progress >= zoomPhase1) {
-      const overlayProgress = clamp((progress - zoomPhase1) / (zoomPhase2 - zoomPhase1), 0, 1)
-      overlayOpacity.value = overlayProgress * 0.8 // 80% de opacidad máxima para mejor contraste
-    } else {
-      overlayOpacity.value = 0
-    }
-
-    // Fase 3: Mensaje aparece (zoomPhase2 → zoomPhase3)
-    if (progress >= zoomPhase2) {
-      const msgProgress = clamp((progress - zoomPhase2) / (zoomPhase3 - zoomPhase2), 0, 1)
-      messageOpacity.value = msgProgress
-      
-      // Bloquear scroll cuando el mensaje está completamente visible
-      if (msgProgress >= 0.98 && !messageShown) {
-        messageShown = true
-        scrollLocked = true
-        
-        // Desbloquear después de tiempo de lectura
-        setTimeout(() => {
-          scrollLocked = false
-        }, messageHoldDuration)
-      }
-    } else {
-      messageOpacity.value = 0
-      // Reset si el usuario vuelve atrás
-      if (messageShown && progress < zoomPhase2 - 0.05) {
-        messageShown = false
-        scrollLocked = false
-      }
-    }
-
-    if (useScrollTrigger) {
-      // Si ScrollTrigger está manejando el scroll, no hacemos más ajustes
-      return
-    }
-
-
-    // Text block transitions (se oculta rápido al inicio del zoom)
-    const textFadeProgress = clamp(progress / 0.2, 0, 1)
-    textOpacity.value = 1 - textFadeProgress
-    textBlur.value = textFadeProgress * 8
-    textTranslateY.value = -Math.min(textFadeProgress * 40, 40)
-
-    // Textos laterales - desaparecen más gradualmente
-    const sideTextFadeProgress = clamp(progress / 0.3, 0, 1)
-    sideTextOpacity.value = 1 - sideTextFadeProgress
-
-    scrollTicking = false
-  })
-}
-
-const animateShimmer = (elRef, delay = 0) => {
-  if (!elRef?.value) return
-  try {
-    const pathLength = elRef.value.getTotalLength()
-    elRef.value.style.strokeDasharray = pathLength
-    elRef.value.style.strokeDashoffset = pathLength
-    gsap.timeline({ delay, repeat: -1, repeatDelay: 12 })
-      .to(elRef.value, { opacity: 1, duration: 0.25, ease: 'power1.in' })
-      .to(elRef.value, { strokeDashoffset: 0, duration: 2.4, ease: 'power1.inOut' }, '<')
-      .to(elRef.value, { opacity: 0, duration: 0.45, ease: 'power1.out' }, '-=0.4')
   } catch (e) { /* safe */ }
 }
 
@@ -416,43 +260,17 @@ onMounted(() => {
   updateDimensions()
   window.addEventListener('resize', updateDimensions)
 
-  if( imageCard.value ) {
+  if (imageCard.value) {
     imageCard.value.style.transformOrigin = 'none'
+    imageCard.value.style.transition = 'none'
   }
 
-  lightMode.value = detectLightMode()
-  if (lightMode.value) {
-    enableLightMode()
-   
-  } else {
-    // blob animation (GPU-friendly; no dynamic blur)
-  if (blob.value && blobInner.value) {
-    gsap.to(blob.value, { opacity: 1, duration: 2.2, ease: 'power2.out' })
-    gsap.to(blob.value, { rotation: 800, duration: 42, repeat: -1, ease: 'none' })
-    gsap.to(blobInner.value, {
-      scale: 1.06,
-      opacity: 0.9,
-      duration: 8,
-      yoyo: true,
-      repeat: -1,
-      ease: 'sine.inOut'
-    })
-  }
-
-  // shimmer animations
-  animateShimmer(shimmer1, 2.5)
-  animateShimmer(shimmer2, 6.5)
-  animateShimmer(shimmer3, 10.5)
-  animateShimmer(shimmer4, 14.5)
-  }
-  
-  // entry animations
+  // Entry animations
   gsap.fromTo(imageCard.value,
     { opacity: 0, scale: 0.96, y: 10 },
     { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.3 }
   )
-  
-  // Animación de entrada para textos laterales (más pronunciada)
+
   gsap.fromTo([textLeft.value, textRight.value],
     { 
       opacity: 0, 
@@ -467,86 +285,80 @@ onMounted(() => {
       stagger: 0.1 
     }
   )
-  
+
   gsap.fromTo(textBlock.value,
     { opacity: 0, y: 10 },
     { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.8 }
   )
 
-  // scroll listener
-  window.addEventListener('scroll', handleScroll, { passive: true })
-
-  // re-evaluate dims after image/font load
+  // Re-evaluate dims after image/font load
   const img = imageEl.value
   if (img && !img.complete) {
-    img.addEventListener('load', () => setTimeout(updateDimensions, 120))
+    img.addEventListener('load', () => {
+      setTimeout(() => {
+        updateDimensions()
+      }, 120)
+    })
   } else {
-    setTimeout(updateDimensions, 120)
+    setTimeout(() => {
+      updateDimensions()
+    }, 120)
   }
 
-  if (imageCard.value) {
-  imageCard.value.style.transition = 'none'
-}
+  // Actualizar posición después de que todo esté renderizado
+  setTimeout(updateButtonPosition, 100)
+  setTimeout(updateButtonPosition, 300)
+  setTimeout(updateButtonPosition, 600)
 
-// esperar al siguiente frame para asegurar que el layout ya está finalizado
-requestAnimationFrame(() => {
-  // recalcular dimensiones basadas en layout definitivo
-  updateDimensions()
+  // ScrollTrigger animation
+  requestAnimationFrame(() => {
+    updateDimensions()
 
-  
-  const baseScale = Math.max(heroWidth / cardWidth, heroHeight / cardHeight)
-  const finalScale = Math.min(baseScale * 1.35, 14)
+    const baseScale = Math.max(heroWidth / cardWidth, heroHeight / cardHeight)
+    const finalScale = Math.min(baseScale * 1.35, 14)
 
-  // refrescar ScrollTrigger/layout por si hubo cambios
-  try { ScrollTrigger.refresh() } catch (e) {}
+    try { ScrollTrigger.refresh() } catch (e) {}
 
-  // timeline controlado por ScrollTrigger (igual que antes, pero usando finalScale actualizado)
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: heroSection.value,
-      start: "top top",
-      end: "+=150%",
-      scrub: 0.7,
-      pin: true,
-      anticipatePin: 1
-    }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: heroSection.value,
+        start: "top top",
+        end: "+=150%",
+        scrub: 0.7,
+        pin: true,
+        anticipatePin: 1
+      }
+    })
+
+    tl.to(imageCard.value, { scale: finalScale, ease: "power2.out", duration: 1 }, 0)
+    tl.to(imageOverlay.value, { opacity: 0.92, ease: "power1.out", duration: 0.8 }, 0)
+    tl.to(textBlock.value, { y: -24, opacity: 0, filter: "blur(6px)", ease: "power1.out", duration: 0.5 }, 0.35)
+    tl.to(zoomMessage.value, {
+      opacity: 1, 
+      scale: 1, 
+      ease: "power3.out", 
+      duration: 0.9,
+      onStart: () => { if (zoomMessage.value) zoomMessage.value.style.pointerEvents = "auto" },
+      onReverseComplete: () => { if (zoomMessage.value) zoomMessage.value.style.pointerEvents = "none" }
+    }, 0.6)
   })
-
-  // zoom y overlay desde el inicio (overlay ahora controla el DOM directamente)
-  tl.to(imageCard.value, { scale: finalScale, ease: "power2.out", duration: 1 }, 0)
-  tl.to(imageOverlay.value, { opacity: 0.92, ease: "power1.out", duration: 0.8 }, 0)
-
-  tl.to(textBlock.value, { y: -24, opacity: 0, filter: "blur(6px)", ease: "power1.out", duration: 0.5 }, 0.35)
-  tl.to(zoomMessage.value, {
-    opacity: 0, scale: 0.7, y: 30,
-    opacity: 1, scale: 1, ease: "power3.out", duration: 0.9,
-    onStart: () => { if (zoomMessage.value) zoomMessage.value.style.pointerEvents = "auto" },
-    onReverseComplete: () => { if (zoomMessage.value) zoomMessage.value.style.pointerEvents = "none" }
-  }, 0.6)
-})
-  
 })
 
 onUnmounted(() => {
   try { 
     ScrollTrigger.getAll().forEach(st => st.kill())
     gsap.killTweensOf(imageCard.value)
-  }
-  catch (e) { /* safe */ }
+  } catch (e) { /* safe */ }
 
-  window.removeEventListener('scroll', handleScroll)
   window.removeEventListener('resize', updateDimensions)
 })
 
-// keep existing exported function
 const scrollToContact = () => smoothScrollTo('#contact')
 </script>
 
 <style scoped>
-.shimmer-line {
-  opacity: 1;
-  will-change: stroke-dashoffset, opacity;
-}
+/* Importar estilos de efectos */
+@import '../styles/effects.css';
 
 /* no borders, card look */
 [ref="imageCard"] {
@@ -587,9 +399,6 @@ const scrollToContact = () => smoothScrollTo('#contact')
     width: 160px;
     height: 272px;
   }
-  [ref="textBlock"] p {
-    font-size: 1.05rem;
-  }
   [ref="ctaButton"] {
     padding: 0.55rem 1.25rem;
     font-size: 0.85rem;
@@ -608,7 +417,7 @@ const scrollToContact = () => smoothScrollTo('#contact')
   text-orientation: initial !important;
 }
 
-/* ajuste fino del gap (puedes cambiar 1.125rem) */
+/* ajuste fino del gap */
 @media (max-width: 640px) {
   .mr-6 { margin-right: 0.75rem; }
   .ml-6 { margin-left: 0.75rem; }
@@ -618,10 +427,11 @@ const scrollToContact = () => smoothScrollTo('#contact')
 /* asegurar que los textos no capturen eventos */
 [ref="centerRow"] > div { pointer-events: none; }
 
-/* small tweak de line-height si quieres las palabras más pegadas */
+/* small tweak de line-height */
 [ref="textLeft"] h1 span, [ref="textRight"] h1 span {
   line-height: 0.95;
 }
+
 /* Asegurar que el mensaje sea visible */
 [ref="zoomMessage"] {
   z-index: 30;
@@ -629,53 +439,12 @@ const scrollToContact = () => smoothScrollTo('#contact')
 
 /* Mejorar la visibilidad del overlay */
 [ref="imageOverlay"] {
-  z-index: 15;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
-
-/* ---- Mobile-adapted blob styles: much lighter (transform + small blur) ---- */
-.mobile-aura-wrap { position: absolute; inset: 0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
-.mobile-aura {
-  width: 110vmax; height: 110vmax;
-  max-width: 900px; max-height: 900px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(228,77,46,0.95) 0%, rgba(228,77,46,0.45) 28%, rgba(228,77,46,0.18) 48%, transparent 70%);
-  filter: blur(26px); /* mucho más pequeño que en desktop */
-  transform-origin: center center;
-  will-change: transform, opacity;
-  animation: mobileAuraRotate 28s linear infinite;
-  opacity: 0.82;
-}
-
-/* ligera variación de pulso */
-.mobile-pulse {
-  position: absolute;
-  width: 36vmax; height: 36vmax;
-  max-width: 420px; max-height: 420px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(244,190,190,0.32), rgba(244,190,190,0.12));
-  filter: blur(18px);
-  will-change: transform, opacity;
-  animation: mobilePulse 6.5s ease-in-out infinite;
-  opacity: 0.7;
-}
-
-/* Animaciones basadas en transform/opacity SOLO (GPU-friendly) */
-@keyframes mobileAuraRotate {
-  from { transform: rotate(0deg) translateZ(0); }
-  to   { transform: rotate(360deg) translateZ(0); }
-}
-@keyframes mobilePulse {
-  0% { transform: translateY(0) scale(0.98); opacity: 0.6; }
-  50% { transform: translateY(-6px) scale(1.02); opacity: 0.85; }
-  100% { transform: translateY(0) scale(0.98); opacity: 0.6; }
-}
-
-/* reduce blur on low-power devices even more */
-@media (prefers-reduced-motion: reduce) {
-  .mobile-aura { animation: none; filter: blur(16px); }
-  .mobile-pulse { animation: none; filter: blur(10px); }
-}
-
-
-
 </style>

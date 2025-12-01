@@ -1,0 +1,96 @@
+/* ===================================
+   ESTILOS PARA EFECTOS BLOB Y SHIMMER
+   Extraídos de HeroSection.vue SIN MODIFICACIONES
+   =================================== */
+
+/* --- SHIMMER EFFECTS (LÓGICA ORIGINAL) --- */
+.shimmer-line {
+  opacity: 1;
+  will-change: stroke-dashoffset, opacity;
+}
+
+/* --- BLOB MOBILE LIGHT MODE (LÓGICA ORIGINAL) --- */
+.mobile-aura-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.mobile-aura {
+  width: 110vmax;
+  height: 110vmax;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(228, 77, 46, 0.95) 0%,
+    rgba(228, 77, 46, 0.45) 28%,
+    rgba(228, 77, 46, 0.18) 48%,
+    transparent 70%
+  );
+  filter: blur(26px);
+  transform-origin: center center;
+  will-change: transform, opacity;
+  animation: mobileAuraRotate 28s linear infinite;
+  opacity: 0.82;
+}
+
+.mobile-pulse {
+  position: absolute;
+  width: 36vmax;
+  height: 36vmax;
+  max-width: 420px;
+  max-height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(244, 190, 190, 0.32),
+    rgba(244, 190, 190, 0.12)
+  );
+  filter: blur(18px);
+  will-change: transform, opacity;
+  animation: mobilePulse 6.5s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+/* --- ANIMACIONES PARA MOBILE BLOB (LÓGICA ORIGINAL) --- */
+@keyframes mobileAuraRotate {
+  from {
+    transform: rotate(0deg) translateZ(0);
+  }
+  to {
+    transform: rotate(360deg) translateZ(0);
+  }
+}
+
+@keyframes mobilePulse {
+  0% {
+    transform: translateY(0) scale(0.98);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-6px) scale(1.02);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(0) scale(0.98);
+    opacity: 0.6;
+  }
+}
+
+/* --- REDUCE MOTION PARA ACCESIBILIDAD (LÓGICA ORIGINAL) --- */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-aura {
+    animation: none;
+    filter: blur(16px);
+  }
+  
+  .mobile-pulse {
+    animation: none;
+    filter: blur(10px);
+  }
+}
