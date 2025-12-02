@@ -89,7 +89,7 @@
             </a>
 
             <!-- True Language Switch for Mobile -->
-            <div class="pt-4 border-t border-white/20 mt-2 flex justify-center">
+            <div class="pt-4  mt-2 flex justify-center">
               <div class="switch switch-mobile">
                 <input 
                   id="language-toggle-mobile" 
@@ -351,6 +351,7 @@ header > nav {
   position: relative;
   display: inline-block;
   margin: 0 5px;
+  transform: scale(0.9);
 }
 
 .switch > span {
@@ -409,7 +410,8 @@ input.check-toggle-round-flat + label {
   padding: 2px;
   width: 80px;
   height: 32px;
-  background: linear-gradient(135deg, rgba(191, 104, 64, 0.4), rgba(153, 83, 51, 0.4)); /* cinnamon-wood gradient */
+   background-color: #BF6840; /* Color sólido cinnamon-wood */
+  border: 2px solid #BF6840; 
   border-radius: 60px;
   transition: all 0.3s ease;
   
@@ -427,7 +429,7 @@ input.check-toggle-round-flat + label:before {
   left: 2px;
   bottom: 2px;
   right: 2px;
-  background-color: rgba(250, 243, 234, 0.15); /* antique-white-50 con opacidad */
+  background-color: #BF6840; /* Color sólido cinnamon-wood */
   backdrop-filter: blur(8px);
   border-radius: 60px;
   transition: background-color 0.3s;
@@ -441,38 +443,37 @@ input.check-toggle-round-flat + label:after {
   background: linear-gradient(135deg, #f6e8d5, #d9a259); /* antique-white-100 a antique-white-400 */
   border-radius: 50px;
   transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 2px 6px rgba(0, 0, 0, 0.15),
-    0 1px 2px rgba(0, 0, 0, 0.1),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.5);
+  
 }
 
 /* Estado cuando está activado (ES seleccionado) */
 input.check-toggle-round-flat:checked + label {
-  background: linear-gradient(135deg, rgba(191, 104, 64, 0.4), rgba(153, 83, 51, 0.4)); /* muted-olive gradient cuando activo */
+  background: #BF6840
   
 }
 
 input.check-toggle-round-flat:checked + label:after {
-  margin-left: 36px; /* mueve el slider a la derecha para ES */
+  margin-left: 34px; /* mueve el slider a la derecha para ES */
   background: linear-gradient(135deg, #f6e8d5, #d9a259); 
+  
 }
 
 /* Mobile version adjustments */
 .switch-mobile {
   margin: 0;
+  transform: scale(0.8);
 }
 
 .switch-mobile input.check-toggle-round-flat + label {
-  width: 90px;
-  height: 36px;
+  width: 70px;
+  height: 28px;
 }
 
 .switch-mobile input.check-toggle-round-flat + label:after {
-  width: 40px;
+  width: 32px;
 }
 
 .switch-mobile input.check-toggle-round-flat:checked + label:after {
-  margin-left: 40px;
+  margin-left: 32px;
 }
 </style>

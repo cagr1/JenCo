@@ -19,8 +19,9 @@
   },
   "about": {
     "title": "Sobre Jennifer",
-    "bio1": "Con más de 10 años de experiencia en la industria de la belleza, Jennifer Gallardo se dedica a ayudarte a sentirte segura y hermosa", 
-    "bio2": "Desde maquillaje nupcial hasta tratamientos relajantes, cada servicio está personalizado para resaltar tu resplandor natural.",
+    "bio1": "Jennifer Gallardo está dedicada a ayudarte a sentirte segura, empoderada y naturalmente hermosa.", 
+    "bio2": "Con un enfoque refinado en maquillaje y cuidado de la piel, trabaja realzando tus rasgos únicos a través de técnicas personalizadas, productos de alta calidad y una experiencia detallada y cercana.",
+    "bioCardDesc": "años de experiencia",
     "philosophy": "Tu belleza, tu forma"
   },
   "services": {

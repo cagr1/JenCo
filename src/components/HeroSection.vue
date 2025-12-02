@@ -101,18 +101,7 @@
         </h1>
       </div>
 
-    <!-- <button
-      ref="ctaButton"
-      @click="scrollToContact"
-      class="fixed left-1/2 transform -translate-x-1/2 bottom-8 z-20 px-7 sm:px-8 md:px-10 py-3 bg-gradient-to-r from-[#d4745e] to-[#bf6840] text-white text-sm sm:text-base font-semibold rounded-full shadow-xl transition-all duration-500 hover:shadow-[#d4745e]/50 hover:scale-110"
-      :style="{
-        opacity: textOpacity,
-        transform: `translateX(-50%) translateY(${textTranslateY}px)`,
-        filter: `blur(${textBlur}px)`
-      }"
-    >
-      {{ $t('hero.cta') }}
-    </button> -->
+   
 
     </div>
     
@@ -125,10 +114,10 @@
         transform: `scale(${ 0.95 + 0.05 * messageOpacity })`,
       }"
     >
-      <h2 class="text-powder-blush-800 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-lg leading-relaxed" style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
+      <h2 class="text-powder-blush-800 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 drop-shadow-sm leading-relaxed" style="text-shadow: 0 6px 24px rgba(0,0,0,0.8)">
         {{ $t('hero.message1') }}
       </h2>
-      <p class="text-powder-blush-900 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-xl font-serif italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
+      <p class="text-powder-blush-900 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-sm font-serif italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
         {{ $t('hero.message2') }}
       </p>
     </div>
@@ -155,7 +144,6 @@ const imageOverlay = ref(null)
 const textBlock = ref(null)
 const textLeft = ref(null)
 const textRight = ref(null)
-const ctaButton = ref(null)
 const zoomMessage = ref(null)
 
 // Composables de efectos visuales
