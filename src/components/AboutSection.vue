@@ -1,7 +1,8 @@
 <template>
   <section id="about" class="relative py-24 px-4 bg-porcelain-50 overflow-hidden">
     
-      <svg 
+    <!-- Background Shimmer Effect -->
+    <svg 
       class="absolute inset-0 w-full h-full pointer-events-none z-5" 
       xmlns="http://www.w3.org/2000/svg" 
       preserveAspectRatio="none" 
@@ -18,26 +19,51 @@
       </defs>
       <path ref="shimmer1" d="M 25 -15 C 15 0, 10 20, 12 40 C 14 55, 20 65, 30 70 C 38 74, 46 74, 52 70 C 58 66, 62 58, 62 48 C 62 38, 58 30, 50 26 C 42 22, 32 24, 26 32 C 22 38, 22 46, 26 52 C 30 58, 38 60, 46 58 C 56 55, 68 48, 78 38 C 88 28, 98 15, 108 0 C 115 -10, 120 -18, 125 -25" stroke="url(#shimmerGradient)" stroke-width="0.15" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
       <path ref="shimmer2" d="M 115 15 C 100 25, 85 38, 72 52 C 58 68, 48 82, 42 90 C 38 95, 36 98, 36 98 C 36 98, 38 94, 42 88 C 48 78, 56 68, 62 60 C 68 52, 72 46, 74 42 C 76 38, 76 36, 74 36 C 72 36, 68 38, 62 44 C 54 52, 44 64, 32 78 C 20 92, 8 104, -4 110 C -12 114, -18 115, -22 114" stroke="url(#shimmerGradient)" stroke-width="0.15" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
-      <!-- <path ref="shimmer3" d="M -20 120 C -5 105, 5 90, 18 75 C 31 60, 42 48, 50 40 C 54 36, 58 34, 62 34 C 66 34, 70 36, 72 40 C 74 44, 74 48, 72 52 C 70 56, 66 58, 62 58 C 58 58, 54 56, 52 52 C 52 48, 54 44, 58 42 C 64 40, 72 38, 82 30 C 92 22, 102 12, 112 0 C 118 -8, 122 -15, 125 -22" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
-      <path ref="shimmer4" d="M 50 120 C 48 105, 46 90, 48 75 C 50 60, 54 48, 58 38 C 60 32, 62 28, 64 26 C 66 24, 70 24, 72 26 C 74 28, 76 32, 76 36 C 76 40, 74 44, 70 46 C 66 48, 62 46, 60 42 C 60 38, 62 34, 66 32 C 72 30, 80 28, 90 22 C 100 16, 110 8, 118 0 C 122 -6, 125 -12, 128 -18" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" /> -->
     </svg>
 
-    
     <div class="max-w-5xl mx-auto">
       <h2 class="section-title text-powder-blush-800">{{ $t('about.title') }}</h2>
 
       <div class="grid md:grid-cols-2 gap-12 items-center">
-        <!-- Image -->
-        <div ref="imageRef" class="w-[300px] h-[440px] rounded-2xl overflow-hidden shadow-lg text-center mx-auto">
-          <img
-            :src="profile"
-            alt="Jennifer Gallardo"
-            class="w-full h-full object-cover"
-          />
-        </div>
+        <!-- Image Container -->
+        <motion.div
+          class="relative"
+          :initial="{ opacity: 0, x: -50 }"
+          :in-view="{ opacity: 1, x: 0 }"
+          :in-view-options="{ once: true, margin: '-100px' }"
+          :transition="{ duration: 0.8 }"
+        >
+          <div class="image-container">
+            <div class="image-wrapper">
+              <img
+                :src="profile"
+                alt="Jennifer Gallardo"
+                class="w-full h-full object-cover rounded-2xl shadow-lg"
+              />
+            </div>
+          </div>
+
+          <!-- Floating Stats Card with Gradient -->
+          <motion.div
+            class="absolute -bottom-6 -right-6 text-white rounded-2xl p-6 shadow-xl z-10 gradient-card"
+            :initial="{ y: 20, opacity: 0 }"
+            :in-view="{ y: 0, opacity: 1 }"
+            :in-view-options="{ once: true, margin: '-100px' }"
+            :transition="{ delay: 0.3, duration: 0.8 }"
+          >
+            <p class="text-3xl font-bold text-white mb-1">+10</p>
+            <p class="text-xs text-white/90">{{ $t('about.bioCardDesc') }}</p>
+          </motion.div>
+        </motion.div>
 
         <!-- Text Content -->
-        <div ref="contentRef" class="space-y-6">
+        <motion.div
+          class="space-y-6"
+          :initial="{ opacity: 0, x: 50 }"
+          :in-view="{ opacity: 1, x: 0 }"
+          :in-view-options="{ once: true, margin: '-100px' }"
+          :transition="{ duration: 0.8 }"
+        >
           <p class="text-lg font-inter text-powder-blush-800 leading-relaxed">
             {{ $t('about.bio1') }}
           </p>
@@ -47,93 +73,102 @@
           </p>
 
           <div class="border-l-4 border-shadow-grey-300 pl-6">
-            <p class="text-2xl font-cormorant text-shadow-grey-300  italic">
+            <p class="text-2xl font-cormorant text-shadow-grey-300 italic">
               "{{ $t('about.philosophy') }}"
             </p>
           </div>
 
-          <div class="grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-shadow-grey-300">
-            <div class="text-center">
-              <p class="text-3xl font-bold text-gold">10+</p>
-              <p class="text-sm text-gray-600">{{ $t('contact.followUs') }}</p>
-            </div>
-            <div class="text-center">
-              <p class="text-3xl font-bold text-gold">1000+</p>
-              <p class="text-sm text-gray-600">Happy Clients</p>
-            </div>
+          <!-- Stats Grid with Icons -->
+          <div class="grid grid-cols-2 gap-6 mt-8 pt-8 border-t border-shadow-grey-300">
+            <motion.div
+              :initial="{ opacity: 0, y: 20 }"
+              :in-view="{ opacity: 1, y: 0 }"
+              :in-view-options="{ once: true }"
+              :transition="{ delay: 0.2, duration: 0.6 }"
+              class="text-center"
+            >
+              <div class="flex items-center justify-center gap-3 mb-2">
+                <Icon icon="heroicons:user-group" class="w-6 h-6 text-powder-blush-800" />
+                <p class="text-3xl font-bold text-powder-blush-800">500+</p>
+              </div>
+              <p class="text-sm text-shadow-grey-600">{{ $t('contact.followUs') }}</p>
+            </motion.div>
+
+            <motion.div
+              :initial="{ opacity: 0, y: 20 }"
+              :in-view="{ opacity: 1, y: 0 }"
+              :in-view-options="{ once: true }"
+              :transition="{ delay: 0.3, duration: 0.6 }"
+              class="text-center"
+            >
+              <div class="flex items-center justify-center gap-3 mb-2">
+                <Icon icon="heroicons:clock" class="w-6 h-6 text-powder-blush-800" />
+                <p class="text-3xl font-bold text-powder-blush-800">24/ 7</p>
+              </div>
+              <p class="text-sm text-shadow-grey-600">{{ $t('contact.time') }}</p>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import profile from '../assets/Profile.png'
+import { motion } from 'motion-v'
+import { Icon } from '@iconify/vue'
 import { useShimmerEffect } from '../composables/useShimmerEffect'
-
-
-gsap.registerPlugin(ScrollTrigger)
-
-const imageRef = ref(null)
-const contentRef = ref(null)
-
+import profile from '../assets/Profile.png'
 
 const {
   shimmer1,
   shimmer2,
-  shimmer3,
-  shimmer4,
   animateShimmer
 } = useShimmerEffect({
   strokeWidth: 0.15,
   gradientId: 'shimmerGradient',
   animationDuration: 2.4,
   repeatDelay: 12,
-  delays: [2.5, 6.5, 10.5, 14.5],
-  paths: 4
+  delays: [2.5, 6.5],
+  paths: 2
 })
 
 
-
-onMounted(() => {
-  gsap.fromTo(
-    imageRef.value,
-    { opacity: 0, x: -50 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: imageRef.value,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse'
-      }
-    }
-  )
-
-  gsap.fromTo(
-    contentRef.value,
-    { opacity: 0, x: 50 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: contentRef.value,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse'
-      }
-    }
-  )
-})
 </script>
+
 <style scoped>
 @import '../styles/effects.css';
 
+/* Image Container - Simple y limpio */
+.image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.image-wrapper {
+  width: 300px;
+  height: 440px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient Card */
+.gradient-card {
+  background: linear-gradient(135deg, #512015 0%, #E44D2E 100%);
+  box-shadow: 0 15px 35px rgba(81, 32, 21, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Optional: Add a subtle animation to the gradient card */
+.gradient-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 40px rgba(81, 32, 21, 0.3);
+}
 </style>
-
-
