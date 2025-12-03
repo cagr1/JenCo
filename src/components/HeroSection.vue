@@ -38,7 +38,9 @@
       <path ref="shimmer1" d="M 25 -15 C 15 0, 10 20, 12 40 C 14 55, 20 65, 30 70 C 38 74, 46 74, 52 70 C 58 66, 62 58, 62 48 C 62 38, 58 30, 50 26 C 42 22, 32 24, 26 32 C 22 38, 22 46, 26 52 C 30 58, 38 60, 46 58 C 56 55, 68 48, 78 38 C 88 28, 98 15, 108 0 C 115 -10, 120 -18, 125 -25" stroke="url(#shimmerGradient)" stroke-width="0.15" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
       <path ref="shimmer2" d="M 115 15 C 100 25, 85 38, 72 52 C 58 68, 48 82, 42 90 C 38 95, 36 98, 36 98 C 36 98, 38 94, 42 88 C 48 78, 56 68, 62 60 C 68 52, 72 46, 74 42 C 76 38, 76 36, 74 36 C 72 36, 68 38, 62 44 C 54 52, 44 64, 32 78 C 20 92, 8 104, -4 110 C -12 114, -18 115, -22 114" stroke="url(#shimmerGradient)" stroke-width="0.15" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
       <path ref="shimmer3" d="M -20 120 C -5 105, 5 90, 18 75 C 31 60, 42 48, 50 40 C 54 36, 58 34, 62 34 C 66 34, 70 36, 72 40 C 74 44, 74 48, 72 52 C 70 56, 66 58, 62 58 C 58 58, 54 56, 52 52 C 52 48, 54 44, 58 42 C 64 40, 72 38, 82 30 C 92 22, 102 12, 112 0 C 118 -8, 122 -15, 125 -22" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
-      <path ref="shimmer4" d="M -25 120 C -15 100, -5 80, 5 70 C 15 60, 25 55, 35 60 C 45 65, 55 70, 65 65 C 75 60, 85 50, 95 40 C 105 30, 115 20, 125 10 C 135 0, 140 -5, 128 -18" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
+      <path ref="shimmer4" d="M 49 -15 C 149 20, 45 10, 71 5 C 101 0, 0 30, 19 50 Q 48 65, 4 -15 C -20 -30, -10 10, 15 25 C 40 40, 70 45, 90 35 C 110 25, 120 5, 110 -10 C 100 -25, 70 -30, 49 -15" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" />
+      <!-- <path ref="shimmer4" d="M -15 80 C 10 60, 25 40, 40 30 C 55 20, 70 15, 85 20 C 100 25, 110 40, 115 55 C 120 70, 115 85, 105 95 C 95 105, 80 110, 65 105 C 50 100, 40 85, 35 70 C 30 55, 30 40, 35 25 C 40 10, 55 0, 70 -5 C 85 -10, 100 -5, 115 5" stroke="url(#shimmerGradient)" stroke-width="0.1" fill="none" stroke-linecap="round" class="shimmer-line" opacity="0" /> -->
+      <!-- path M 49 -15 C 149 20, 45 10, 71 5 C 101 0, 0 30, 19 50 Q 48 65, 4 -15 C -20 -30, -10 10, 15 25 C 40 40, 70 45, 90 35 C 110 25, 120 5, 110 -10 C 100 -25, 70 -30, 49 -15 -->
     </svg>
     
     <!-- overlay de zoom -->
@@ -114,10 +116,10 @@
         transform: `scale(${ 0.95 + 0.05 * messageOpacity })`,
       }"
     >
-      <h2 class="text-powder-blush-600 text-6xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight" style="text-shadow: 0 3px 24px rgba(0,0,0,0.8)">
+      <h2 class="text-cinnamon-white-700 text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-light font-playfair italic text-center mb-6 leading-tight" style="text-shadow: 0 3px 24px rgba(0,0,0,0.8)">
         {{ $t('hero.message1') }}
       </h2>
-      <p class="text-powder-blush-600 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-sm font-serif italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
+      <p class="text-cinnamon-white-800 text-lg sm:text-xl md:text-2xl text-center max-w-3xl drop-shadow-sm font-playfair italic" style="text-shadow: 0 3px 16px rgba(0,0,0,0.6)">
         {{ $t('hero.message2') }}
       </p>
     </div>

@@ -22,7 +22,12 @@
     </svg>
 
     <div class="max-w-5xl mx-auto">
-      <h2 class="section-title text-powder-blush-800">{{ $t('about.title') }}</h2>
+      <div class="max-w-3xl md:ml-auto md:mr-16">
+    <h2 class="section-title text-powder-blush-800 text-center md:text-right">
+      {{ $t('about.title') }}
+    </h2>
+  </div>
+      
 
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <!-- Image Container -->
@@ -161,8 +166,7 @@ const {
 /* Gradient Card */
 .gradient-card {
   background: linear-gradient(135deg, #512015 0%, #E44D2E 100%);
-  box-shadow: 0 15px 35px rgba(81, 32, 21, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(81, 32, 21, 0.25);  
 }
 
 /* Optional: Add a subtle animation to the gradient card */

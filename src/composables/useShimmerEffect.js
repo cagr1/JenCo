@@ -18,12 +18,14 @@ export function useShimmerEffect(options = {}) {
     animationDuration = 2.4,
     repeatDelay = 12,
     delays = [2.5, 6.5, 10.5, 14.5],
-    paths = 4
+    paths = 4,
+    initialDelay = 100,
+    fadeIn = true
   } = options
 
   // Referencias para los paths
   const shimmerRefs =  ref(Array.from({ length: paths }, () => null))
-  
+  const shimmerSvg = ref(null)
   const shimmer1 = ref(null) 
   const shimmer2 = ref(null)
   const shimmer3 = ref(null)
@@ -32,6 +34,9 @@ export function useShimmerEffect(options = {}) {
 
   const updateShimmerRefs = () => {
     shimmerRefs.value = [shimmer1.value, shimmer2.value, shimmer3.value, shimmer4.value]
+    if (shimmer1.value) {
+      shimmer1.value = shimmer1.value.closest('svg')
+    }
   }
 
   // Timelines de GSAP
@@ -81,12 +86,24 @@ export function useShimmerEffect(options = {}) {
    * Inicia todas las animaciones shimmer
    */
   const startShimmers = () => {
-    shimmerRefs.value.forEach((ref, index) => {
+    
+     if (fadeIn && shimmerSvg.value) {
+      gsap.to(shimmerSvg.value, {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      })
+    }
+    
+    setTimeout(() => {
+      shimmerRefs.value.forEach((ref, index) => {
       if (ref) {
         const delay = delays[index] || index * 4
         animateShimmerPath(ref, delay)
       }
-    })
+    })  
+    }, initialDelay);
+    
   }
 
   /**
@@ -99,6 +116,23 @@ export function useShimmerEffect(options = {}) {
       } catch (e) {}
     })
     timelines.length = 0
+  }
+
+   const hideShimmers = () => {
+    if (shimmerSvg.value) {
+      shimmerSvg.value.style.opacity = '0'
+    }
+    shimmerRefs.value.forEach(ref => {
+      if (ref) {
+        ref.style.opacity = '0'
+      }
+    })
+  }
+
+   const showShimmers = () => {
+    if (shimmerSvg.value) {
+      shimmerSvg.value.style.opacity = '1'
+    }
   }
 
   /**
@@ -165,6 +199,9 @@ export function useShimmerEffect(options = {}) {
   onMounted(() => {
     updateShimmerRefs()
     // Pequeño delay para asegurar que los refs estén disponibles
+
+    hideShimmers()
+
     setTimeout(() => {
       startShimmers()
     }, 100)
@@ -187,6 +224,8 @@ export function useShimmerEffect(options = {}) {
     //addShimmerRef,
     startShimmers,
     stopShimmers,
+    hideShimmers,
+    showShimmers,
     //restartShimmers,
     //animateShimmerPath,
     
