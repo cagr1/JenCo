@@ -125,18 +125,13 @@ export default {
           "100%": { transform: "translateY(100vh)", opacity: 1 },
         },
         // AGREGADO: Hero gradient animation
-        HeroAnimation: {
-          "0%": { backgroundPosition: "92% 0%" },
-          "50%": { backgroundPosition: "9% 100%" },
-          "100%": { backgroundPosition: "92% 0%" },
-        },
+       
       },
       fontFamily: {
-        lucida: ['"Lucida Handwriting"', 'cursive'],
-        rage: ['"Rage Italic"', 'cursive'],
+              
         playfair: ['"Playfair Display"', 'serif'],
         inter: ['"Inter"', 'sans-serif'],
-        haviland: ["Mr De Haviland", 'cursive'],
+        
       },
       animation: {
         float: "float 8s ease-in-out infinite",

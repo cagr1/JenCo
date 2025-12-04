@@ -22,11 +22,21 @@
     </svg>
 
     <div class="max-w-5xl mx-auto">
-      <div class="max-w-3xl md:ml-auto md:mr-16">
-    <h2 class="section-title text-powder-blush-800 text-center md:text-right">
-      {{ $t('about.title') }}
-    </h2>
-  </div>
+      <motion.div
+          class="max-w-5xl mx-auto"
+          :initial="{ opacity: 0, y: 40 }"
+          :in-view="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut' }"
+          
+        >
+          <div class="max-w-3xl md:ml-auto md:mr-16 md:text-right"> 
+            <h2 
+            
+            class="section-title  mb-6 text-powder-blush-800  text-center md:text-right">
+              {{ $t('about.title') }}
+            </h2>
+          </div>
+      </motion.div>
       
 
       <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -35,10 +45,9 @@
           class="relative"
           :initial="{ opacity: 0, x: -50 }"
           :in-view="{ opacity: 1, x: 0 }"
-          :in-view-options="{ once: true, margin: '-100px' }"
-          :transition="{ duration: 0.8 }"
+          :transition="{ duration: 0.8, ease: 'easeOut' }"
         >
-          <div class="image-container">
+          <div class="image-container z-30">
             <div class="image-wrapper">
               <img
                 :src="profile"
@@ -50,7 +59,7 @@
 
           <!-- Floating Stats Card with Gradient -->
           <motion.div
-            class="absolute -bottom-6 -right-6 text-white rounded-2xl p-6 shadow-xl z-10 gradient-card"
+            class="absolute -bottom-6 -right-6 text-white rounded-2xl p-6 shadow-xl z-30 gradient-card"
             :initial="{ y: 20, opacity: 0 }"
             :in-view="{ y: 0, opacity: 1 }"
             :in-view-options="{ once: true, margin: '-100px' }"
@@ -66,7 +75,6 @@
           class="space-y-6"
           :initial="{ opacity: 0, x: 50 }"
           :in-view="{ opacity: 1, x: 0 }"
-          :in-view-options="{ once: true, margin: '-100px' }"
           :transition="{ duration: 0.8 }"
         >
           <p class="text-lg font-inter text-powder-blush-800 leading-relaxed">
@@ -88,7 +96,6 @@
             <motion.div
               :initial="{ opacity: 0, y: 20 }"
               :in-view="{ opacity: 1, y: 0 }"
-              :in-view-options="{ once: true }"
               :transition="{ delay: 0.2, duration: 0.6 }"
               class="text-center"
             >
@@ -102,7 +109,6 @@
             <motion.div
               :initial="{ opacity: 0, y: 20 }"
               :in-view="{ opacity: 1, y: 0 }"
-              :in-view-options="{ once: true }"
               :transition="{ delay: 0.3, duration: 0.6 }"
               class="text-center"
             >
@@ -125,6 +131,7 @@ import { Icon } from '@iconify/vue'
 import { useShimmerEffect } from '../composables/useShimmerEffect'
 import profile from '../assets/Profile.png'
 
+
 const {
   shimmer1,
   shimmer2,
@@ -139,29 +146,13 @@ const {
 })
 
 
+
 </script>
 
 <style scoped>
 @import '../styles/effects.css';
 
-/* Image Container - Simple y limpio */
-.image-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
 
-.image-wrapper {
-  width: 300px;
-  height: 440px;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
 
 /* Gradient Card */
 .gradient-card {
@@ -175,4 +166,8 @@ const {
   transition: transform 0.3s ease;
   box-shadow: 0 20px 40px rgba(81, 32, 21, 0.3);
 }
+
+
+
+
 </style>

@@ -1,23 +1,27 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+
+// Registrar el plugin de MotionPath
+gsap.registerPlugin(MotionPathPlugin)
 
 /**
  * Composable para el efecto de blob volumétrico animado
  * @param {Object} options - Opciones de configuración
  * @param {boolean} options.autoDetectLightMode - Detectar automáticamente modo ligero para dispositivos de bajo rendimiento
- * @param {number} options.rotationDuration - Duración de la rotación completa en segundos (default: 42)
- * @param {number} options.pulseDuration - Duración del pulso en segundos (default: 8)
- * @param {number} options.fadeInDuration - Duración del fade in inicial en segundos (default: 2.2)
+ * @param {number} options.rotationDuration - Duración de la rotación completa en segundos (default: 50)
+ * @param {number} options.pulseDuration - Duración del pulso en segundos (default: 10)
+ * @param {number} options.fadeInDuration - Duración del fade in inicial en segundos (default: 2.5)
  * @param {string} options.gradientColors - Colores del gradiente radial (default: basado en rgba(201,81,54))
  * @returns {Object} Referencias y funciones de control
  */
 export function useBlobEffect(options = {}) {
   const {
     autoDetectLightMode = true,
-    rotationDuration = 42,
-    pulseDuration = 8,
-    fadeInDuration = 2.2,
-    gradientColors = 'rgba(201,81,54,0.95) 0%, rgba(201,81,54,0.82) 18%, rgba(201,81,54,0.68) 32%, rgba(201,81,54,0.52) 46%, rgba(201,81,54,0.35) 60%, rgba(201,81,54,0.20) 72%, rgba(201,81,54,0.08) 84%, transparent 95%'
+    rotationDuration = 50,
+    pulseDuration = 10,
+    fadeInDuration = 2.5,
+    gradientColors = 'rgba(201,81,54,0.45) 0%, rgba(201,81,54,0.38) 12%, rgba(201,81,54,0.30) 24%, rgba(201,81,54,0.22) 36%, rgba(201,81,54,0.16) 48%, rgba(201,81,54,0.11) 60%, rgba(201,81,54,0.06) 72%, rgba(201,81,54,0.03) 84%, transparent 95%'
   } = options
 
   // Referencias DOM
@@ -28,6 +32,7 @@ export function useBlobEffect(options = {}) {
   // Estado
   const lightMode = ref(false)
   let demoWrapper = null
+  let resizeObserver = null
 
   // HTML para modo ligero (móviles)
   const DEMO_BLOB_HTML = `
@@ -106,7 +111,7 @@ export function useBlobEffect(options = {}) {
    * Inicia las animaciones del blob
    */
   const animateBlob = () => {
-    if (!blob.value || !blobInner.value) return
+    if (!blob.value || !blobInner.value || !blobContainer.value) return
 
     try {
       // Fade in inicial
@@ -116,18 +121,50 @@ export function useBlobEffect(options = {}) {
         ease: 'power2.out'
       })
 
-      // Rotación continua
+      // Obtener dimensiones reales del contenedor (la sección completa)
+      const containerRect = blobContainer.value.getBoundingClientRect()
+      const containerWidth = containerRect.width
+      const containerHeight = containerRect.height
+      
+      // Calcular órbita DENTRO de los límites de la sección
+      // Usamos porcentajes menores para que quede bien dentro
+      const radiusX = containerWidth * 0.30
+      const radiusY = containerHeight * 0.30
+
+      // Animación orbital alrededor del perímetro
       gsap.to(blob.value, {
-        rotation: 800,
+        motionPath: {
+          path: [
+            { x: radiusX, y: 0 },                           // Derecha
+            { x: radiusX * 0.7, y: radiusY * 0.7 },       // Diagonal abajo-derecha
+            { x: 0, y: radiusY },                          // Abajo
+            { x: -radiusX * 0.7, y: radiusY * 0.7 },      // Diagonal abajo-izquierda
+            { x: -radiusX, y: 0 },                         // Izquierda
+            { x: -radiusX * 0.7, y: -radiusY * 0.7 },     // Diagonal arriba-izquierda
+            { x: 0, y: -radiusY },                         // Arriba
+            { x: radiusX * 0.7, y: -radiusY * 0.7 },      // Diagonal arriba-derecha
+            { x: radiusX, y: 0 }                           // Vuelta al inicio
+          ],
+          curviness: 1.5,
+          autoRotate: false
+        },
         duration: rotationDuration,
+        repeat: -1,
+        ease: 'none'
+      })
+
+      // Rotación del blob sobre sí mismo
+      gsap.to(blob.value, {
+        rotation: 360,
+        duration: rotationDuration * 0.6,
         repeat: -1,
         ease: 'none'
       })
 
       // Pulso de escala y opacidad
       gsap.to(blobInner.value, {
-        scale: 1.06,
-        opacity: 0.9,
+        scale: 1.08,
+        opacity: 0.85,
         duration: pulseDuration,
         yoyo: true,
         repeat: -1,
@@ -163,7 +200,9 @@ export function useBlobEffect(options = {}) {
    */
   const getBlobInnerStyle = () => {
     return {
-      background: `radial-gradient(ellipse 42% 32% at 50% 18%, ${gradientColors})`
+      background: `radial-gradient(circle at center, ${gradientColors})`,
+      filter: 'blur(90px)',
+      mixBlendMode: 'normal'
     }
   }
 
@@ -176,9 +215,25 @@ export function useBlobEffect(options = {}) {
         enableLightMode()
       } else {
         animateBlob()
+        
+        // Observar cambios de tamaño y re-animar
+        if (blobContainer.value && window.ResizeObserver) {
+          resizeObserver = new ResizeObserver(() => {
+            restartBlob()
+          })
+          resizeObserver.observe(blobContainer.value)
+        }
       }
     } else {
       animateBlob()
+      
+      // Observar cambios de tamaño y re-animar
+      if (blobContainer.value && window.ResizeObserver) {
+        resizeObserver = new ResizeObserver(() => {
+          restartBlob()
+        })
+        resizeObserver.observe(blobContainer.value)
+      }
     }
   })
 
@@ -187,6 +242,9 @@ export function useBlobEffect(options = {}) {
     stopBlob()
     if (demoWrapper && demoWrapper.parentNode) {
       demoWrapper.parentNode.removeChild(demoWrapper)
+    }
+    if (resizeObserver) {
+      resizeObserver.disconnect()
     }
   })
 
@@ -209,3 +267,9 @@ export function useBlobEffect(options = {}) {
     getBlobInnerStyle
   }
 }
+
+
+
+
+
+

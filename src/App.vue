@@ -190,6 +190,7 @@ function onScrollHandler() {
   const y = window.scrollY || window.pageYOffset
   const delta = y - lastScroll.y
 
+  console.log('Scroll:', { y, delta, menuOpen: menuOpen.value, visible: visible.value })
   // if menu open keep visible
   if (menuOpen.value) {
     lastScroll.y = y
