@@ -98,7 +98,7 @@
           <div class="image-container-services">
             <div class="image-wrapper-services" ref="imgWrapper1">
               <img
-                src="/src/assets/service/Service1.jpg"
+                src="/service/Service1.jpg"
                 alt="Makeup Services"
                 class="service-image rounded-2xl"
               />
@@ -183,7 +183,7 @@
           <div class="image-container-services">
             <div class="image-wrapper-services" ref="imgWrapper2">
               <img
-                src="/src/assets/service/Service2.png"
+                src="/service/Service2.png"
                 alt="Beauty Services"
                 class="service-image"
               />
@@ -266,7 +266,7 @@
           <div class="image-container-services">
             <div class="image-wrapper-services" ref="imgWrapper3">
               <img
-                src="/src/assets/service/Service3.jpg"
+                src="/service/Service3.jpg"
                 alt="Spa Services"
                 class="service-image"
               />

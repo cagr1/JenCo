@@ -63,12 +63,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const galleryImages = ref([
-  { src: 'src/assets/gallery/Gallery1.png', alt: 'Bridal Makeup 1' },
-  { src: 'src/assets/gallery/Gallery2.png', alt: 'Professional Makeup 1' },
-  { src: 'src/assets/gallery/Gallery3.jpg', alt: 'Beauty Treatment 1' },
-  { src: 'src/assets/gallery/Gallery4.jpg', alt: 'Bridal Makeup 2' },
-  { src: 'src/assets/gallery/Gallery5.png', alt: 'Professional Makeup 2' },
-  { src: 'src/assets/gallery/Gallery6.png', alt: 'Beauty Treatment 2' }
+  { src: '/gallery/Gallery1.png', alt: 'Bridal Makeup 1' },
+  { src: '/gallery/Gallery2.png', alt: 'Professional Makeup 1' },
+  { src: '/gallery/Gallery3.JPG', alt: 'Beauty Treatment 1' },
+  { src: '/gallery/Gallery4.JPG', alt: 'Bridal Makeup 2' },
+  { src: '/gallery/Gallery5.png', alt: 'Professional Makeup 2' },
+  { src: '/gallery/Gallery6.png', alt: 'Beauty Treatment 2' }
 ])
 
 let scrollTriggers = []
