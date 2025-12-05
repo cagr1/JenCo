@@ -51,13 +51,13 @@
       <!-- BLOQUE 1: Card + Card + Imagen -->
       <div class="flex flex-col md:flex-row gap-6 mb-16 items-center justify-center">
         <!-- Imagen 1 - Mobile primero -->
-        <div ref="img1" class="w-full max-w-[280px] md:max-w-[320px] md:order-3">
+        <div ref="img1" class="w-full relative max-w-[280px] md:max-w-[320px] md:order-3">
           <div class="image-container">
             <div class="image-wrapper">
               <img
                 src="/src/assets/Service1.jpg"
                 alt="Makeup Services"
-                class="w-full h-[380px] md:h-[600px] object-cover rounded-2xl shadow-lg"
+                class="w-full h-full object-cover rounded-2xl shadow-lg"
               />
             </div>
           </div>
@@ -66,10 +66,10 @@
         <!-- Card 1 -->
         <div ref="card1" class="w-full max-w-[280px] md:order-1">
           <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
-            <div class="mb-4">
-              <Icon icon="heroicons:sparkles-solid" class="w-12 h-12 text-powder-blush-800" />
+            <div class="mb-4 flex items-center justify-center">
+              <Icon icon="heroicons:sparkles" class="w-12 h-12 text-powder-blush-800" />
             </div>
-            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3">
+            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3 text-center">
               {{ $t('services.makeup_bride') }}
             </h3>
             <p class="text-sm text-powder-blush-800/80 leading-relaxed flex-1">
@@ -81,10 +81,10 @@
         <!-- Card 2 -->
         <div ref="card2" class="w-full max-w-[280px] md:order-2">
           <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
-            <div class="mb-4">
-              <Icon icon="heroicons:star-solid" class="w-12 h-12 text-powder-blush-800" />
+            <div class="mb-4 flex items-center justify-center">
+              <Icon icon="heroicons:star" class="w-12 h-12 text-powder-blush-800" />
             </div>
-            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3">
+            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3 text-center">
               {{ $t('services.makeup_quince') }}
             </h3>
             <p class="text-sm text-powder-blush-800/80 leading-relaxed flex-1">
@@ -101,9 +101,9 @@
           <div class="image-container">
             <div class="image-wrapper">
               <img
-                src="/src/assets/Service2.jpg"
+                src="/src/assets/Service2.png"
                 alt="Beauty Services"
-                 
+                class="w-full h-full object-cover rounded-2xl shadow-lg" 
               />
             </div>
           </div>
@@ -112,10 +112,10 @@
         <!-- Card 3 -->
         <div ref="card3" class="w-full max-w-[280px] md:order-2">
           <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
-            <div class="mb-4">
-              <Icon icon="heroicons:camera-solid" class="w-12 h-12 text-powder-blush-800" />
+            <div class="mb-4 flex items-center justify-center">
+              <Icon icon="heroicons:camera" class="w-12 h-12 text-powder-blush-800" />
             </div>
-            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3">
+            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3 text-center">
               {{ $t('services.makeup_photo') }}
             </h3>
             <p class="text-sm text-powder-blush-800/80 leading-relaxed flex-1">
@@ -127,10 +127,10 @@
         <!-- Card 4 -->
         <div ref="card4" class="w-full max-w-[280px] md:order-3">
           <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
-            <div class="mb-4">
-              <Icon icon="heroicons:fire-solid" class="w-12 h-12 text-powder-blush-800" />
+            <div class="mb-4 flex items-center justify-center">
+              <Icon icon="heroicons:fire" class="w-12 h-12 text-powder-blush-800" />
             </div>
-            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3">
+            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3 text-center">
               {{ $t('services.waxing') }}
             </h3>
             <p class="text-sm text-powder-blush-800/80 leading-relaxed flex-1">
@@ -149,7 +149,7 @@
               <img
                 src="/src/assets/Service3.jpg"
                 alt="Spa Services"
-                
+                class="w-full h-full object-cover rounded-2xl shadow-lg"
               />
             </div>
           </div>
@@ -158,10 +158,10 @@
         <!-- Card 5 -->
         <div ref="card5" class="w-full max-w-[280px] md:order-1">
           <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
-            <div class="mb-4">
-              <Icon icon="heroicons:eye-solid" class="w-12 h-12 text-powder-blush-800" />
+            <div class="mb-4 flex items-center justify-center">
+              <Icon icon="heroicons:eye" class="w-12 h-12 text-powder-blush-800" />
             </div>
-            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3">
+            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3 text-center">
               {{ $t('services.lash') }}
             </h3>
             <p class="text-sm text-powder-blush-800/80 leading-relaxed flex-1">
@@ -173,10 +173,10 @@
         <!-- Card 6 -->
         <div ref="card6" class="w-full max-w-[280px] md:order-2">
           <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
-            <div class="mb-4">
-              <Icon icon="heroicons:heart-solid" class="w-12 h-12 text-powder-blush-800" />
+            <div class="mb-4 items-center justify-center flex">
+              <Icon icon="heroicons:heart" class="w-12 h-12 text-powder-blush-800" />
             </div>
-            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3">
+            <h3 class="text-lg font-playfair font-bold text-powder-blush-800 mb-3 text-center">
               {{ $t('services.massage') }}
             </h3>
             <p class="text-sm text-powder-blush-800/80 leading-relaxed flex-1">

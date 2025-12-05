@@ -68,12 +68,12 @@
       <!-- IMAGE CARD -->
       <div
         ref="imageCard"
-        class="relative z-10 w-[210px] h-[340px] rounded-2xl overflow-hidden shadow-2xl bg-black/10 transition-transform duration-150 ease-out"
+        class="relative z-10 w-[250px] h-[380px] rounded-2xl overflow-hidden shadow-2xl bg-black/10 transition-transform duration-150 ease-out"
         style="border: none; transform-origin: center center;"
       >
         <img
           ref="imageEl"
-          src="/src/assets/pexels-shiny-diamond.jpg"
+          src="/src/assets/NaturalBeautyPortrait.png"
           alt="Hero Image"
           class="w-full h-full object-cover"
           draggable="false"

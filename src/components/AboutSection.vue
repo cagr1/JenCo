@@ -62,7 +62,6 @@
             class="absolute -bottom-6 -right-6 text-white rounded-2xl p-6 shadow-xl z-30 gradient-card"
             :initial="{ y: 20, opacity: 0 }"
             :in-view="{ y: 0, opacity: 1 }"
-            :in-view-options="{ once: true, margin: '-100px' }"
             :transition="{ delay: 0.3, duration: 0.8 }"
           >
             <p class="text-3xl font-bold text-white mb-1">+10</p>
