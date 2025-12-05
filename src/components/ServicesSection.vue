@@ -52,20 +52,30 @@
       <div class="flex flex-col md:flex-row gap-6 mb-16 items-center justify-center">
         <!-- Imagen 1 - Mobile primero -->
         <div ref="img1" class="w-full relative max-w-[280px] md:max-w-[320px] md:order-3">
-          <div class="image-container">
-            <div class="image-wrapper">
+          <div class="image-container-services">
+            <div class="image-wrapper-services" ref="imgWrapper1">
               <img
                 src="/src/assets/Service1.jpg"
                 alt="Makeup Services"
-                class="w-full h-full object-cover rounded-2xl shadow-lg"
+                class="service-image"
               />
             </div>
           </div>
         </div>
 
         <!-- Card 1 -->
-        <div ref="card1" class="w-full max-w-[280px] md:order-1">
-          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
+        <motion.div 
+          ref="card1" 
+          class="w-full max-w-[280px] md:order-1"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{ 
+            duration: 0.8, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.1 
+          }"
+        >
+          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col">
             <div class="mb-4 flex items-center justify-center">
               <Icon icon="heroicons:sparkles" class="w-12 h-12 text-powder-blush-800" />
             </div>
@@ -76,11 +86,21 @@
               {{ $t('services.makeup_bride_desc') }}
             </p>
           </div>
-        </div>
+        </motion.div>
 
         <!-- Card 2 -->
-        <div ref="card2" class="w-full max-w-[280px] md:order-2">
-          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
+        <motion.div 
+          ref="card2" 
+          class="w-full max-w-[280px] md:order-2"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{ 
+            duration: 0.8, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.2 
+          }"
+        >
+          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col">
             <div class="mb-4 flex items-center justify-center">
               <Icon icon="heroicons:star" class="w-12 h-12 text-powder-blush-800" />
             </div>
@@ -91,27 +111,37 @@
               {{ $t('services.makeup_quince_desc') }}
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <!-- BLOQUE 2: Imagen + Card + Card -->
       <div class="flex flex-col md:flex-row gap-6 mb-16 items-center justify-center">
         <!-- Imagen 2 -->
         <div ref="img2" class="w-full max-w-[280px] md:max-w-[320px] md:order-1">
-          <div class="image-container">
-            <div class="image-wrapper">
+          <div class="image-container-services">
+            <div class="image-wrapper-services" ref="imgWrapper2">
               <img
                 src="/src/assets/Service2.png"
                 alt="Beauty Services"
-                class="w-full h-full object-cover rounded-2xl shadow-lg" 
+                class="service-image"
               />
             </div>
           </div>
         </div>
 
         <!-- Card 3 -->
-        <div ref="card3" class="w-full max-w-[280px] md:order-2">
-          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
+        <motion.div 
+          ref="card3" 
+          class="w-full max-w-[280px] md:order-2"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{ 
+            duration: 0.8, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.3 
+          }"
+        >
+          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col">
             <div class="mb-4 flex items-center justify-center">
               <Icon icon="heroicons:camera" class="w-12 h-12 text-powder-blush-800" />
             </div>
@@ -122,11 +152,21 @@
               {{ $t('services.makeup_photo_desc') }}
             </p>
           </div>
-        </div>
+        </motion.div>
 
         <!-- Card 4 -->
-        <div ref="card4" class="w-full max-w-[280px] md:order-3">
-          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
+        <motion.div 
+          ref="card4" 
+          class="w-full max-w-[280px] md:order-3"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{ 
+            duration: 0.8, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.4 
+          }"
+        >
+          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col">
             <div class="mb-4 flex items-center justify-center">
               <Icon icon="heroicons:fire" class="w-12 h-12 text-powder-blush-800" />
             </div>
@@ -137,27 +177,37 @@
               {{ $t('services.waxing_desc') }}
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <!-- BLOQUE 3: Card + Card + Imagen -->
       <div class="flex flex-col md:flex-row gap-6 items-center justify-center">
         <!-- Imagen 3 - Mobile primero -->
         <div ref="img3" class="w-full max-w-[280px] md:max-w-[320px] md:order-3">
-          <div class="image-container">
-            <div class="image-wrapper">
+          <div class="image-container-services">
+            <div class="image-wrapper-services" ref="imgWrapper3">
               <img
                 src="/src/assets/Service3.jpg"
                 alt="Spa Services"
-                class="w-full h-full object-cover rounded-2xl shadow-lg"
+                class="service-image"
               />
             </div>
           </div>
         </div>
 
         <!-- Card 5 -->
-        <div ref="card5" class="w-full max-w-[280px] md:order-1">
-          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
+        <motion.div 
+          ref="card5" 
+          class="w-full max-w-[280px] md:order-1"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{ 
+            duration: 0.8, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.5 
+          }"
+        >
+          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col">
             <div class="mb-4 flex items-center justify-center">
               <Icon icon="heroicons:eye" class="w-12 h-12 text-powder-blush-800" />
             </div>
@@ -168,11 +218,21 @@
               {{ $t('services.lash_desc') }}
             </p>
           </div>
-        </div>
+        </motion.div>
 
         <!-- Card 6 -->
-        <div ref="card6" class="w-full max-w-[280px] md:order-2">
-          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col hover:shadow-2xl transition-all duration-300">
+        <motion.div 
+          ref="card6" 
+          class="w-full max-w-[280px] md:order-2"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{ 
+            duration: 0.8, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.6 
+          }"
+        >
+          <div class="h-[280px] bg-white/40 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 p-6 flex flex-col">
             <div class="mb-4 items-center justify-center flex">
               <Icon icon="heroicons:heart" class="w-12 h-12 text-powder-blush-800" />
             </div>
@@ -183,7 +243,7 @@
               {{ $t('services.massage_desc') }}
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     
     </div>
@@ -191,7 +251,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import { motion } from 'motion-v'
 import gsap from 'gsap'
@@ -226,7 +286,7 @@ const {
   fadeInDuration: 2.5
 })
 
-// Refs
+// Refs para cards e imágenes
 const card1 = ref(null)
 const card2 = ref(null)
 const card3 = ref(null)
@@ -236,20 +296,128 @@ const card6 = ref(null)
 const img1 = ref(null)
 const img2 = ref(null)
 const img3 = ref(null)
+const imgWrapper1 = ref(null)
+const imgWrapper2 = ref(null)
+const imgWrapper3 = ref(null)
+
+// Variables para Mouse Parallax - REDUCIDO para menos agresividad
+let mouseX = 0
+let mouseY = 0
+let currentX = 0
+let currentY = 0
+const parallaxElements = []
+const smooth = 0.15 // Aumentado para movimiento más suave (antes 0.1)
+const strength = 0.015 // REDUCIDO a la mitad (antes 0.03)
+
+// Mouse Parallax Handler
+const handleMouseMove = (e) => {
+  const { clientX, clientY } = e
+  const { innerWidth, innerHeight } = window
+  
+  mouseX = (clientX / innerWidth - 0.5) * 2
+  mouseY = (clientY / innerHeight - 0.5) * 2
+}
+
+// Animation Loop para Parallax
+const animateParallax = () => {
+  currentX += (mouseX - currentX) * smooth
+  currentY += (mouseY - currentY) * smooth
+  
+  parallaxElements.forEach(({ el, intensity }) => {
+    if (el) {
+      const x = currentX * intensity * strength * 100
+      const y = currentY * intensity * strength * 100
+      el.style.transform = `translate(${x}px, ${y}px) scale(1.08)` // Scale aumentado a 1.08
+    }
+  })
+  
+  requestAnimationFrame(animateParallax)
+}
+
+// Agregar elemento al parallax
+const addParallaxElement = (el, intensity = 10) => {
+  if (el) {
+    parallaxElements.push({ el, intensity })
+  }
+}
+
+// Parallax vertical en scroll para imágenes
+const setupScrollParallax = () => {
+  const imageWrappers = [
+    { el: imgWrapper1.value, direction: -40 },
+    { el: imgWrapper2.value, direction: 40 },
+    { el: imgWrapper3.value, direction: -40 }
+  ]
+  
+  imageWrappers.forEach(({ el, direction }) => {
+    if (!el) return
+    
+    gsap.to(el, {
+      y: direction,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.5
+      }
+    })
+  })
+}
 
 onMounted(() => {
-  const images = [img1.value, img2.value, img3.value]
-  const cards = [card1.value, card2.value, card3.value, card4.value, card5.value, card6.value]
-
-  // PARALLAX SOLO EN IMÁGENES
+  // FASE 1: Mouse Parallax en imágenes - Intensidades reducidas
+  addParallaxElement(imgWrapper1.value, 10) // Antes 15
+  addParallaxElement(imgWrapper2.value, 8)  // Antes 12
+  addParallaxElement(imgWrapper3.value, 12) // Antes 18
   
+  window.addEventListener('mousemove', handleMouseMove)
+  animateParallax()
+  
+  // FASE 2: Scroll Parallax en imágenes
+  setupScrollParallax()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('mousemove', handleMouseMove)
+  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
 })
 </script>
 
 <style scoped>
-.service-card-enhanced {
-  transform-style: preserve-3d;
+/* Clases específicas para Services Section */
+.image-container-services {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-wrapper-services {
+  width: 100%;
+  height: 440px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Imagen con más área extra para cubrir el parallax */
+.service-image {
+  width: 120%; /* Aumentado de 110% a 120% */
+  height: 120%; /* Aumentado de 110% a 120% */
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 16px;
 }
 
 * {
