@@ -59,5 +59,26 @@
     "followUs": "Sígueme",
     "time":"Reserva online",
     "phone": "Teléfono"
+  },
+  "footer":{
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "subtitle": "La Mejor Versión De Ti",
+    "terms": "Términos de Servicio",
+    "services":{
+      "makeup": "Maquillaje",
+      "waxing": "Depilación",
+      "lash": "Pestañas",
+      "massage": "Masaje"
+    },
+    "links":{
+      "home": "Inicio",
+      "about": "Sobre Mí",
+      "services": "Servicios",
+      "gallery": "Galería",
+      "testimonials": "Testimonios"      
   }
+    
+  }
+  
 }

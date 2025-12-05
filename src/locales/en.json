@@ -58,5 +58,25 @@
     "followUs": "Follow Us",
     "time":"Book Online",
     "phone": "Phone"
+  },
+  "footer":{
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "subtitle": "The Best Version Of You",
+    "services":{
+      "makeup": "Makeup",
+      "waxing": "Waxing",
+      "lash": "Lashes",
+      "massage": "Massage"
+    },
+    "links":{
+      "home": "Home",
+      "about": "About",
+      "services": "Services",
+      "gallery": "Gallery",
+      "testimonials": "Testimonials"      
+  }
+
   }
 }

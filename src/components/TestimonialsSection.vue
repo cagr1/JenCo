@@ -1,95 +1,371 @@
 <template>
-  <section class="py-24 px-4 bg-porcelain-50">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="section-title">{{ $t('testimonials.title') }}</h2>
+  <section 
+    id="testimonials" 
+    class="relative py-20 px-4 bg-porcelain-50" 
+    style="overflow: visible"
+  >
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Animated Background SVG -->
+      <svg
+        class="absolute inset-0 w-full h-full pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 100"
+      >
+        <defs>
+          <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color: transparent; stop-opacity: 0" />
+            <stop offset="35%" style="stop-color: #e44d2e; stop-opacity: 0.6" />
+            <stop offset="50%" style="stop-color: #e44d2e; stop-opacity: 1" />
+            <stop offset="65%" style="stop-color: #e44d2e; stop-opacity: 0.6" />
+            <stop offset="100%" style="stop-color: transparent; stop-opacity: 0" />
+          </linearGradient>
+        </defs>
+        <path 
+          ref="shimmer1" 
+          d="M 25 -15 C 15 0, 10 20, 12 40 C 14 55, 20 65, 30 70 C 38 74, 46 74, 52 70 C 58 66, 62 58, 62 48 C 62 38, 58 30, 50 26 C 42 22, 32 24, 26 32 C 22 38, 22 46, 26 52 C 30 58, 38 60, 46 58 C 56 55, 68 48, 78 38 C 88 28, 98 15, 108 0 C 115 -10, 120 -18, 125 -25" 
+          stroke="url(#shimmerGradient)" 
+          stroke-width="0.15" 
+          fill="none" 
+          stroke-linecap="round" 
+          class="shimmer-line" 
+          opacity="0" 
+        />
+        <path 
+          ref="shimmer2" 
+          d="M 115 15 C 100 25, 85 38, 72 52 C 58 68, 48 82, 42 90 C 38 95, 36 98, 36 98 C 36 98, 38 94, 42 88 C 48 78, 56 68, 62 60 C 68 52, 72 46, 74 42 C 76 38, 76 36, 74 36 C 72 36, 68 38, 62 44 C 54 52, 44 64, 32 78 C 20 92, 8 104, -4 110 C -12 114, -18 115, -22 114" 
+          stroke="url(#shimmerGradient)" 
+          stroke-width="0.15" 
+          fill="none" 
+          stroke-linecap="round" 
+          class="shimmer-line" 
+          opacity="0" 
+        />
+      </svg>
 
-      <div class="grid md:grid-cols-3 gap-8">
+      <!-- Section Title -->
+      <motion.div
+        class="max-w-3xl md:mr-auto md:ml-16 md:text-left mb-16"
+        :initial="{ opacity: 0, y: 40 }"
+        :in-view="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut' }"
+      >
+        <h2
+          class="section-title text-powder-blush-800 md:text-left"
+        >
+           {{ $t('testimonials.title') }}
+        </h2>
+      </motion.div>
+
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
         <!-- Testimonial Card 1 -->
-        <div ref="testimonial1" class="testimonial-card bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <div class="flex mb-4">
-            <span v-for="i in 5" :key="i" class="text-gold text-lg">★</span>
+        <motion.div
+          ref="testimonial1"
+          class="testimonial-card group"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.1,
+          }"
+        >
+          <div class="card-content">
+            <!-- Quote Icon -->
+            <div class="quote-icon">
+              <Icon icon="bi:quote" class="w-8 h-8 text-powder-blush-400/30" />
+            </div>
+
+            <!-- Animated Stars -->
+            <div class="flex gap-1 mb-6">
+              <motion.span
+                v-for="i in 5"
+                :key="i"
+                class="star"
+                :initial="{ opacity: 0, scale: 0, rotate: -180 }"
+                :in-view="{ opacity: 1, scale: 1, rotate: 0 }"
+                :transition="{ 
+                  delay: 0.3 + (i * 0.08), 
+                  duration: 0.5,
+                  ease: [0.34, 1.56, 0.64, 1]
+                }"
+              >
+                ★
+              </motion.span>
+            </div>
+
+            <!-- Review Text -->
+            <p class="review-text">
+              "{{ $t('testimonials.review1') }}"
+            </p>
+
+            <!-- Author Info with Gradient Line -->
+            <div class="author-section">
+              <div class="gradient-line"></div>
+              <p class="author-name">{{ $t('testimonials.author1') }}</p>
+              <p class="author-role">{{ $t('contact.followUs') }}</p>
+            </div>
+
+            <!-- Hover Gradient Effect -->
+            <div class="hover-gradient"></div>
           </div>
-          <p class="text-gray-700 italic mb-6 leading-relaxed">
-            "{{ $t('testimonials.review1') }}"
-          </p>
-          <div class="border-t border-gray-200 pt-4">
-            <p class="font-playfair font-bold text-gray-800">{{ $t('testimonials.author1') }}</p>
-            <p class="text-sm text-gray-500">{{ $t('contact.followUs') }}</p>
-          </div>
-        </div>
+        </motion.div>
 
         <!-- Testimonial Card 2 -->
-        <div ref="testimonial2" class="testimonial-card bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <div class="flex mb-4">
-            <span v-for="i in 5" :key="i" class="text-gold text-lg">★</span>
+        <motion.div
+          ref="testimonial2"
+          class="testimonial-card group"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.3,
+          }"
+        >
+          <div class="card-content">
+            <div class="quote-icon">
+              <Icon icon="bi:quote" class="w-8 h-8 text-powder-blush-400/30" />
+            </div>
+
+            <div class="flex gap-1 mb-6">
+              <motion.span
+                v-for="i in 5"
+                :key="i"
+                class="star"
+                :initial="{ opacity: 0, scale: 0, rotate: -180 }"
+                :in-view="{ opacity: 1, scale: 1, rotate: 0 }"
+                :transition="{ 
+                  delay: 0.5 + (i * 0.08), 
+                  duration: 0.5,
+                  ease: [0.34, 1.56, 0.64, 1]
+                }"
+              >
+                ★
+              </motion.span>
+            </div>
+
+            <p class="review-text">
+              "{{ $t('testimonials.review2') }}"
+            </p>
+
+            <div class="author-section">
+              <div class="gradient-line"></div>
+              <p class="author-name">{{ $t('testimonials.author2') }}</p>
+              <p class="author-role">{{ $t('contact.followUs') }}</p>
+            </div>
+
+            <div class="hover-gradient"></div>
           </div>
-          <p class="text-gray-700 italic mb-6 leading-relaxed">
-            "{{ $t('testimonials.review2') }}"
-          </p>
-          <div class="border-t border-gray-200 pt-4">
-            <p class="font-playfair font-bold text-gray-800">{{ $t('testimonials.author2') }}</p>
-            <p class="text-sm text-gray-500">{{ $t('contact.followUs') }}</p>
-          </div>
-        </div>
+        </motion.div>
 
         <!-- Testimonial Card 3 -->
-        <div ref="testimonial3" class="testimonial-card bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <div class="flex mb-4">
-            <span v-for="i in 5" :key="i" class="text-gold text-lg">★</span>
+        <motion.div
+          ref="testimonial3"
+          class="testimonial-card group"
+          :initial="{ opacity: 0, y: 60, rotateX: -15 }"
+          :in-view="{ opacity: 1, y: 0, rotateX: 0 }"
+          :transition="{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.5,
+          }"
+        >
+          <div class="card-content">
+            <div class="quote-icon">
+              <Icon icon="bi:quote" class="w-8 h-8 text-powder-blush-400/30" />
+            </div>
+
+            <div class="flex gap-1 mb-6">
+              <motion.span
+                v-for="i in 5"
+                :key="i"
+                class="star"
+                :initial="{ opacity: 0, scale: 0, rotate: -180 }"
+                :in-view="{ opacity: 1, scale: 1, rotate: 0 }"
+                :transition="{ 
+                  delay: 0.7 + (i * 0.08), 
+                  duration: 0.5,
+                  ease: [0.34, 1.56, 0.64, 1]
+                }"
+              >
+                ★
+              </motion.span>
+            </div>
+
+            <p class="review-text">
+              "{{ $t('testimonials.review3') }}"
+            </p>
+
+            <div class="author-section">
+              <div class="gradient-line"></div>
+              <p class="author-name">{{ $t('testimonials.author3') }}</p>
+              <p class="author-role">{{ $t('contact.followUs') }}</p>
+            </div>
+
+            <div class="hover-gradient"></div>
           </div>
-          <p class="text-gray-700 italic mb-6 leading-relaxed">
-            "{{ $t('testimonials.review3') }}"
-          </p>
-          <div class="border-t border-gray-200 pt-4">
-            <p class="font-playfair font-bold text-gray-800">{{ $t('testimonials.author3') }}</p>
-            <p class="text-sm text-gray-500">{{ $t('contact.followUs') }}</p>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Icon } from "@iconify/vue";
+import { motion } from "motion-v";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useShimmerEffect } from "../composables/useShimmerEffect";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
-const testimonial1 = ref(null)
-const testimonial2 = ref(null)
-const testimonial3 = ref(null)
-
-onMounted(() => {
-  const testimonials = [testimonial1.value, testimonial2.value, testimonial3.value]
-
-  testimonials.forEach((card, index) => {
-    gsap.fromTo(
-      card,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        delay: index * 0.15,
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    )
-  })
-})
+const { shimmer1, shimmer2, animateShimmer } = useShimmerEffect({
+  strokeWidth: 0.15,
+  gradientId: "shimmerGradient",
+  animationDuration: 2.4,
+  repeatDelay: 12,
+  delays: [2.5, 6.5],
+  paths: 2,
+});
 </script>
 
 <style scoped>
 .testimonial-card {
-  transition: transform 0.3s ease;
+  perspective: 1000px;
+  height: 100%;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-4px);
+.card-content {
+  position: relative;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 
+    0 10px 30px rgba(81, 32, 21, 0.08),
+    0 1px 3px rgba(81, 32, 21, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.testimonial-card:hover .card-content {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 50px rgba(81, 32, 21, 0.15),
+    0 5px 15px rgba(228, 77, 46, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Quote Icon */
+.quote-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  opacity: 1;
+  transition: all 0.4s ease;
+}
+
+.testimonial-card:hover .quote-icon {
+  transform: scale(1.2) rotate(5deg);
+  opacity: 0.6;
+}
+
+/* Animated Stars */
+.star {
+  font-size: 1.25rem;
+  color: #E4B649;
+  display: inline-block;
+  filter: drop-shadow(0 2px 4px rgba(228, 182, 73, 0.3));
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover .star {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(228, 182, 73, 0.5));
+}
+
+/* Review Text */
+.review-text {
+  color: #4A4A4A;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  line-height: 1.75;
+  flex: 1;
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Author Section */
+.author-section {
+  margin-top: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.gradient-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #512015 0%, #E44D2E 100%);
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-card:hover .gradient-line {
+  width: 100px;
+}
+
+.author-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #512015;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.author-role {
+  font-size: 0.875rem;
+  color: #8B7355;
+  opacity: 0.8;
+}
+
+/* Hover Gradient Effect */
+.hover-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(228, 77, 46, 0.05) 100%);
+  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+
+.testimonial-card:hover .hover-gradient {
+  height: 120px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  .review-text {
+    font-size: 0.9rem;
+  }
+
+  .star {
+    font-size: 1.1rem;
+  }
 }
 </style>

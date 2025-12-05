@@ -1,9 +1,16 @@
 <template>
   <section id="gallery" class="py-24 px-4 bg-porcelain-50 overflow-hidden">
     <div class="max-w-7xl mx-auto">
-      <h2 class="section-title text-powder-blush-800 text-center mb-16 title opacity-0">{{ $t('nav.gallery') }}</h2>
-
-      <div class="grid-container">
+      <motion.div
+        class="max-w-3xl text-center mx-auto mb-12"
+        :initial="{ opacity: 0, y: 40 }"
+        :in-view="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.6, ease: 'easeOut' }"
+      >
+      
+        <h2 class="section-title text-powder-blush-800 text-center mb-20 title opacity-0">{{ $t('nav.gallery') }}</h2>
+      </motion.div>
+      <div class="grid-container z-10">
         <div class="grid">
           <!-- Primera columna (2 imágenes) -->
           <div class="col">
@@ -15,7 +22,7 @@
               <img
                 :src="galleryImages[index].src"
                 :alt="galleryImages[index].alt"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover "
               />
             </div>
           </div>
@@ -45,7 +52,7 @@
               <img
                 :src="galleryImages[index].src"
                 :alt="galleryImages[index].alt"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover z-30"
               />
             </div>
           </div>
@@ -59,6 +66,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion} from 'motion-v'
 
 gsap.registerPlugin(ScrollTrigger)
 

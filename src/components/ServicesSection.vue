@@ -31,45 +31,45 @@
       </div>
     </div>
 
-    <svg
-      class="absolute inset-0 w-full h-full pointer-events-none z-5"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="none"
-      viewBox="0 0 100 100"
-    >
-      <defs>
-        <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style="stop-color: transparent; stop-opacity: 0" />
-          <stop offset="35%" style="stop-color: #e44d2e; stop-opacity: 0.6" />
-          <stop offset="50%" style="stop-color: #e44d2e; stop-opacity: 1" />
-          <stop offset="65%" style="stop-color: #e44d2e; stop-opacity: 0.6" />
-          <stop
-            offset="100%"
-            style="stop-color: transparent; stop-opacity: 0"
+      <svg
+        class="absolute inset-0 w-full h-full pointer-events-none z-5"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 100"
+      >
+          <defs>
+            <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color: transparent; stop-opacity: 0" />
+              <stop offset="35%" style="stop-color: #e44d2e; stop-opacity: 0.6" />
+              <stop offset="50%" style="stop-color: #e44d2e; stop-opacity: 1" />
+              <stop offset="65%" style="stop-color: #e44d2e; stop-opacity: 0.6" />
+              <stop
+                offset="100%"
+                style="stop-color: transparent; stop-opacity: 0"
+              />
+            </linearGradient>
+          </defs>
+          <path
+            ref="shimmer1"
+            d="M 25 -15 C 15 0, 10 20, 12 40 C 14 55, 20 65, 30 70 C 38 74, 46 74, 52 70 C 58 66, 62 58, 62 48 C 62 38, 58 30, 50 26 C 42 22, 32 24, 26 32 C 22 38, 22 46, 26 52 C 30 58, 38 60, 46 58 C 56 55, 68 48, 78 38 C 88 28, 98 15, 108 0 C 115 -10, 120 -18, 125 -25"
+            stroke="url(#shimmerGradient)"
+            stroke-width="0.15"
+            fill="none"
+            stroke-linecap="round"
+            class="shimmer-line"
+            opacity="0"
           />
-        </linearGradient>
-      </defs>
-      <path
-        ref="shimmer1"
-        d="M 25 -15 C 15 0, 10 20, 12 40 C 14 55, 20 65, 30 70 C 38 74, 46 74, 52 70 C 58 66, 62 58, 62 48 C 62 38, 58 30, 50 26 C 42 22, 32 24, 26 32 C 22 38, 22 46, 26 52 C 30 58, 38 60, 46 58 C 56 55, 68 48, 78 38 C 88 28, 98 15, 108 0 C 115 -10, 120 -18, 125 -25"
-        stroke="url(#shimmerGradient)"
-        stroke-width="0.15"
-        fill="none"
-        stroke-linecap="round"
-        class="shimmer-line"
-        opacity="0"
-      />
-      <path
-        ref="shimmer2"
-        d="M 115 15 C 100 25, 85 38, 72 52 C 58 68, 48 82, 42 90 C 38 95, 36 98, 36 98 C 36 98, 38 94, 42 88 C 48 78, 56 68, 62 60 C 68 52, 72 46, 74 42 C 76 38, 76 36, 74 36 C 72 36, 68 38, 62 44 C 54 52, 44 64, 32 78 C 20 92, 8 104, -4 110 C -12 114, -18 115, -22 114"
-        stroke="url(#shimmerGradient)"
-        stroke-width="0.15"
-        fill="none"
-        stroke-linecap="round"
-        class="shimmer-line"
-        opacity="0"
-      />
-    </svg>
+          <path
+            ref="shimmer2"
+            d="M 115 15 C 100 25, 85 38, 72 52 C 58 68, 48 82, 42 90 C 38 95, 36 98, 36 98 C 36 98, 38 94, 42 88 C 48 78, 56 68, 62 60 C 68 52, 72 46, 74 42 C 76 38, 76 36, 74 36 C 72 36, 68 38, 62 44 C 54 52, 44 64, 32 78 C 20 92, 8 104, -4 110 C -12 114, -18 115, -22 114"
+            stroke="url(#shimmerGradient)"
+            stroke-width="0.15"
+            fill="none"
+            stroke-linecap="round"
+            class="shimmer-line"
+            opacity="0"
+          />
+      </svg>
 
     <div class="max-w-5xl mx-auto relative" style="z-index: 10">
       <!-- Title Section -->

@@ -116,26 +116,11 @@
       <GallerySection />
       <TestimonialsSection />
       <ContactSection />
+      <FooterSection />
     </main>
 
-    <!-- footer (unchanged) -->
-    <footer class="bg-cocoa text-linen text-center py-12">
-      <div class="relative overflow-hidden h-24 mb-6">
-        <span
-          v-for="n in 15"
-          :key="n"
-          class="absolute text-gold font-rage text-3xl opacity-80 animate-fall"
-          :style="{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 3}s`,
-            fontSize: `${Math.random() * 1.5 + 1}rem`
-          }"
-        >
-          Jen&nbsp;&amp;&nbsp;Co
-        </span>
-      </div>
-      <p class="text-sm opacity-80">&copy; {{ new Date().getFullYear() }} Jennifer & Co. Made with ❤️ by CG. All rights reserved.</p>
-    </footer>
+    
+    
   </div>
 </template>
 
@@ -148,8 +133,10 @@ import ServicesSection from './components/ServicesSection.vue'
 import GallerySection from './components/GallerySection.vue'
 import TestimonialsSection from './components/TestimonialsSection.vue'
 import ContactSection from './components/ContactSection.vue'
+import FooterSection from './components/FooterSection.vue'
 import { useSmoothScroll } from './composables/useSmoothScroll'
 import logoJen from './assets/logo.png'
+
 
 const menuOpen = ref(false)
 const visible = ref(true) // controls translateY for hide/show

@@ -1,115 +1,131 @@
 <template>
-  <section id="contact" class="py-24 px-4 bg-porcelain-50">
+  <section id="contact" class="relative py-24 px-4 bg-porcelain-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="section-title">{{ $t('contact.title') }}</h2>
+      <!-- Section Title -->
+      <motion.div
+          class="max-w-5xl mx-auto"
+          :initial="{ opacity: 0, y: 40 }"
+          :in-view="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, ease: 'easeOut' }"
+          
+        >
+          <div class="max-w-3xl md:ml-auto md:mr-16 md:text-right"> 
+            <h2 
+            
+            class="section-title  mb-6 text-powder-blush-800  text-center md:text-right">
+              {{ $t('contact.title') }}
+            </h2>
+          </div>
+      </motion.div>
 
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- Contact Form -->
-        <div ref="formRef" class="bg-white rounded-lg p-8 shadow-md">
-          <form @submit.prevent="submitForm" class="space-y-6">
-            <div>
-              <label class="block text-sm font-inter font-semibold text-gray-700 mb-2">
-                {{ $t('contact.form_name') }}
-              </label>
-              <input
-                v-model="form.name"
-                type="text"
-                required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
-                placeholder="Jennifer Doe"
-              />
+      <div class="grid md:grid-cols-2 gap-16 mt-16">
+        <!-- Left Column -->
+        <div class="space-y-0">
+          <!-- Phone -->
+          <motion.div
+            class="contact-item"
+            :initial="{ opacity: 0, x: -30 }"
+            :in-view="{ opacity: 1, x: 0 }"
+            :transition="{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }"
+          >
+            <div class="flex items-start gap-4">
+              <Icon icon="heroicons:phone" class="w-6 h-6 text-powder-blush-800 flex-shrink-0 mt-1" />
+              <div class="flex-1">
+                <h3 class="contact-label">{{ $t('contact.phone') }}</h3>
+                <a href="tel:+14169980495" class="contact-value">
+                  +1 (416) 998-0495
+                </a>
+              </div>
             </div>
+          </motion.div>
 
-            <div>
-              <label class="block text-sm font-inter font-semibold text-gray-700 mb-2">
-                {{ $t('contact.form_email') }}
-              </label>
-              <input
-                v-model="form.email"
-                type="email"
-                required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
-                placeholder="your@email.com"
-              />
+          <div class="divider"></div>
+
+          <!-- Email -->
+          <motion.div
+            class="contact-item"
+            :initial="{ opacity: 0, x: -30 }"
+            :in-view="{ opacity: 1, x: 0 }"
+            :transition="{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }"
+          >
+            <div class="flex items-start gap-4">
+              <Icon icon="heroicons:envelope" class="w-6 h-6 text-powder-blush-800 flex-shrink-0 mt-1" />
+              <div class="flex-1">
+                <h3 class="contact-label">{{ $t('contact.form_email') }}</h3>
+                <a href="mailto:jenn130888@gmail.com" class="contact-value">
+                  jenn130888@gmail.com
+                </a>
+              </div>
             </div>
-
-            <div>
-              <label class="block text-sm font-inter font-semibold text-gray-700 mb-2">
-                {{ $t('contact.form_service') }}
-              </label>
-              <select
-                v-model="form.service"
-                required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition"
-              >
-                <option value="">Select a service...</option>
-                <option value="bridal">{{ $t('services.makeup_bride') }}</option>
-                <option value="quince">{{ $t('services.makeup_quince') }}</option>
-                <option value="photo">{{ $t('services.makeup_photo') }}</option>
-                <option value="waxing">{{ $t('services.waxing') }}</option>
-                <option value="lash">{{ $t('services.lash') }}</option>
-                <option value="massage">{{ $t('services.massage') }}</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-sm font-inter font-semibold text-gray-700 mb-2">
-                {{ $t('contact.form_message') }}
-              </label>
-              <textarea
-                v-model="form.message"
-                rows="5"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition resize-none"
-                placeholder="Tell me about your needs..."
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full py-3 bg-gradient-to-r from-blush to-gold text-white font-inter font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
-            >
-              {{ $t('contact.form_submit') }}
-            </button>
-          </form>
+          </motion.div>
         </div>
 
-        <!-- Contact Info -->
-        <div ref="infoRef" class="space-y-8">
+        <!-- Right Column -->
+        <div class="space-y-0">
           <!-- Location -->
-          <div class="bg-white rounded-lg p-6 shadow-md">
-            <h3 class="font-playfair font-bold text-xl mb-3 text-gray-800">📍 {{ $t('contact.location') }}</h3>
-            <p class="text-gray-600">Beauty & Wellness Studio</p>
-            <p class="text-gray-600">Miami, Florida</p>
-          </div>
-
-          <!-- Phone -->
-          <div class="bg-white rounded-lg p-6 shadow-md">
-            <h3 class="font-playfair font-bold text-xl mb-3 text-gray-800">📞 {{ $t('contact.phone') }}</h3>
-            <p class="text-gold font-semibold">(305) 555-0123</p>
-          </div>
-
-          <!-- Social Links -->
-          <div class="bg-white rounded-lg p-6 shadow-md">
-            <h3 class="font-playfair font-bold text-xl mb-4 text-gray-800">{{ $t('contact.followUs') }}</h3>
-            <div class="flex gap-4">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-12 h-12 rounded-full bg-gradient-to-r from-blush to-gold flex items-center justify-center text-white hover:shadow-lg transition-all duration-300 transform hover:scale-110"
-              >
-                IG
-              </a>
-              <a
-                href="https://wa.me"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-12 h-12 rounded-full bg-gradient-to-r from-gold to-blush flex items-center justify-center text-white hover:shadow-lg transition-all duration-300 transform hover:scale-110"
-              >
-                WA
-              </a>
+          <motion.div
+            class="contact-item"
+            :initial="{ opacity: 0, x: 30 }"
+            :in-view="{ opacity: 1, x: 0 }"
+            :transition="{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }"
+          >
+            <div class="flex items-start gap-4">
+              <Icon icon="heroicons:map-pin" class="w-6 h-6 text-powder-blush-800 flex-shrink-0 mt-1" />
+              <div class="flex-1">
+                <h3 class="contact-label">{{ $t('contact.location') }}</h3>
+                <p class="contact-value">
+                  200 Chalkfarm Dr, North York<br>
+                  ON M3L 2H7, Canada
+                </p>
+              </div>
             </div>
-          </div>
+          </motion.div>
+
+          <div class="divider"></div>
+
+          <!-- Social -->
+          <motion.div
+            class="contact-item"
+            :initial="{ opacity: 0, x: 30 }"
+            :in-view="{ opacity: 1, x: 0 }"
+            :transition="{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }"
+          >
+            <div class="flex items-start gap-4">
+              <Icon icon="heroicons:heart" class="w-6 h-6 text-powder-blush-800 flex-shrink-0 mt-1" />
+              <div class="flex-1">
+                <h3 class="contact-label">{{ $t('contact.followUs') }}</h3>
+                <div class="social-links">
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-icon"
+                    aria-label="Instagram"
+                  >
+                    <Icon icon="heroicons:camera" class="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://wa.me/14169980495"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-icon"
+                    aria-label="WhatsApp"
+                  >
+                    <Icon icon="heroicons:chat-bubble-left-ellipsis" class="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-icon"
+                    aria-label="Facebook"
+                  >
+                    <Icon icon="heroicons:globe-alt" class="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>
@@ -117,72 +133,90 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-
-const form = ref({
-  name: '',
-  email: '',
-  service: '',
-  message: ''
-})
-
-const formRef = ref(null)
-const infoRef = ref(null)
-
-const submitForm = () => {
-  // Form submission logic
-  console.log('Form submitted:', form.value)
-  alert('Thank you for your message! I will contact you soon.')
-  form.value = { name: '', email: '', service: '', message: '' }
-}
-
-onMounted(() => {
-  gsap.fromTo(
-    formRef.value,
-    { opacity: 0, x: -50 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: formRef.value,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse'
-      }
-    }
-  )
-
-  gsap.fromTo(
-    infoRef.value,
-    { opacity: 0, x: 50 },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: infoRef.value,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse'
-      }
-    }
-  )
-})
+import { Icon } from '@iconify/vue'
+import { motion } from 'motion-v'
 </script>
 
 <style scoped>
-input,
-textarea,
-select {
+/* Contact Items */
+.contact-item {
+  padding: 2rem 0;
+}
+
+/* Divider Line */
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #E5E5E5 10%,
+    #E5E5E5 90%,
+    transparent 100%
+  );
+}
+
+/* Contact Label */
+.contact-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #512015;
+  margin-bottom: 0.5rem;
+}
+
+/* Contact Value */
+.contact-value {
+  color: #8B7355;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-decoration: none;
+  display: inline-block;
   transition: all 0.3s ease;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+a.contact-value:hover {
+  color: #512015;
+  transform: translateX(4px);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.social-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8B7355;
+  text-decoration: none;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #512015;
+  border-color: #512015;
   transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-item {
+    padding: 1.5rem 0;
+  }
+
+  .contact-label {
+    font-size: 1rem;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+  }
 }
 </style>
