@@ -2,7 +2,7 @@
   <section
     id="home"
     ref="heroSection"
-    class="relative h-screen flex items-center justify-center overflow-hidden bg-porcelain-50"
+    class=" h-screen flex items-center justify-center overflow-hidden bg-porcelain-50"
   >
     <!-- Blob Volumétrico -->
     <div ref="blobContainer" class="absolute inset-0 z-0 pointer-events-none overflow-hidden">

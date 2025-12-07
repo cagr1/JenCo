@@ -1,6 +1,5 @@
 <template>
   <footer 
-    ref="footerRef"
     class="footer-container bg-gradient-to-br from-stone-900 via-stone-900 to-stone-950 text-stone-400 py-20 px-6 border-t border-stone-800 relative overflow-hidden"
   >
     <!-- Subtle Background Pattern -->
@@ -9,10 +8,10 @@
       <div class="absolute bottom-20 right-10 w-96 h-96 bg-gold/50 rounded-full blur-3xl"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto relative z-10 ">
+    <div class="max-w-7xl mx-auto relative z-10">
       <!-- Giant Name -->
       <motion.h2 
-        class="footer-title text-[10vw] md:text-[10vw] leading-[1.4] font-playfair text-stone-100 tracking-tighter mb-16 text-center  opacity-90 text-left md:text-left"
+        class="footer-title text-[10vw] md:text-[10vw] leading-[1.4] font-playfair text-stone-100 tracking-tighter mb-16 text-center opacity-90 text-left md:text-left"
         :initial="{ opacity: 0, y: 50 }"
         :in-view="{ opacity: 0.9, y: 0 }"
         :transition="{ duration: 1, ease: [0.16, 1, 0.3, 1] }"
@@ -139,45 +138,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
 import { Icon } from '@iconify/vue'
 import { motion } from 'motion-v'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
-
-const footerRef = ref(null)
-
-onMounted(() => {
-  if (!footerRef.value) return
-
-  // Footer Reveal Effect - Similar to paisana.studio
-  gsap.set(footerRef.value, {
-    yPercent: 50,
-    opacity: 0
-  })
-
-  ScrollTrigger.create({
-    trigger: footerRef.value,
-    start: 'top bottom',
-    end: 'top 80%',
-    scrub: 1,
-    onUpdate: (self) => {
-      const progress = self.progress
-      gsap.to(footerRef.value, {
-        yPercent: 100 - (progress * 100),
-        opacity: progress,
-        duration: 0.1,
-        ease: 'none'
-      })
-    }
-  })
-})
-
-onUnmounted(() => {
-  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-})
+// ✅ SIN GSAP - Solo motion-v
 </script>
 
 <style scoped>

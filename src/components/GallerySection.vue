@@ -1,5 +1,5 @@
 <template>
-  <section id="gallery" class="py-24 px-4 bg-porcelain-50 overflow-hidden" >
+  <section id="gallery" class="py-24 px-4 bg-porcelain-50 relative" >
     <div class="max-w-7xl mx-auto">
       <motion.div
         class="max-w-3xl text-center mx-auto mb-12"
@@ -52,7 +52,7 @@
               <img
                 :src="galleryImages[index].src"
                 :alt="galleryImages[index].alt"
-                class="w-full h-full object-cover z-30"
+                class="w-full h-full object-cover"
               />
             </div>
           </div>
@@ -115,7 +115,7 @@ onMounted(() => {
   
   cols.forEach((col, index) => {
     // Velocidades diferentes: col1 = rápida, col2 = media, col3 = lenta
-    const speed = [0.8, 0.5, 0.3][index]
+    const speed = [0.8, 0.6, 0.3][index]
     
     const trigger = gsap.to(col, {
       y: -150 * speed,
@@ -124,7 +124,15 @@ onMounted(() => {
         trigger: '.grid-container',
         start: 'top bottom',
         end: 'bottom top',
-        scrub: 1.5
+        scrub: 1, 
+        invalidateOnRefresh: true, 
+       
+        onLeave: () => {
+          gsap.set(col, { clearProps: 'transform' })
+        },
+        onEnterBack: () => {
+       
+        }
       }
     })
     scrollTriggers.push(trigger.scrollTrigger)
@@ -149,15 +157,23 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  scrollTriggers.forEach(trigger => trigger?.kill())
+  scrollTriggers.forEach(trigger => {
+    if (trigger) trigger.kill()
+  })
+  scrollTriggers = []
+  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
 })
 </script>
 
 <style scoped>
+
+
+
 .grid-container {
   width: 100%;
   position: relative;
   padding-bottom: 4rem;
+  
 }
 
 .grid {
