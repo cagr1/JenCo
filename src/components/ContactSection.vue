@@ -1,5 +1,5 @@
 <template>
-  <section id="contact" class="relative py-24 px-4 bg-porcelain-50">
+  <section id="contact" class="relative py-24 px-4 bg-porcelain-50" >
     <div class="max-w-4xl mx-auto">
       <!-- Section Title -->
       <motion.div
@@ -31,7 +31,7 @@
             <div class="flex items-start gap-4">
               <Icon icon="heroicons:phone" class="w-6 h-6 text-powder-blush-800 flex-shrink-0 mt-1" />
               <div class="flex-1">
-                <h3 class="contact-label">{{ $t('contact.phone') }}</h3>
+                
                 <a href="tel:+14169980495" class="contact-value">
                   +1 (416) 998-0495
                 </a>
@@ -51,7 +51,7 @@
             <div class="flex items-start gap-4">
               <Icon icon="heroicons:envelope" class="w-6 h-6 text-powder-blush-800 flex-shrink-0 mt-1" />
               <div class="flex-1">
-                <h3 class="contact-label">{{ $t('contact.form_email') }}</h3>
+                
                 <a href="mailto:jenn130888@gmail.com" class="contact-value">
                   jenn130888@gmail.com
                 </a>
@@ -72,7 +72,7 @@
             <div class="flex items-start gap-4">
               <Icon icon="heroicons:map-pin" class="w-6 h-6 text-powder-blush-800 flex-shrink-0 mt-1" />
               <div class="flex-1">
-                <h3 class="contact-label">{{ $t('contact.location') }}</h3>
+                
                 <p class="contact-value">
                   200 Chalkfarm Dr, North York<br>
                   ON M3L 2H7, Canada
@@ -91,9 +91,9 @@
             :transition="{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }"
           >
             <div class="flex items-start gap-4">
-              <Icon icon="heroicons:heart" class="w-6 h-6 text-powder-blush-800 flex-shrink-0 mt-1" />
+              
               <div class="flex-1">
-                <h3 class="contact-label">{{ $t('contact.followUs') }}</h3>
+                
                 <div class="social-links">
                   <a
                     href="https://instagram.com"

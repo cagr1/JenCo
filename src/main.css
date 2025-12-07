@@ -34,6 +34,8 @@ html, body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
+  position:relative;
+  background-color: var(--color-porcelain-50);
 }
 
 /* Smooth Scroll Enhancement */

@@ -152,6 +152,7 @@ const navItems = [
   { key: 'nav.about', href: '#about' },
   { key: 'nav.services', href: '#services' },
   { key: 'nav.gallery', href: '#gallery' },
+  { key: 'nav.testimonials', href: '#testimonials' },
   { key: 'nav.contact', href: '#contact' },
 ]
 
@@ -464,4 +465,5 @@ input.check-toggle-round-flat:checked + label:after {
 .switch-mobile input.check-toggle-round-flat:checked + label:after {
   margin-left: 32px;
 }
+
 </style>

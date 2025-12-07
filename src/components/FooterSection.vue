@@ -12,7 +12,7 @@
     <div class="max-w-7xl mx-auto relative z-10 ">
       <!-- Giant Name -->
       <motion.h2 
-        class="footer-title text-[10vw] md:text-[8vw] leading-none font-playfair text-stone-100 tracking-tighter mb-16 text-center  opacity-90"
+        class="footer-title text-[10vw] md:text-[10vw] leading-[1.4] font-playfair text-stone-100 tracking-tighter mb-16 text-center  opacity-90 text-left md:text-left"
         :initial="{ opacity: 0, y: 50 }"
         :in-view="{ opacity: 0.9, y: 0 }"
         :transition="{ duration: 1, ease: [0.16, 1, 0.3, 1] }"
@@ -57,7 +57,7 @@
           :transition="{ duration: 0.8, delay: 0.3 }"
         >
           <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-2">
-            {{ $t('footer.links') }}
+            {{ $t('footer.linkTitle') }}
           </h4>
           <a href="#home" class="footer-link">{{ $t('footer.links.home') }}</a>
           <a href="#about" class="footer-link">{{ $t('footer.links.about') }}</a>
