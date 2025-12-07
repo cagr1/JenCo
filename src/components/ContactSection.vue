@@ -74,7 +74,7 @@
               <div class="flex-1">
                 
                 <p class="contact-value">
-                  200 Chalkfarm Dr, North York<br>
+                  200 Chalkfarm drive floor 3<br>
                   ON M3L 2H7, Canada
                 </p>
               </div>
@@ -96,13 +96,13 @@
                 
                 <div class="social-links">
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/jenandco.beautystudio/"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="social-icon"
                     aria-label="Instagram"
                   >
-                    <Icon icon="heroicons:camera" class="w-5 h-5" />
+                    <Icon icon="mdi:instagram" class="w-5 h-5" />
                   </a>
                   <a
                     href="https://wa.me/14169980495"
@@ -111,7 +111,7 @@
                     class="social-icon"
                     aria-label="WhatsApp"
                   >
-                    <Icon icon="heroicons:chat-bubble-left-ellipsis" class="w-5 h-5" />
+                    <Icon icon="ic:outline-whatsapp" class="w-5 h-5" />
                   </a>
                   <a
                     href="https://facebook.com"

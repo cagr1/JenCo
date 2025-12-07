@@ -89,7 +89,7 @@
               class="social-icon"
               aria-label="Instagram"
             >
-              <Icon icon="heroicons:camera" class="w-5 h-5" />
+              <Icon icon="mdi:instagram" class="w-5 h-5" />
             </a>
             <a
               href="https://wa.me/14169980495"
@@ -98,7 +98,7 @@
               class="social-icon"
               aria-label="WhatsApp"
             >
-              <Icon icon="heroicons:chat-bubble-left-ellipsis" class="w-5 h-5" />
+              <Icon icon="ic:outline-whatsapp" class="w-5 h-5" />
             </a>
             <a
               href="https://facebook.com"
@@ -154,7 +154,7 @@ onMounted(() => {
 
   // Footer Reveal Effect - Similar to paisana.studio
   gsap.set(footerRef.value, {
-    yPercent: 100,
+    yPercent: 50,
     opacity: 0
   })
 
