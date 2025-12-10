@@ -6,14 +6,8 @@ export default defineConfig({
   plugins: [vue()],
   build: {
     target: 'es2017',
-    minify: 'terser',
-    cssMinify: true,
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    },
+    minify: 'esbuild',
+    cssMinify: true,    
     rollupOptions: {
       output: {
         manualChunks: {
