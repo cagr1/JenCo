@@ -80,6 +80,8 @@
           class="w-full h-full object-cover"
           draggable="false"
           :style="{ objectPosition: '50% 35%' }"
+          width="250"
+          height="380"
         />
 
         <div
@@ -131,7 +133,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, shallowRef } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useSmoothScroll } from '../composables/useSmoothScroll'
@@ -141,9 +143,9 @@ import { useShimmerEffect } from '../composables/useShimmerEffect'
 gsap.registerPlugin(ScrollTrigger)
 
 // Referencias del componente
-const heroSection = ref(null)
-const imageCard = ref(null)
-const imageEl = ref(null)
+const heroSection = shallowRef(null)
+const imageCard = shallowRef(null)
+const imageEl = shallowRef(null)
 const imageOverlay = ref(null)
 const textBlock = ref(null)
 const textLeft = ref(null)

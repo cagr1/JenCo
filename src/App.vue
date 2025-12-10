@@ -127,18 +127,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, defineAsyncComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import HeroSection from './components/HeroSection.vue'
-import AboutSection from './components/AboutSection.vue'
-import ServicesSection from './components/ServicesSection.vue'
-import GallerySection from './components/GallerySection.vue'
-import TestimonialsSection from './components/TestimonialsSection.vue'
-import ContactSection from './components/ContactSection.vue'
-import FooterSection from './components/FooterSection.vue'
 import { useSmoothScroll } from './composables/useSmoothScroll'
 import logoJen from './assets/logo.png'
 
+
+const AboutSection = defineAsyncComponent(() => import('./components/AboutSection.vue'))
+const ServicesSection = defineAsyncComponent(() => import('./components/ServicesSection.vue'))
+const GallerySection = defineAsyncComponent(() => import('./components/GallerySection.vue'))
+const TestimonialsSection = defineAsyncComponent(() => import('./components/TestimonialsSection.vue'))
+const ContactSection = defineAsyncComponent(() => import('./components/ContactSection.vue'))
+const FooterSection = defineAsyncComponent(() => import('./components/FooterSection.vue'))
 
 
 const menuOpen = ref(false)

@@ -22,6 +22,8 @@
               <img
                 :src="galleryImages[index].src"
                 :alt="galleryImages[index].alt"
+                loading="lazy"
+                decoding="async"
                 class="w-full h-full object-cover "
               />
             </div>
@@ -37,6 +39,8 @@
               <img
                 :src="galleryImages[index].src"
                 :alt="galleryImages[index].alt"
+                loading="lazy"
+                decoding="async"
                 class="w-full h-full object-cover"
               />
             </div>

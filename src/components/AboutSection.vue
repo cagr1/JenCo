@@ -52,6 +52,8 @@
               <img
                 :src="profile"
                 alt="Jennifer Gallardo"
+                loading="lazy"
+                decoding="async"
                 class="w-full h-full object-cover rounded-2xl shadow-lg"
               />
             </div>
