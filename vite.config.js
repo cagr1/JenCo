@@ -6,9 +6,13 @@ export default defineConfig({
   plugins: [vue()
 
   ],
+  build: {
+    target: 'es2017',
+    minify: 'esbuild',
+    cssMinify: true
+  },
   server
 : {
-    host: true,
     port: 5173,
     cors: true,
     strictPort: true

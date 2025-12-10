@@ -15,7 +15,7 @@
         :style="{ willChange: 'transform' }"
       >
         <div
-          class="glass-card rounded-full px-4 md:px-6 py-3 flex items-center justify-between gap-4 shadow-sm border border-white/20 bg-white/10 backdrop-blur-xl"
+          class="glass-card rounded-full px-4 md:px-6 py-3 flex items-center justify-between gap-4 shadow-sm border border-white/20 bg-white/10 backdrop-blur-md"
           role="navigation"
           aria-label="Main navigation"
         >
@@ -76,7 +76,7 @@
         class="fixed inset-0 z-40 md:hidden"
         @click.self="menuOpen = false"
       >
-        <div class="absolute top-20 left-4 right-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-lg">
+        <div class="absolute top-20 left-4 right-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-lg">
           <nav class="flex flex-col gap-3">
             <a
               v-for="item in navItems"
@@ -420,7 +420,7 @@ input.check-toggle-round-flat + label:before {
   bottom: 2px;
   right: 2px;
   background-color: #BF6840; /* Color sólido cinnamon-wood */
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
   border-radius: 60px;
   transition: background-color 0.3s;
 }
