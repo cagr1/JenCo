@@ -21,7 +21,7 @@
         >
           <!-- left: brand -->
           <div class="flex items-center gap-3">
-            <img :src="logoJen" alt="Jennifer & Co" class="h-9 md:h-11 w-auto select-none" />
+            <img :src="logoJen" alt="Jennifer & Co" loading="lazy" decoding="async" class="h-9 md:h-11 w-auto select-none" />
             
           </div>
 
@@ -33,6 +33,8 @@
               :href="item.href"
               @click.prevent="handleNavClick($event, item.href)"
               class="nav-link text-sm font-inter text-stone-700 py-2 transition-colors duration-300"
+              :aria-label="$t(item.key)"
+              :aria-current="currentSection === item.href ? 'page' : null"
             >
               {{ $t(item.key) }}
             </a>
@@ -59,7 +61,7 @@
               @click="toggleMenu"
               class="md:hidden text-2xl p-2 rounded-full hover:bg-white/10 transition-all duration-300"
               :aria-expanded="menuOpen"
-              aria-label="Open menu"
+              :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
             >
               <span v-if="!menuOpen">☰</span>
               <span v-else>✕</span>
@@ -176,29 +178,20 @@ const toggleMenu = () => {
 
 // Auto hide/show logic: hide on scroll down, show on scroll up; also show on mousemove briefly
 function onScrollHandler() {
-  const y = window.scrollY || window.pageYOffset
-  const delta = y - lastScroll.y
-
+   if (menuOpen.value) return;
   
-  // if menu open keep visible
-  if (menuOpen.value) {
-    lastScroll.y = y
-    return
-  }
-
-  if (Math.abs(delta) < 5) {
-    // tiny jitter ignore
-    return
-  }
-
-  if (delta > 0 && y > 30) {
-    // scrolled down
-    visible.value = false
-  } else if (delta < 0) {
-    // scrolled up
-    visible.value = true
-  }
-  lastScroll.y = y
+  const y = window.scrollY;
+  const delta = y - lastScroll.y;
+  
+  // Usa requestAnimationFrame para mejor performance
+  requestAnimationFrame(() => {
+    if (delta > 5 && y > 30) {
+      visible.value = false;
+    } else if (delta < -5) {
+      visible.value = true;
+    }
+    lastScroll.y = y;
+  });
 }
 
 function onMouseMoveHandler() {
@@ -350,10 +343,10 @@ header > nav {
   transform: translateY(-50%);
   pointer-events: none;
   font-family: 'Helvetica', Arial, sans-serif;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 11px;
   text-transform: uppercase;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   width: 50%;
   text-align: center;
   z-index: 2;
@@ -400,8 +393,8 @@ input.check-toggle-round-flat + label {
   padding: 2px;
   width: 80px;
   height: 32px;
-   background-color: #BF6840; /* Color sólido cinnamon-wood */
-  border: 2px solid #BF6840; 
+   background-color: #9C4A1A; 
+  border: 2px solid #7A3914; 
   border-radius: 60px;
   transition: all 0.3s ease;
   
@@ -419,7 +412,7 @@ input.check-toggle-round-flat + label:before {
   left: 2px;
   bottom: 2px;
   right: 2px;
-  background-color: #BF6840; /* Color sólido cinnamon-wood */
+  background-color: #9C4A1A; /* Color sólido cinnamon-wood */
   backdrop-filter: blur(6px);
   border-radius: 60px;
   transition: background-color 0.3s;

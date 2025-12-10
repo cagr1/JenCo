@@ -75,6 +75,8 @@
           ref="imageEl"
           src="/src/assets/NaturalBeautyPortrait.png"
           alt="Hero Image"
+          loading="lazy"
+          decoding="async"
           class="w-full h-full object-cover"
           draggable="false"
           :style="{ objectPosition: '50% 35%' }"

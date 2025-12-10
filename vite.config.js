@@ -1,21 +1,31 @@
+// vite.config.js - Actualízalo:
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue()
-
-  ],
+  plugins: [vue()],
   build: {
     target: 'es2017',
-    minify: 'esbuild',
-    cssMinify: true
+    minify: 'terser',
+    cssMinify: true,
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue'],
+          ui: ['vue-i18n']
+        }
+      }
+    }
   },
-  server
-: {
+  server: {
     port: 5173,
     cors: true,
     strictPort: true
-
   }
 })
