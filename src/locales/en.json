@@ -57,7 +57,13 @@
     "location": "Location",
     "followUs": "Follow Us",
     "time":"Book Online",
-    "phone": "Phone"
+    "phone": "Phone",
+    "cta-title": "Make an Appointment",
+    "cta-subtitle": "Discover our services and book your transformation",
+    "cta-btn-primary": "Book Now",
+    "cta-btn-secondary": "View Prices",
+    "cta-confirm": "Inmediate Confirmation",
+    "cta-confirm-desc": "Flexibles Schedules"
   },
   "footer":{
     "rights": "All rights reserved.",

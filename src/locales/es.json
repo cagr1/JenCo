@@ -58,7 +58,13 @@
     "location": "Ubicación",
     "followUs": "Sígueme",
     "time":"Reserva online",
-    "phone": "Teléfono"
+    "phone": "Teléfono",
+    "cta-title": "Agenda tu Cita",
+    "cta-subtitle": "Descubre nuestros servicios y reserva tu transformación",
+    "cta-btn-primary": "Reservar",
+    "cta-btn-secondary": "Ver Precios",
+    "cta-confirm": "Confirmacion Inmediata",
+    "cta-confirm-desc": "Horarios Flexibles"
   },
   "footer":{
     "rights": "Todos los derechos reservados.",
